@@ -25,13 +25,13 @@ test.describe('Projects API', () => {
 test.describe('Items API', () => {
   test.skip(!!process.env.SKIP_DB_TESTS, 'Skipped: requires DB');
 
-  test('POST /projects/item-list returns a list response', async ({ request }) => {
+  test('POST /projects/item-list with valid itemIds returns results', async ({ request }) => {
     const res = await request.post('/projects/item-list', {
-      data: { companyCode: 'ddep' },
+      data: { itemIds: ['000000000000000000000000'] },
     });
     expect(res.status()).toBe(200);
     const body = await res.json();
-    expect(body).toHaveProperty('status');
+    expect(Array.isArray(body)).toBe(true);
   });
 });
 
