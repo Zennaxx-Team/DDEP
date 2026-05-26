@@ -67,9 +67,13 @@
 	},
 	"scripts": {
 		"build": "node app.js",
-		"start": "node app.js"
+		"start": "node app.js",
+		"test": "playwright test",
+		"test:ui": "playwright test --ui",
+		"test:report": "playwright show-report"
 	},
 	"devDependencies": {
+		"@playwright/test": "^1.49.0",
 		"@babel/core": "^7.15.8",
 		"@babel/preset-env": "^7.15.8",
 		"babel-loader": "^8.2.2",
