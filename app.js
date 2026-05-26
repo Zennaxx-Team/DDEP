@@ -267,7 +267,7 @@ if (cluster.isMaster) {
 	/* Every minute cron schedule */
 	cron.schedule("* * * * *", function() {
 		console.log("\n==================================================");
-		console.log("\nRun public scheduler every minute");
+		console.log("\nRun public scheduler every minute.");
 		publicScheduler();
 		updateRunningItem();
 	});
