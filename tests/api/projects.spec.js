@@ -31,7 +31,8 @@ test.describe('Items API', () => {
     });
     expect(res.status()).toBe(200);
     const body = await res.json();
-    expect(Array.isArray(body)).toBe(true);
+    expect(body).toHaveProperty('data');
+    expect(Array.isArray(body.data)).toBe(true);
   });
 });
 
