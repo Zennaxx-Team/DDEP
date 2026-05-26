@@ -261,7 +261,14 @@ if (cluster.isMaster) {
 	});
 
 	app.listen(port, function () {
+		const networkInterfaces = os.networkInterfaces();
+		const ipAddresses = Object.values(networkInterfaces)
+			.flat()
+			.filter(iface => iface.family === "IPv4" && !iface.internal)
+			.map(iface => iface.address);
+		const ip = ipAddresses.length > 0 ? ipAddresses[0] : "127.0.0.1";
 		console.log("Server is running on PORT", port);
+		console.log("Server IP address:", ip);
 	});
 
 	/* Every minute cron schedule */
