@@ -1,0 +1,31 @@
+<%
+	let style = '';
+	let body = '';
+	let script = '';
+%>
+
+<% style = `` %>
+
+<% body = `<div class="content-wrapper">
+				<div class="content-body">
+					<div class="misc-wrapper">
+						<a class="brand-logo" href="/">
+							<img src="/app-assets/images/a4appz-logo-slogan-usage-02.png" alt="logo" height="46" width="200">
+						</a>
+						<div class="misc-inner p-2 p-sm-3">
+							<div class="w-100 text-center">
+								<h2 class="mb-1">404 - Page Not Found</h2>
+								<p class="mb-2">The Webtrends Marketing Lab website in IIS uses the default IUSR account credentials to access the web pages it serves.</p>
+								<div>
+									<a class="btn-sm-block mb-1 btn btn-primary" href="/projects/project-list">Back to project</a>
+								</div>
+								<img class="img-fluid" src="/app-assets/images/not-authorized.svg" alt="Not authorized page">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>`%>
+
+<% script = `` %>
+
+<%- include('layout-blank', { title: `404 - Page Not Found`, style, body, script }) %>

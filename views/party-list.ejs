@@ -1,0 +1,69 @@
+<%
+	const partyCreateModel = include('party-create-modal.ejs');
+	let style = '';
+	let body = '';
+	let script = '';
+%>
+
+<% style = `<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/form-validation.css" />` %>
+
+<% body = `<div class="content-wrapper">
+				<div class="content-header row mb-2">
+					<div class="content-header-left col-md-9 col-12">
+						<div class="row breadcrumbs-top">
+							<div class="col-12">
+								<h2 class="content-header-title float-left mb-0">Parties</h2>
+								<div class="breadcrumb-wrapper">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item">
+											<a href="/">Home</a>
+										</li>
+										<li class="breadcrumb-item">
+											Parties
+										</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-body">
+					<section class="parties-listing">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<table class="table" id="party-data-table">
+										<thead>
+											<tr>
+												<th>No</th>
+												<th>Name</th>
+												<th>Company</th>
+												<th>Project</th>
+												<th>Creator</th>
+												<th>Created Time</th>
+												<th>Updated Time</th>
+												<th>Active</th>
+												<th>Actions</th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>` %>
+<% body += partyCreateModel; %>
+
+<% script = `
+		<script type="text/javascript" src="/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js"></script>
+		<script type="text/javascript" src="/assets/js/parties.js" defer></script>` %>
+
+<%- include('layout', { title: `Parties`, style, body, script }) %>

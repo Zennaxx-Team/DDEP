@@ -1,0 +1,27 @@
+<!-- Starts notify email model -->
+<div class="modal fade modal-slide-in-form modal-slide-in alert-moniter-notify-query" id="alert-moniter-notify-query--modal-slide-in">
+    <div class="modal-dialog">
+        <div class="modal-content overflow-hidden">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+            <div class="modal-header mb-1">
+                <h5 class="modal-title" id="alert-moniter-notify-query-label-condition">Validate & SQL Generated Query</h5>
+            </div>
+            <div class="modal-body flex-grow-1 sql-section">
+                <div class="output-section">
+                    <div class="section-title">
+                        Generated Output
+                    </div>
+
+                    <h5>JSON Structure:</h5>
+                    <pre class="output-code" id="query-output">{
+                    "condition": "AND",
+                    "rules": []
+                    }</pre>
+
+                    <h5 class="mt-2">SQL Condition Statement:</h5>
+                    <pre class="sql-statement mb-4" id="sql-output">-- Your SQL condition will appear here</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Ends notify email model -->

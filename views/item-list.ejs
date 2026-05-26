@@ -1,0 +1,338 @@
+<%
+	const itemLogsModal = include('item-logs-modal.ejs');
+	const itemLogsViewModal = include('item-logs-view-modal.ejs');
+	const itemNewLogsViewModal = include('item-logs-new-view-modal.ejs');
+	const itemLogsViewDetailsModal = include('item-logs-view-details-modal.ejs');
+	const itemCurlbashViewModal = include('curl-bash-model.ejs');
+	const logDesscriptionModel = include('item-log-description-model.ejs');
+	const itemCloneModel = include('item-clone-model.ejs');
+	let style = '';
+	let body = '';
+	let script = '';
+%>
+
+<% style = `<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/extensions/ext-component-drag-drop.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/extensions/dragula.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/form-validation.css" />
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/forms/wizard/bs-stepper.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/form-wizard.css">	
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/pickers/daterangepicker/daterangepicker.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css">` %>
+
+<% body = `<div class="content-wrapper">
+				<div class="content-header row mb-2">
+					<div class="content-header-left col-md-9 col-12">
+						<div class="row breadcrumbs-top">
+							<div class="col-12">
+								<h2 class="content-header-title float-left mb-0">Projects</h2>
+								<div class="breadcrumb-wrapper">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item">
+											<a href="/">Home</a>
+										</li>
+										<li class="breadcrumb-item">
+											Projects
+										</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-body">
+					<section class="items-listing">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+								<div class="card-header border-bottom p-1">
+									<div class="head-label">
+										<h6 class="mb-0"></h6>
+									</div>
+									<div class="dt-action-buttons text-right">
+										<div class="dt-buttons d-inline-flex">
+											<div class="dropdown">
+												<button class="dt-button btn btn-outline-secondary waves-effect mr-2"
+													id="import_item" type="button" tabindex="0">
+													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+														viewBox="0 0 24 24" fill="none" stroke="currentColor"
+														stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+														class="feather feather-upload font-small-4 mr-50">
+														<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+														<polyline points="17 8 12 3 7 8"></polyline>
+														<line x1="12" y1="3" x2="12" y2="15"></line>
+													</svg>
+													<span>Import</span>
+												</button>
+											</div>
+											<div class="dropdown">
+												<button class="dt-button btn btn-outline-secondary waves-effect mr-2"
+													id="export_item" type="button" tabindex="0">
+													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+														viewBox="0 0 24 24" fill="none" stroke="currentColor"
+														stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+														class="feather feather-download font-small-4 mr-50">
+														<path
+															d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+													</svg>
+													<span>Export</span>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+									<table class="table" id="item-data-table">
+										<thead>
+											<tr>
+												<th>
+													<div class="custom-control custom-checkbox mt-0">
+														<input type="checkbox" name="item_select_all" id="item_select_all"
+															class="custom-control-input item-checkbox"
+															data-item-id="item_select_all" aria-label="Select Item">
+														<label class="custom-control-label" for="item_select_all"></label>
+													</div>
+												</th>
+												<th>No</th>
+												<th>Company</th>
+												<th>Code</th>
+												<th>Name</th>
+												<th>Last Inbound Status</th>
+												<th>Last Inbound Date</th>
+												<th>Active</th>
+												<th>Actions</th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+			<!-- IMPORT ITEM MODAL - 2 STEPS ONLY -->
+			 <div class="modal fade modal-slide-in-form modal-slide-in third-step" id="import-item-modal-slide-in"
+  				  data-backdrop="true" data-keyboard="true" style="z-index: 1060;">
+				<div class="modal-dialog">
+					<div class="modal-content overflow-hidden">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+						<div class="modal-header mb-1">
+							<h5 class="modal-title" id="import-item-modal-label">Import Item</h5>
+						</div>
+						<div class="modal-body flex-grow-1">
+							<section class="mb-2">
+								<div id="import-errors"></div>
+								<div id="import-item-stepper" class="bs-stepper">
+										<div class="bs-stepper-header" role="tablist">
+											<div class="step" data-target="#import-step-1" role="tab">
+												<button type="button" class="step-trigger" role="tab">
+													<span class="bs-stepper-box">1</span>
+													<span class="bs-stepper-label">
+														<span class="bs-stepper-title">Configure File</span>
+													</span>
+												</button>
+											</div>
+											<div class="line"><i data-feather="chevron-right" class="font-medium-2"></i></div>
+											<div class="step" data-target="#import-step-2" role="tab">
+												<button type="button" class="step-trigger" role="tab">
+													<span class="bs-stepper-box">2</span>
+													<span class="bs-stepper-label">
+														<span class="bs-stepper-title">Target Selection</span>
+													</span>
+												</button>
+											</div>
+										</div>
+									 <div class="bs-stepper-content">
+										<!-- STEP 1: CONFIGURE FILE -->
+										<div id="import-step-1" class="content" role="tabpanel">
+										<form id="importForm">
+											<div class="form-group">
+											<label for="importFile" class="form-label required">Select JSON File</label>
+											<div class="custom-file">
+												<input type="file" class="custom-file-input" id="importFile" name="importFile" accept=".json" required>
+												<label class="custom-file-label" for="importFile">Choose file...</label>
+											</div>
+											<small class="form-text text-muted">Only JSON files are allowed</small>
+											</div>
+										</form>
+										</div>
+
+										<!-- STEP 2: TARGET SELECTION -->
+										<div id="import-step-2" class="content" role="tabpanel">
+										<!-- COMPANY SELECTION -->
+										<div class="section mb-3">
+											<h5 class="mb-3">Target Company</h5>
+						
+											<div class="mb-2 custom-control custom-radio">
+												<input class="custom-control-input" type="radio" name="companyType" value="existing" id="existing-company-radio" checked>
+												<label class="custom-control-label" for="existing-company-radio">
+													<strong>Existing Company</strong>
+												</label>
+											</div>
+
+											<div id="company-existing-group" class="ml-3 mb-3">
+												<div class="form-group">
+													<select class="select2 form-control form-control-lg" id="import-select-company" required>
+													<option value="">-- Please Select Company --</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="mb-2 custom-control custom-radio">
+												<input class="custom-control-input" type="radio" name="companyType" value="new" id="new-company-radio">
+												<label class="custom-control-label" for="new-company-radio">
+													<strong>New Company</strong>
+												</label>
+											</div>
+
+											<div id="company-new-group" class="ml-3 mb-3" style="display: none;">
+												<div class="form-group">
+													<label for="new-company-code" class="form-label">Company Code</label>
+													<input type="text" class="form-control" id="new-company-code" placeholder="Auto-filled from file">
+													<small class="form-text text-muted">Auto-filled from configure file</small>
+												</div>
+
+												<div class="form-group">
+													<label for="new-company-name" class="form-label">Company Name</label>
+													<input type="text" class="form-control" id="new-company-name" placeholder="Enter company name" required>
+													<small class="form-text text-muted">Auto-filled from configure file</small>
+												</div>
+											</div>
+										</div>
+
+										<hr/>
+
+										<!-- PROJECT SELECTION -->
+										<div class="section mb-3">
+											<h5 class="mb-3">Target Project</h5>
+											
+											<div class="mb-2 custom-control custom-radio">
+												<input class="custom-control-input" type="radio" name="projectType" value="existing" id="existing-project-radio" checked>
+												<label class="custom-control-label" for="existing-project-radio">
+													<strong>Existing Project</strong>
+												</label>
+												<small class="form-text text-muted d-block">(If new Company selected, this option is disabled)</small>
+											</div>
+
+											<div id="project-existing-group" class="ml-3 mb-3">
+												<div class="form-group">
+													<select class="select2 form-control form-control-lg" id="import-select-project" required>
+													<option value="">-- Please Select Project --</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="mb-2 custom-control custom-radio">
+												<input class="custom-control-input" type="radio" name="projectType" value="new" id="new-project-radio">
+												<label class="custom-control-label" for="new-project-radio">
+													<strong>New Project</strong>
+												</label>
+											</div>
+
+											<div id="project-new-group" class="ml-3 mb-3" style="display: none;">
+											<div class="form-group">
+												<label for="new-project-code" class="form-label">Project Code</label>
+												<input type="text" class="form-control" id="new-project-code" placeholder="Auto-filled from file">
+												<small class="form-text text-muted">Auto-filled from configure file</small>
+											</div>
+
+											<div class="form-group">
+												<label for="new-project-name" class="form-label">Project Name</label>
+												<input type="text" class="form-control" id="new-project-name" placeholder="Enter project name" required>
+												<small class="form-text text-muted">Auto-filled from configure file</small>
+											</div>
+											</div>
+										</div>
+
+										<hr/>
+
+										<!-- ITEM SELECTION -->
+										<div class="section">
+											<h5 class="mb-3">Target Item</h5>
+											
+											<div class="mb-2 custom-control custom-radio">
+												<input class="custom-control-input" type="radio" name="itemType" value="existing" id="existing-item-radio">
+												<label class="custom-control-label" for="existing-item-radio">
+													<strong>Existing Item</strong>
+												</label>
+												<small class="form-text text-muted d-block">(If new Project selected, this option is disabled)</small>
+											</div>
+
+											<div id="item-existing-group" class="ml-3 mb-3">
+												<div class="form-group">
+													<select class="select2 form-control form-control-lg" id="import-select-item" required>
+													<option value="">-- Please Select Item --</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="mb-2 custom-control custom-radio">
+												<input class="custom-control-input" type="radio" name="itemType" value="new" id="new-item-radio" checked>
+												<label class="custom-control-label" for="new-item-radio">
+													<strong>New Item</strong>
+												</label>
+											</div>
+
+											<div id="item-new-group" class="ml-3">
+												<div class="form-group">
+													<label for="new-item-code" class="form-label">Item Code</label>
+													<input type="text" class="form-control" id="new-item-code" placeholder="Enter item code" required>
+												</div>
+
+												<div class="form-group">
+													<label for="new-item-name" class="form-label">Item Name</label>
+													<input type="text" class="form-control" id="new-item-name" placeholder="Enter item name" required>
+													<small class="form-text text-muted">Auto-filled from configure file</small>
+												</div>
+											</div>
+										</div>
+										</div>
+									</div>
+									<div class="modal-footer border-top d-flex justify-content-between">
+										<button class="btn btn-primary btn-prev">
+											<i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+											<span class="align-middle d-sm-inline-block d-none">Previous</span>
+										</button>
+										<button class="btn btn-primary btn-next" id="import-wizard-next-btn">
+											<span class="align-middle d-sm-inline-block d-none">Next</span>
+											<i data-feather="arrow-right"
+												class="align-middle ml-sm-25 ml-0"></i>
+										</button>
+										<button type="button" class="btn btn-primary" id="import-wizard-confirm-btn" style="display: none;">
+											<i data-feather="check" class="align-middle mr-1"></i>
+											<span>Import</span>
+										</button>
+									</div>
+								</div>
+							</section>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			` %>
+<% body += itemLogsModal; %>
+<% body += itemLogsViewModal; %>
+<% body += itemNewLogsViewModal; %>
+<% body += itemLogsViewDetailsModal; %>
+<% body += itemCurlbashViewModal; %>
+<% body += logDesscriptionModel; %>
+<% body += itemCloneModel; %>
+
+<% script = `<script type="text/javascript" src="/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/forms/wizard/bs-stepper.min.js"></script>
+		<script type="text/javascript" src="/app-assets/js/scripts/moment.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/pickers/daterangepicker/daterangepicker.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
+		<script type="text/javascript" src="/assets/js/items.js" defer></script>
+		<script type="text/javascript" src="/assets/js/drag-hide.js" defer></script>
+		<script src="/app-assets/vendors/js/extensions/dragula.min.js" defer></script>
+		<script src="/app-assets/js/scripts/extensions/ext-component-drag-drop.js" defer></script>` %>
+
+<%- include('layout', { title: `Items`, style, body, script }) %>

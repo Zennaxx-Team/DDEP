@@ -1,0 +1,97 @@
+			<!-- Start Party-->
+			<div class="modal fade modal-slide-in-form modal-slide-in second-middle-step party-modal" id="party-modal-slide-in" data-backdrop="true" data-keyboard="true" style="z-index: 1080;">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+						<div class="modal-header mb-1">
+							<h5 class="modal-title" id="party-modal-label">Party</h5>
+						</div>
+						<div class="modal-body flex-grow-1">
+							<section class="party-create">
+								<form id="form-party-create" action="javascript:void(0);" autocomplete="off">
+									<div class="row">
+										<div class="form-group col-12 col-md-12 m-0">
+											<div class="row">
+												<div class="form-group col-12 m-0">
+													<input type="hidden" name="party-id" id="party-id" class="form-control" placeholder="Id" value="" readonly />
+												</div>
+												<div class="form-group col-12">
+													<label class="form-label required" for="select-party-company">Company</label>
+													<select class="select2 form-control form-control-lg" id="select-party-company" name="select-party-company"></select>
+												</div>
+												<div class="form-group col-12">
+													<label class="form-label required" for="select-party-project">Project</label>
+													<select class="select2 form-control form-control-lg" id="select-party-project" name="select-party-project"></select>
+												</div>
+												<div class="form-group col-12">
+													<label class="form-label required" for="party-name">Party Name</label>
+													<input type="text" name="party-name" id="party-name" class="form-control" placeholder="Enter Party Name" required />
+												</div>
+												<div class="form-group col-12">
+													<label class="form-label" for="party-description">Party Description</label>
+													<textarea name="party-description" id="party-description" class="form-control" placeholder="Enter Party Description" rows="4"></textarea>
+												</div>
+												<div class="form-group col-12">
+													<label class="form-label" for="party-sequence">Sequence</label>
+													<input type="text" name="party-sequence" id="party-sequence" class="form-control" placeholder="Enter Sequence" />
+												</div>
+												<div class="form-group col-12">
+													<div class="demo-inline-spacing">
+														<div class="custom-control custom-control-primary custom-switch mt-0">
+															<p class="mb-50 form-label" for="is-party-active">Active</p>
+															<input type="checkbox" name="is-party-active" class="custom-control-input" id="is-party-active" value="1" checked /><label class="custom-control-label" for="is-party-active"></label>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="row mt-2">
+												<div class="form-group col-12">
+													<h4>Environment</h4>
+												</div>
+												<div class="form-group col-12">
+													<label class="form-label" for="select-party-environment">Environment Name</label>
+													<select class="select2 form-control form-control-lg" name="select-party-environment" id="select-party-environment"></select>
+												</div>
+												<div class="form-group col-4 col-md-2">
+													<label class="form-label" for="select-domain-prefix">Domain</label>
+													<select class="select2 form-control form-control-lg" name="select-domain-prefix" id="select-domain-prefix">
+														<option value="http://">http://</option>
+														<option value="https://">https://</option>
+													</select>
+												</div>
+												<div class="form-group col-8 col-md-8">
+													<label class="form-label invisible" for="domain">Domain</label>
+													<input type="text" name="domain" id="domain" class="form-control" placeholder="Enter Domain" />
+												</div>
+												<div class="form-group col-12 col-md-2 text-right">
+													<a href="javascript:void(0);" class="btn btn-primary mt-2" id="add-environment">Add</a>
+												</div>
+												<div class="col-12 mt-2">
+													<table class="table table-bordered border-0" id="environment-listing">
+														<thead>
+															<tr>
+																<th>Environment</th>
+																<th>Domain</th>
+																<th>Created Date</th>
+																<th>Last Updated Date</th>
+																<th></th>
+															</tr>
+														</thead>
+														<tbody></tbody>
+													</table>
+												</div>
+											</div>
+											<div class="row mt-2">
+												<div class="form-group col-12">
+													<button class="btn btn-primary" id="create-party" type="submit">Create Party</button>
+												</div>
+											</div>	
+										</div>
+									</div>
+								</form>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Party-->

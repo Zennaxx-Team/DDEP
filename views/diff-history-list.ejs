@@ -1,0 +1,88 @@
+<%
+	let style = '';
+	const diffCheckerDetailModal = include('diff-history-detail-model.ejs');
+	const diffCheckerLogsModal = include('diff-history-logs-view-model.ejs');
+	const itemLogsViewDetailsModal = include('item-logs-view-details-modal.ejs');
+	let body = '';
+	let script = '';
+%>
+
+<% style = `<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/pickers/daterangepicker/daterangepicker.css"></script>
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/forms/wizard/bs-stepper.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/form-validation.css" />
+		<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/form-wizard.css">` %>
+
+<% body = `<div class="content-wrapper">
+				<div class="content-header row">
+					<div class="content-header-left col-md-12 col-12 mb-2">
+						<div class="row breadcrumbs-top">
+							<div class="col-sm-12 col-md-12 col-lg-8 col-12">
+								<h2 class="content-header-title float-left mb-0">Diff. History</h2>
+								<div class="breadcrumb-wrapper">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item">
+											<a href="/">Home</a>
+										</li>
+										<li class="breadcrumb-item">
+											<a href="javascript:void(0);">Diff. History</a>
+										</li>
+									</ol>
+								</div>
+							</div>
+                            <div class="col-sm-12 col-md-12 col-lg-4 col-12 d-flex justify-content-end align-items-center" style="gap: 0.5rem;">
+								<div style="flex: 0 0 auto; min-width: auto;">
+									<div id="diffhistoryreportrange" 
+										style="background: #fff; cursor: pointer; padding: 6px 10px; border: 1px solid #ccc; width: 100%; border-radius: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+										<i data-feather="clock"></i>&nbsp;<span></span>
+									</div>
+									<div class="hidden since-time-diff-history"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-body">
+					<section id="basic-datatable">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<table class="datatables-basic table" id="diff-history-table">
+									<thead>
+										<tr>
+											<th class="header-number">No</th>
+											<th class="header-item-name">Item Name</th>
+                                            <th class="header-unique-name">Unique ID</th>
+											<th class="header-path">Path</th>
+											<th class="header-type">Type</th>
+											<th class="header-diff-row">Total Diff. Row</th>
+                                            <th class="header-created-time">Start Time</th>
+										</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>` %>
+<% body += diffCheckerDetailModal; %>
+<% body += diffCheckerLogsModal; %>
+<% body += itemLogsViewDetailsModal; %>
+
+<% script = `<script type="text/javascript" src="/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/app-assets/js/scripts/moment.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/forms/wizard/bs-stepper.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/pickers/daterangepicker/daterangepicker.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
+		<script type="text/javascript" src="/assets/js/diff-checker-history.js" defer></script>` %>
+
+<%- include('layout', { title: `Diff. History`, style, body, script }) %>

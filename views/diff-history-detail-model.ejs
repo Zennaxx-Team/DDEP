@@ -1,0 +1,87 @@
+<!-- Starts diff checker detail model -->
+<div class="modal fade modal-slide-in-form modal-slide-in first-step diff-checker-detail-model"
+    id="diff-checker-detail-modal-slide-in">
+    <div class="modal-dialog">
+        <div class="modal-content overflow-hidden">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+            <div class="modal-header mb-1">
+                <h5 class="modal-title" id="diff-checker-detail-label-condition"></h5>
+            </div>
+            <div class="modal-body flex-grow-1">
+                <section>
+                    <!-- Info Table -->
+                    <div class="row all-item mt-2"></div>
+
+                    <!-- Diff Check Info Section -->
+                    <div class="diff-check-info mt-2">
+                        <!-- Toolbar -->
+                        <div class="col-12">
+                            <div class="main-header">
+                                <h1></h1>
+                                <div class="toolbar">
+                                    <button id="swapBtn">
+                                        <i class="fas fa-exchange-alt"></i> Swap
+                                    </button>
+                                    <button id="copyLeft">
+                                        <i class="fas fa-copy"></i> Copy Left
+                                    </button>
+                                    <button id="copyRight">
+                                        <i class="fas fa-copy"></i> Copy Right
+                                    </button>
+                                    <button id="copyDiff">
+                                        <i class="fas fa-clipboard"></i> Copy Diff
+                                    </button>
+                                    <button id="exportJson">
+                                        <i class="fas fa-download"></i> Export JSON
+                                    </button>
+                                    <button class="btn-primary" id="runDiff">
+                                        <i class="fas fa-equals"></i> Compare
+                                    </button>
+                                    <span id="status">Ready</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="diff-check-info mt-2">
+                        <div class="editor">
+                            <div class="editor-header">Template</div>
+                            <div class="editor-body">
+                                <div class="line-numbers" id="leftLines"></div>
+                                <div class="textarea-wrapper" id="leftWrapper">
+                                    <textarea id="left" placeholder="Enter first text..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="diff-check-info mt-2">
+                        <div class="editor">
+                            <div class="editor-header editor-header-type">Inbound/Outbound</div>
+                            <div class="editor-body">
+                                <div class="line-numbers" id="rightLines"></div>
+                                <div class="textarea-wrapper" id="rightWrapper">
+                                    <textarea id="right" placeholder="Enter second text..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Diff Output -->
+                    <div class="diff-check-info mt-2">
+                        <div class="diff-output">
+                            <div class="diff-output-header">Comparison</div>
+                            <div class="diff-body">
+                                <div class="diff-column" id="leftCol"></div>
+                                <div class="diff-column" id="rightCol"></div>
+                            </div>
+                            <div class="stats text-center" id="stats">Added: 0 | Removed: 0 | Modified: 0 | Unchanged: 0 |
+                                Total: 0</div>
+                        </div>
+                    </div>  
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Ends alert history model -->

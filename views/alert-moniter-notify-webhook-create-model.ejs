@@ -1,0 +1,85 @@
+			<!-- Starts notify webhook model -->
+			<div class="modal fade modal-slide-in-form modal-slide-in notify-webhook-model" id="notify-webhook-modal-slide-in" >
+				<div class="modal-dialog">
+					<div class="modal-content overflow-hidden">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+						<div class="modal-header mb-1">
+							<h5 class="modal-title" id="notify-webhook-label-condition">Content</h5>
+						</div>
+						<div class="modal-body flex-grow-1">
+							<section class="alert-notify-webhook-create">
+								<form id="form-notify-webhook" action="javascript:void(0);" autocomplete="off">
+									<div class="row mt-0">
+										<div class="form-group col-12 m-0 font-weight-bold green-color h4">
+											Webhook
+										</div>
+									</div>
+									<div class="row mt-2">
+										<div class="form-group col-12">
+											<label class="form-label" for="notify-description-webhook">Notify Description</label>
+											<input type="text" name="notify-description-webhook" id="notify-description-webhook" class="form-control" placeholder="Enter Notificaiton Description" />
+										</div>
+										<div class="form-group col-12">
+											<label class="form-label required" for="webhook-name">Webhook Name</label>
+											<input type="text" name="webhook-name" id="webhook-name" class="form-control" placeholder="Enter webhook name" required/>
+										</div>
+										<div class="form-group col-12">
+											<label class="form-label required" for="endpoint-url">URL</label>
+											<input type="url" name="endpoint-url" id="endpoint-url" class="form-control" placeholder="Enter endpoint URL" required/>
+										</div>
+										<div class="form-group col-12">
+											<label class="form-label required" for="select-authorization">Authorization</label>
+											<select class="select2 form-control form-control-lg required" id="select-authorization" name="select-authorization">
+												<option value="No_Auth">No Auth</option>
+												<option value="API_Key">API Key</option>
+											</select>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-12">
+											<label class="form-label" for="custom-header-label">Variables</label>
+											<table id="webhook-variable-header-table" class="table logical-table table-bordered">
+												<thead>
+													<tr>
+														<th></th>
+														<th>Key</th>
+														<th>Value</th>
+														<th>Mask</th>
+														<th>Description</th>
+														<th class="text-center">
+															<a href="javascript:void(0);" class="btn btn-lg btn-del modal-button" id="webhook-variable-header-btn-add-row">
+																<i data-feather="plus" class="font-medium-2"></i>
+															</a>
+														</th>
+													</tr>
+												</thead>
+												<tbody>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-12 m-0">
+											<label class="form-label m-0"><strong>Payload</strong></label>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="form-label required" for="webhook-template">Template</label>
+											<textarea id="webhook-template" name="webhook-template" class="form-control" style="height: 275px;" required></textarea>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="form-label" for="webhook-preview">Preview</label>
+											<div id="webhook-preview" class="form-control" style="height: 277px; overflow: auto; border: 1px solid #ced4da; padding: 10px; resize: vertical;"></div>
+										</div>
+									</div>
+									<div class="row mt-2">
+										<div class="form-group col-12">
+											<button class="btn btn-primary" id="save-webhook" type="submit">Save</button>
+										</div>
+									</div>
+								</form>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Ends notify webhook model -->

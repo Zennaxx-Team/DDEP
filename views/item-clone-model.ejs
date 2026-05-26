@@ -1,0 +1,1930 @@
+<!-- Starts Item model -->
+<div class="modal fade modal-slide-in-form modal-slide-in third-step item-clone-model" id="item-clone-modal-slide-in"
+    data-backdrop="true" data-keyboard="true" style="z-index: 1060;">
+    <div class="modal-dialog">
+        <div class="modal-content overflow-hidden">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+            <div class="modal-header">
+                <h5 class="modal-title" id="item-clone-modal-label">Clone Project</h5>
+            </div>
+            <div class="header-navbar">
+                <div class="navbar navbar-expand-lg align-items-center navbar-light navbar-shadow"
+                    style="min-height: 0px; border-radius: 0px;">
+                    <div class="navbar-container d-flex content">
+                        <div class="bookmark-wrapper d-flex align-items-center">
+                            <ul class="nav navbar-nav bookmark-icons mb-pos-wrapper">
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link addIcon"><i class="ficon"
+                                            data-feather="plus-circle"></i></a></li>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link printerIcon"><i class="ficon"
+                                            data-feather="printer"></i></a></li>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link refreshIcon"><i class="ficon"
+                                            data-feather="refresh-ccw"></i></a></li>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link trashIcon"><i class="ficon"
+                                            data-feather="trash-2"></i></a></li>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link menuIcon"><i class="ficon"
+                                            data-feather="menu"></i></a></li>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link cornerdownIcon"><i
+                                            class="ficon" data-feather="corner-down-left"></i></a></li>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link save_clone_item"
+                                        id="create-clone-item" role="button" title="Create clone item"><i class="ficon"
+                                            data-feather="save"></i></a></li>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link dollarIcon"><i class="ficon"
+                                            data-feather="dollar-sign"></i></a></li>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link downloadIcon"><i class="ficon"
+                                            data-feather="download-cloud"></i></a></li>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link columnIcon"><i class="ficon"
+                                            data-feather="columns"></i></a></li>
+                            </ul>
+                            <div class="d-inline-flex d-mbile-box">
+                                <a class="pr-1 dropdown-toggle hide-arrow text-primary" data-toggle="dropdown"
+                                    aria-expanded="true">
+                                    <svg t="1710208216723" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                        xmlns="http://www.w3.org/2000/svg" p-id="1479"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink" width="30" height="30">
+                                        <path
+                                            d="M206.116734 596.023523c46.398166-0.727906 83.429277-38.940285 82.701371-85.336645-0.717069-46.40539-38.927642-83.438308-85.325808-82.710401-46.407197 0.7261-83.438308 38.927642-82.710402 85.334838 0.727906 46.409003 38.927642 83.429277 85.334839 82.712208zM820.51854 596.023523c46.396359-0.727906 83.427471-38.940285 82.699565-85.336645-0.717069-46.40539-38.927642-83.438308-85.325808-82.710401-46.407197 0.7261-83.438308 38.927642-82.710402 85.334838 0.729713 46.409003 38.927642 83.429277 85.336645 82.712208zM513.313122 596.023523c46.407197-0.727906 83.438308-38.940285 82.710401-85.336645-0.729713-46.40539-38.927642-83.438308-85.336645-82.710401-46.396359 0.7261-83.427471 38.927642-82.710401 85.334838 0.729713 46.409003 38.929448 83.429277 85.336645 82.712208z"
+                                            fill="#fff" p-id="1480"></path>
+                                    </svg>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-mobile-box" x-placement="top-end"
+                                    style="position: absolute; transform: translate3d(1328px, -266px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                    <a href="javascript:;" class="dropdown-item addIcon">
+                                        <i class="ficon" data-feather="plus-circle"></i>
+                                    </a>
+                                    <a href="javascript:;" class="dropdown-item printerIcon">
+                                        <i class="ficon" data-feather="printer"></i>
+                                    </a>
+                                    <a href="javascript:;" class="dropdown-item refreshIcon">
+                                        <i class="ficon" data-feather="refresh-ccw"></i>
+                                    </a>
+                                    <a href="javascript:;" class="dropdown-item trashIcon">
+                                        <i class="ficon" data-feather="trash-2"></i>
+                                    </a>
+                                    <a href="javascript:;" class="dropdown-item menuIcon">
+                                        <i class="ficon" data-feather="menu"></i>
+                                    </a>
+                                    <a href="javascript:;" class="dropdown-item cornerdownIcon">
+                                        <i class="ficon" data-feather="corner-down-left"></i>
+                                    </a>
+                                    <a href="javascript:;" class="dropdown-item save_clone_item" id="create-clone-item"
+                                        title="Create clone item">
+                                        <i class="ficon" data-feather="save"></i>
+                                    </a>
+                                    <a href="javascript:;" class="dropdown-item dollarIcon">
+                                        <i class="ficon" data-feather="dollar-sign"></i>
+                                    </a>
+                                    <a href="javascript:;" class="dropdown-item downloadIcon">
+                                        <i class="ficon" data-feather="download-cloud"></i>
+                                    </a>
+                                    <a href="javascript:;" class="dropdown-item columnIcon">
+                                        <i class="ficon" data-feather="columns"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body flex-grow-1">
+                <section class="horizontal-wizard">
+                    <div id="item-step" class="content m-0 p-0">
+                        <form id="form-item-clone-create" autocomplete="off">
+                            <div class="row">
+                                <div class="form-group col-12 m-0 mb-2 mt-2">
+                                    <h3>Basic Information</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-12 m-0">
+                                    <input type="hidden" name="item-clone-id" id="item-clone-id" class="form-control"
+                                        placeholder="Item Id">
+                                </div>
+                                <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                                    <label class="form-label required" for="item-code">Item
+                                        Code</label>
+                                    <input type="text" name="item-code" id="item-code" class="form-control"
+                                        placeholder="Enter Item Code" required />
+                                </div>
+                                <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                                    <label class="form-label required" for="item-name">Item
+                                        Name</label>
+                                    <input type="text" name="item-name" id="item-name" class="form-control"
+                                        placeholder="Enter Item Name" required />
+                                </div>
+                                <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                                    <label class="form-label" for="item-description">Item
+                                        Description</label>
+                                    <input type="text" name="item-description" id="item-description"
+                                        class="form-control" placeholder="Enter Item Description" />
+                                </div>
+                                <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                                    <label class="form-label required" for="select-item-company">Company</label>
+                                    <div class="d-flex mapping-profile-dropdown">
+                                        <div>
+                                            <select class="select2 form-control form-control-lg required"
+                                                id="select-item-company" name="select-item-company"></select>
+                                        </div>
+                                        <button type="button"
+                                            class="btn btn-primary mapping-edit-button item-company-edit-button"
+                                            id="item-company-edit-button">
+                                            <i data-feather="edit" class="align-middle"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                                    <label class="form-label required" for="select-item-project">Project</label>
+                                    <div class="d-flex mapping-profile-dropdown">
+                                        <div>
+                                            <select class="select2 form-control form-control-lg required"
+                                                id="select-item-project" name="select-item-project"></select>
+                                        </div>
+                                        <button type="button"
+                                            class="btn btn-primary mapping-edit-button item-project-edit-button"
+                                            id="item-project-edit-button">
+                                            <i data-feather="edit" class="align-middle"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                                    <label class="form-label required" for="select-item-environment">Environment</label>
+                                    <div class="d-flex mapping-profile-dropdown">
+                                        <div>
+                                            <select class="select2 form-control form-control-lg required"
+                                                id="select-item-environment" name="select-item-environment"></select>
+                                        </div>
+                                        <button type="button"
+                                            class="btn btn-primary mapping-edit-button item-environment-edit-button"
+                                            id="item-environment-edit-button">
+                                            <i data-feather="edit" class="align-middle"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="inbound-step" class="content m-0 p-0">
+                        <form id="form-inbound-clone-create" autocomplete="off">
+                            <div class="row">
+                                <div class="form-group col-12 m-0 mb-2 mt-2">
+                                    <h3>Inbound</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-12 hidden">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h4 class="mb-0">Inbound Format</h4>
+                                        <div class="form-group mb-0 d-flex align-items-center">
+                                            <div class="custom-control custom-switch custom-control-inline">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    id="inboundEnableEmail" aria-label="Enable Email" />
+                                                <label class="custom-control-label" for="inboundEnableEmail">Enable
+                                                    Email</label>
+                                            </div>
+                                            <div class="custom-control custom-switch custom-control-inline">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    id="inboundEnableLogs" aria-label="Enable Logs" checked />
+                                                <label class="custom-control-label" for="inboundEnableLogs">Enable
+                                                    Logs</label>
+                                            </div>
+                                            <div class="custom-control custom-switch custom-control-inline">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    id="is_active_inbound" aria-label="Active" checked />
+                                                <label class="custom-control-label"
+                                                    for="is_active_inbound">Active</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-12 col-xs-12 col-sm-12 col-md-3 hidden">
+                                    <label for="select-inbound-mime-type">Mime Type
+                                        Supported</label>
+                                    <select class="select2 form-control form-control-lg custom-select"
+                                        id="select-inbound-mime-type" name="select-inbound-mime-type"
+                                        multiple="multiple">
+                                        <option value="json" selected>JSON</option>
+                                        <option value="xml">XML</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-12">
+                                    <h4 class="mb-0">Synchronize Configure</h4>
+                                </div>
+                                <div class="form-group col-12 m-0">
+                                    <input type="hidden" name="item-inbound-id" id="item-inbound-id"
+                                        class="form-control" placeholder="Item Inbound Id" value="" readonly />
+                                    <input type="hidden" name="url-prefix" id="url-prefix" class="form-control"
+                                        placeholder="url-prefix" value="" readonly />
+                                </div>
+                                <div class="form-group col-12">
+                                    <div class="demo-inline-spacing">
+                                        <div class="form-label mt-0">
+                                            <strong>Platform</strong>
+                                        </div>
+                                        <div id="platform-selected-text" class="form-label mt-0"></div>
+                                        <div class="custom-control custom-radio mt-0 hidden">
+                                            <input class="custom-control-input" type="radio" name="platform"
+                                                id="platform-api" value="API" checked />
+                                            <label class="custom-control-label" for="platform-api">API</label>
+                                        </div>
+                                        <div class="custom-control custom-radio mt-0 hidden">
+                                            <input class="custom-control-input" type="radio" name="platform"
+                                                id="platform-ftp" value="FTP" />
+                                            <label class="custom-control-label" for="platform-ftp">FTP</label>
+                                        </div>
+                                        <div class="custom-control custom-radio mt-0 hidden">
+                                            <input class="custom-control-input" type="radio" name="platform"
+                                                id="platform-sftp" value="SFTP" />
+                                            <label class="custom-control-label" for="platform-sftp">SFTP</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-12 m-0 p-0 platform-api-options">
+                                    <div class="form-group col-12">
+                                        <div class="demo-inline-spacing">
+                                            <div class="form-label mt-0">
+                                                <strong>Type</strong>
+                                            </div>
+                                            <div id="platform-api-type-selected-text" class="form-label mt-0"></div>
+                                            <div class="custom-control custom-radio mt-0 hidden">
+                                                <input class="custom-control-input" type="radio"
+                                                    name="platform-api-type" id="platform-api-type-ddep"
+                                                    value="DDEP_API" checked />
+                                                <label class="custom-control-label"
+                                                    for="platform-api-type-ddep">DDEP</label>
+                                            </div>
+                                            <div class="custom-control custom-radio mt-0 hidden">
+                                                <input class="custom-control-input" type="radio"
+                                                    name="platform-api-type" id="platform-api-type-user"
+                                                    value="User_API" />
+                                                <label class="custom-control-label"
+                                                    for="platform-api-type-user">User</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12 mt-1 mb-0">
+                                        <div class="form-label mt-0"><strong>Controller
+                                                Endpoint</strong></div>
+                                    </div>
+                                    <div class="row col-12 m-0 p-0 ddep-api-type">
+                                        <div class="form-group col-12">
+                                            <div class="ddep-api-endpoint">
+                                                <label class="form-label mt-1" for="ddep-api-endpoint"
+                                                    id="ddep-api-prefix"></label>
+                                                <div>
+                                                    <input type="text" name="ddep-api-endpoint" id="ddep-api-endpoint"
+                                                        class="form-control" placeholder="Enter DDEP API Endpoint"
+                                                        required />
+                                                    <p class="input-note mb-0">Path where API in
+                                                        exposed, must start with a '/' and must
+                                                        contain any letter, capitalize letter,
+                                                        number, dash or underscore.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-12 mt-1 hidden">
+                                            <h4 class="mb-0">Email Configure</h4>
+                                        </div>
+                                        <div class="form-group col-12 mb-2 hidden">
+                                            <div class="demo-inline-spacing">
+                                                <div class="custom-control custom-checkbox mt-0">
+                                                    <input type="checkbox" name="inboundEndpointURL"
+                                                        id="inboundEndpointURL" class="custom-control-input"
+                                                        aria-label="Enable Email" />
+                                                    <label class="custom-control-label"
+                                                        for="inboundEndpointURL">Endpoint
+                                                        URL</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox mt-0">
+                                                    <input type="checkbox" name="inboundLogURL" id="inboundLogURL"
+                                                        class="custom-control-input" aria-label="Enable Email" />
+                                                    <label class="custom-control-label" for="inboundLogURL">Logs
+                                                        URL</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox mt-0">
+                                                    <input type="checkbox" name="inboundRequestHeader"
+                                                        id="inboundRequestHeader" class="custom-control-input"
+                                                        aria-label="Enable Email" />
+                                                    <label class="custom-control-label"
+                                                        for="inboundRequestHeader">Request
+                                                        Header</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox mt-0">
+                                                    <input type="checkbox" name="inboundQueryParams"
+                                                        id="inboundQueryParams" class="custom-control-input"
+                                                        aria-label="Enable Logs" />
+                                                    <label class="custom-control-label" for="inboundQueryParams">Query
+                                                        Params</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox mt-0">
+                                                    <input type="checkbox" name="inboundBody" id="inboundBody"
+                                                        class="custom-control-input" aria-label="Enable Logs" />
+                                                    <label class="custom-control-label" for="inboundBody">Body</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox mt-0">
+                                                    <input type="checkbox" name="inboundBodyhtml" id="inboundBodyhtml"
+                                                        class="custom-control-input" aria-label="Enable Logs" />
+                                                    <label class="custom-control-label"
+                                                        for="inboundBodyhtml">Body(Table)</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox mt-0">
+                                                    <input type="checkbox" name="inboundValidationMessage"
+                                                        id="inboundValidationMessage" class="custom-control-input"
+                                                        aria-label="Enable Logs" />
+                                                    <label class="custom-control-label"
+                                                        for="inboundValidationMessage">Validation
+                                                        Message</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox mt-0">
+                                                    <input type="checkbox" name="inboundLogs" id="inboundLogs"
+                                                        class="custom-control-input" aria-label="Enable Logs" />
+                                                    <label class="custom-control-label" for="inboundLogs">Logs</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-12 hidden">
+                                            <hr />
+                                        </div>
+                                        <div class="form-group col-12 hidden">
+                                            <h4 class="mb-0">Authentication</h4>
+                                        </div>
+                                        <!-- Type Section -->
+                                        <div class="form-group col-2 hidden">
+                                            <label for="select-ddep-api-auth-type" class="form-label">Type</label>
+                                            <select class="select2 form-control form-control-lg"
+                                                id="select-ddep-api-auth-type" name="select-ddep-api-auth-type">
+                                                <option value="No_Auth">No Auth</option>
+                                                <option value="API_Key">API Key</option>
+                                                <option value="JWT_Bearer">JWT Bearer</option>
+                                            </select>
+                                        </div>
+                                        <!-- Algorithm Section -->
+                                        <div class="form-group col-2 authorization_jwt_bearer hidden">
+                                            <label for="jwt_algorithm" class="form-label">Algorithm</label>
+                                            <select class="select2 form-control form-control-lg" id="jwt_algorithm"
+                                                name="jwt_algorithm">
+                                                <option value="HS256" selected>HS256</option>
+                                            </select>
+                                        </div>
+
+                                        <!-- Algorithm Section -->
+                                        <div class="form-group col-12 d-flex align-items-center hidden">
+                                            <div class="custom-control custom-checkbox hmac-fields"
+                                                style="display: none;">
+                                                <input type="checkbox" name="base64-encode" id="base64-encode"
+                                                    class="custom-control-input" aria-label="Base64 Encode" />
+                                                <label class="custom-control-label" for="base64-encode">Base64
+                                                    Encode</label>
+                                            </div>
+                                        </div>
+                                        <div class="row col-12 m-0 p-0 authorization-api-key hidden"
+                                            style="display:none;">
+                                            <div class="form-group col-12 text-right">
+                                                <button type="button" class="btn btn-primary"
+                                                    id="generate-subscription-key-btn">Generate
+                                                    Subscription Key</button>
+                                                <button type="button" class="btn btn-primary"
+                                                    id="generate-custom-key-btn">Generate Custom
+                                                    Key</button>
+                                            </div>
+                                            <div class="form-group col-12 hidden">
+                                                <table class="table logical-table table-bordered"
+                                                    id="api-key-data-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>Type</th>
+                                                            <th>Key</th>
+                                                            <th>Description</th>
+                                                            <th>Expiry Date (optional)</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row col-12 m-0 p-0 user-api-type" style="display:none;">
+                                        <div class="form-group col-12">
+                                            <div class="user-api">
+                                                <label class="form-label mt-1 required" for="user-api">User API</label>
+                                                <div>
+                                                    <input type="text" name="user-api" id="user-api"
+                                                        class="form-control" placeholder="Enter User API" required />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-12 m-0 p-0 platform-ftp-options" style="display:none;">
+                                    <div class="form-group col-md-4">
+                                        <label class="form-label required" for="ftp-server-link">FTP/SFPT Server</label>
+                                        <input type="text" name="ftp-server-link" id="ftp-server-link"
+                                            class="form-control" placeholder="Enter FTP Host" required />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="form-label required" for="port">Port</label>
+                                        <input type="text" name="port" id="port" class="form-control"
+                                            placeholder="Enter FTP Port" required />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="form-label required" for="login-name">Login
+                                            Name</label>
+                                        <input type="text" name="login-name" id="login-name" class="form-control"
+                                            placeholder="Enter FTP Login Name" required />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="form-label required" for="password">Password</label>
+                                        <input type="password" name="password" id="password" class="form-control"
+                                            placeholder="Enter FTP Password" required />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="form-label required" for="folder">FTP
+                                            Folder</label>
+                                        <input type="text" name="folder" id="folder" class="form-control"
+                                            placeholder="Enter FTP Folder" required />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="form-label" for="backup-folder">FTP Backup
+                                            Folder</label>
+                                        <input type="text" name="backup-folder" id="backup-folder" class="form-control"
+                                            placeholder="Enter FTP Backup Folder" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="form-label" for="max-file-download">Maximum
+                                            File Download per Schedule/Click</label>
+                                        <input type="text" name="max-file-download" id="max-file-download"
+                                            class="form-control" placeholder="Enter Max File Download" value="50" />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="outbound-step" class="content m-0 p-0">
+                        <form id="form-outbound-clone-create" autocomplete="off" class="hidden">
+                            <div class="row">
+                                <div class="form-group col-12">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h4 class="mb-0">Outbound Format</h4>
+                                        <div class="form-group mb-0 d-flex align-items-center">
+                                            <div class="custom-control custom-switch custom-control-inline">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    id="outboundEnableEmail" aria-label="Enable Email" />
+                                                <label class="custom-control-label" for="outboundEnableEmail">Enable
+                                                    Email</label>
+                                            </div>
+                                            <div class="custom-control custom-switch custom-control-inline">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    id="outboundEnableLogs" aria-label="Enable Logs" checked />
+                                                <label class="custom-control-label" for="outboundEnableLogs">Enable
+                                                    Logs</label>
+                                            </div>
+                                            <div class="custom-control custom-switch custom-control-inline">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    id="is_active_outbound" aria-label="Active" checked />
+                                                <label class="custom-control-label"
+                                                    for="is_active_outbound">Active</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-12 col-xs-12 col-sm-12 col-md-3">
+                                    <label class="form-label required" for="select-outbound-mime-type">Mime Type
+                                        Supported</label>
+                                    <select class="select2 form-control form-control-lg custom-select"
+                                        id="select-outbound-mime-type" name="select-outbound-mime-type"
+                                        multiple="multiple">
+                                        <option value="json" selected>JSON</option>
+                                        <option value="xml">XML</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-12 mt-2">
+                                    <h4 class="mb-0">Synchronize Configure</h4>
+                                </div>
+                                <div class="form-group col-12 m-0">
+                                    <input type="hidden" name="item-outbound-id" id="item-outbound-id"
+                                        class="form-control" placeholder="Item Outbound Id" value="" readonly />
+                                </div>
+                                <div class="form-group col-12">
+                                    <div class="demo-inline-spacing">
+                                        <div class="form-label mt-0">
+                                            <strong>Flow</strong>
+                                        </div>
+                                        <div class="custom-control custom-radio mt-0">
+                                            <input class="custom-control-input" type="radio" name="flow" id="flow-api"
+                                                value="API" checked />
+                                            <label class="custom-control-label" for="flow-api">API</label>
+                                        </div>
+                                        <!-- <div class="custom-control custom-radio mt-0">
+																	<input class="custom-control-input" type="radio" name="flow" id="flow-ftp" value="FTP" />
+																	<label class="custom-control-label" for="flow-ftp">FTP</label>
+																</div>
+																<div class="custom-control custom-radio mt-0">
+																	<input class="custom-control-input" type="radio" name="flow" id="flow-message-queues" value="Message Queues" />
+																	<label class="custom-control-label" for="flow-message-queues">Message Queues</label>
+																</div> -->
+                                    </div>
+                                </div>
+                                <div class="row col-12 m-0 p-0 flow-api-options">
+                                    <div class="form-group col-12">
+                                        <div class="demo-inline-spacing">
+                                            <div class="form-label mt-0">
+                                                <strong>Type</strong>
+                                            </div>
+                                            <div class="custom-control custom-radio mt-0">
+                                                <input class="custom-control-input" type="radio" name="flow-api-type"
+                                                    id="flow-api-type-single" value="single" checked />
+                                                <label class="custom-control-label" for="flow-api-type-single">Single
+                                                    API</label>
+                                            </div>
+                                            <div class="custom-control custom-radio mt-0">
+                                                <input class="custom-control-input" type="radio" name="flow-api-type"
+                                                    id="flow-api-type-multiple" value="multiple" />
+                                                <label class="custom-control-label"
+                                                    for="flow-api-type-multiple">Multiple
+                                                    API</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12 col-xs-12 col-sm-12 col-md-4"
+                                        id="outboud_max_post_file" style="display: none;">
+                                        <label class="form-label" for="first-name">Maximum file post per
+                                            schedule/click</label>
+                                        <input type="number" class="form-control form-control-lg" name="max_file_post"
+                                            id="max_file_post" class="form-control" value="50" />
+                                    </div>
+                                    <div class="form-group col-12 mt-1 mb-0">
+                                        <div class="form-label mt-0"><strong>Controller Endpoint</strong></div>
+                                    </div>
+
+                                    <div class="form-group col-12 mt-1 mb-0">
+                                        <div class="form-label mt-0"><strong>Default Mapping</strong></div>
+                                    </div>
+                                    <div class="row col-12 m-0 p-0">
+                                        <div class="form-group col-md-6 select-clearble">
+                                            <label class="form-label" for="select-inbound-default-mapping">Inbound
+                                                Posting</label>
+                                            <div class="d-flex mapping-profile-dropdown">
+                                                <div>
+                                                    <select class="select2 form-control form-control-lg"
+                                                        id="select-inbound-default-mapping"
+                                                        name="select-inbound-default-mapping"></select>
+                                                </div>
+                                                <button type="button"
+                                                    class="btn btn-primary mapping-edit-button inbound-default-mapping-settings-button"
+                                                    id="inbound-default-mapping-settings-button">
+                                                    <i data-feather="edit" class="align-middle"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 select-clearble">
+                                            <label class="form-label" for="select-outbound-default-mapping">Outbound
+                                                Posting</label>
+                                            <div class="d-flex mapping-profile-dropdown">
+                                                <div>
+                                                    <select class="select2 form-control form-control-lg"
+                                                        id="select-outbound-default-mapping"
+                                                        name="select-outbound-default-mapping"></select>
+                                                </div>
+                                                <button type="button"
+                                                    class="btn btn-primary mapping-edit-button outbound-default-mapping-settings-button"
+                                                    id="outbound-default-mapping-settings-button">
+                                                    <i data-feather="edit" class="align-middle"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <table class="table logical-table table-bordered"
+                                            id="outbound-endpoint-data-table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="multiple-api-type" style="display:none;"></th>
+                                                    <th></th>
+                                                    <th>Party</th>
+                                                    <th>Endpoint</th>
+                                                    <th>Mapping (Inbound Posting)</th>
+                                                    <th>Mapping (Outbound Posting)</th>
+                                                    <!-- <th>Trigger Rules</th> -->
+                                                    <th>Default Response</th>
+                                                    <th>Settings</th>
+                                                    <th class="text-center multiple-api-type" style="display:none;">
+                                                        <a href="javascript:void(0);"
+                                                            class="btn btn-lg btn-del modal-button"
+                                                            id="outbound-endpoint-btn-add-row">
+                                                            <i data-feather="plus" class="font-medium-2"></i>
+                                                        </a>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                    <div class="form-group col-12 mt-1">
+                                        <h4 class="mb-0">Global Headers</h4>
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <table id="outbound-global-headers-table"
+                                            class="table logical-table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Key</th>
+                                                    <th>Value</th>
+                                                    <th>Mask</th>
+                                                    <th>Description</th>
+                                                    <th class="text-center">
+                                                        <a href="javascript:void(0);"
+                                                            class="btn btn-lg btn-del modal-button"
+                                                            id="outbound-global-headers-btn-add-row">
+                                                            <i data-feather="plus" class="font-medium-2"></i>
+                                                        </a>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="col-sm-1 text-center">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" name="outbound-global-headers-status"
+                                                                id="outbound-global-headers-status-0"
+                                                                class="custom-control-input" checked />
+                                                            <label class="custom-control-label"
+                                                                for="outbound-global-headers-status-0"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="col-sm-3">
+                                                        <input type="text" name="outbound-global-headers[][key]"
+                                                            class="form-control border-0"
+                                                            id="outbound-global-headers-key-0" />
+                                                    </td>
+                                                    <td class="col-sm-4">
+                                                        <input type="text" name="outbound-global-headers[][value]"
+                                                            class="form-control border-0"
+                                                            id="outbound-global-headers-value-0" />
+                                                    </td>
+                                                    <td class="col-sm-1 text-center">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" name="outbound-global-headers-mask"
+                                                                id="outbound-global-headers-mask-0"
+                                                                class="custom-control-input" checked />
+                                                            <label class="custom-control-label"
+                                                                for="outbound-global-headers-mask-0"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="col-sm-3">
+                                                        <input type="text" name="outbound-global-headers[][description]"
+                                                            class="form-control border-0"
+                                                            id="outbound-global-headers-description-0" />
+                                                    </td>
+                                                    <td class="col-sm-1 text-center">
+                                                        <a href="javascript:void(0);" type="button"
+                                                            class="btn btn-lg btn-del modal-button outbound-global-headers-btn-del">
+                                                            <i data-feather="minus" class="font-medium-2"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="form-group col-12 mt-1">
+                                        <h4 class="mb-0">Email Configure</h4>
+                                    </div>
+                                    <div class="form-group col-12 mb-2">
+                                        <div class="demo-inline-spacing">
+                                            <div class="custom-control custom-checkbox mt-0">
+                                                <input type="checkbox" name="outboundEndpointURL"
+                                                    id="outboundEndpointURL" class="custom-control-input"
+                                                    aria-label="Enable Email" />
+                                                <label class="custom-control-label" for="outboundEndpointURL">Endpoint
+                                                    URL</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mt-0">
+                                                <input type="checkbox" name="outboundLogURL" id="outboundLogURL"
+                                                    class="custom-control-input" aria-label="Enable Email" />
+                                                <label class="custom-control-label" for="outboundLogURL">Logs
+                                                    URL</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mt-0">
+                                                <input type="checkbox" name="outboundRequestHeader"
+                                                    id="outboundRequestHeader" class="custom-control-input"
+                                                    aria-label="Enable Email" />
+                                                <label class="custom-control-label" for="outboundRequestHeader">Request
+                                                    Header</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mt-0">
+                                                <input type="checkbox" name="outboundRequestTransformedHeader"
+                                                    id="outboundRequestTransformedHeader" class="custom-control-input"
+                                                    aria-label="Enable Email" />
+                                                <label class="custom-control-label"
+                                                    for="outboundRequestTransformedHeader">Transformed Request
+                                                    Header</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mt-0">
+                                                <input type="checkbox" name="outboundQueryParams"
+                                                    id="outboundQueryParams" class="custom-control-input"
+                                                    aria-label="Enable Logs" />
+                                                <label class="custom-control-label" for="outboundQueryParams">Query
+                                                    Params</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mt-0">
+                                                <input type="checkbox" name="outboundBody" id="outboundBody"
+                                                    class="custom-control-input" aria-label="Enable Logs" />
+                                                <label class="custom-control-label" for="outboundBody">Body</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mt-0">
+                                                <input type="checkbox" name="outboundBodyhtml" id="outboundBodyhtml"
+                                                    class="custom-control-input" aria-label="Enable Logs" />
+                                                <label class="custom-control-label" for="outboundBodyhtml">Body
+                                                    (Table)</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mt-0">
+                                                <input type="checkbox" name="outboundTransformedBody"
+                                                    id="outboundTransformedBody" class="custom-control-input"
+                                                    aria-label="Enable Logs" />
+                                                <label class="custom-control-label"
+                                                    for="outboundTransformedBody">Transformed Body</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mt-0">
+                                                <input type="checkbox" name="outboundTransformedBodyhtml"
+                                                    id="outboundTransformedBodyhtml" class="custom-control-input"
+                                                    aria-label="Enable Logs" />
+                                                <label class="custom-control-label"
+                                                    for="outboundTransformedBodyhtml">Transformed Body(Table)</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mt-0">
+                                                <input type="checkbox" name="outboundRequestToEndPointUrl"
+                                                    id="outboundRequestToEndPointUrl" class="custom-control-input"
+                                                    aria-label="Enable Logs" />
+                                                <label class="custom-control-label"
+                                                    for="outboundRequestToEndPointUrl">Request to Endpoint URL
+                                                    Information</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mt-0">
+                                                <input type="checkbox" name="outboundResponse" id="outboundResponse"
+                                                    class="custom-control-input" aria-label="Enable Logs" />
+                                                <label class="custom-control-label"
+                                                    for="outboundResponse">Response</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mt-0">
+                                                <input type="checkbox" name="outboundResponsehtml"
+                                                    id="outboundResponsehtml" class="custom-control-input"
+                                                    aria-label="Enable Logs" />
+                                                <label class="custom-control-label" for="outboundResponsehtml">Response
+                                                    (Table)</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mt-0">
+                                                <input type="checkbox" name="outboundTransformedResponse"
+                                                    id="outboundTransformedResponse" class="custom-control-input"
+                                                    aria-label="Enable Logs" />
+                                                <label class="custom-control-label"
+                                                    for="outboundTransformedResponse">Transformed Response</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mt-0">
+                                                <input type="checkbox" name="outboundTransformedResponsehtml"
+                                                    id="outboundTransformedResponsehtml" class="custom-control-input"
+                                                    aria-label="Enable Logs" />
+                                                <label class="custom-control-label"
+                                                    for="outboundTransformedResponsehtml">Transformed Response
+                                                    (Table)</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mt-0">
+                                                <input type="checkbox" name="outboundValidationMessage"
+                                                    id="outboundValidationMessage" class="custom-control-input"
+                                                    aria-label="Enable Logs" />
+                                                <label class="custom-control-label"
+                                                    for="outboundValidationMessage">Validation Message</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mt-0">
+                                                <input type="checkbox" name="outboundLogs" id="outboundLogs"
+                                                    class="custom-control-input" aria-label="Enable Logs" />
+                                                <label class="custom-control-label" for="outboundLogs">Logs</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="schedule-step" class="content m-0 p-0">
+                        <form id="form-schedule-clone-create" autocomplete="off">
+                            <div class="row">
+                                <div class="form-group col-12">
+                                    <div class="row">
+                                        <div class="form-group col-12 m-0 mb-2 mt-2">
+                                            <h3>Schedule</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-12">
+                                    <input type="hidden" name="schedule_setting_id" id="schedule_setting_id" />
+                                    <div>
+                                        <div id="inbound-shedule-setting-tab">
+                                            <div class="form-group col-12 p-0">
+                                                <h4 class="mb-0">Inbound</h4>
+                                            </div>
+                                            <div class="form-group col-12 p-0">
+                                                <div class="row">
+                                                    <div class="col-md-2 col-5">
+                                                        <div class="custom-control custom-radio">
+                                                            <input type="radio" name="s_configure_inbound"
+                                                                id="Schedule_configure_schedule_inbound"
+                                                                class="custom-control-input" value="schedule" checked />
+                                                            <label class="custom-control-label"
+                                                                for="Schedule_configure_schedule_inbound"><strong>Schedule</strong></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 col-5">
+                                                        <div class="custom-control custom-radio">
+                                                            <input type="radio" name="s_configure_inbound"
+                                                                id="Schedule_configure_click_by_user_inbound"
+                                                                class="custom-control-input" value="click_by_user" />
+                                                            <label class="custom-control-label"
+                                                                for="Schedule_configure_click_by_user_inbound"><strong>Click
+                                                                    By User</strong></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10 mt-md-2 mt-0 p-0 relation-schedule-open">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2 mb-md-0 mb-1">
+                                                        <strong>Schedule Type</strong>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-3 col-6">
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio" name="schedule_type_inbound"
+                                                                            id="Schedule_type_recurring_inbound"
+                                                                            class="custom-control-input"
+                                                                            value="Recurring" checked />
+                                                                        <label class="custom-control-label"
+                                                                            for="Schedule_type_recurring_inbound">Recurring</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3 col-6">
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio" name="schedule_type_inbound"
+                                                                            id="Schedule_type_one_time_inbound"
+                                                                            class="custom-control-input"
+                                                                            value="OneTime" />
+                                                                        <label class="custom-control-label"
+                                                                            for="Schedule_type_one_time_inbound">One
+                                                                            Time</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="inbound-data-recurring">
+                                                    <hr class="mb-2">
+                                                    <div class="row">
+                                                        <div class="col-md-12 mb-1">
+                                                            <strong>Frequency</strong>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="row">
+                                                                <div class="form-group col-md-9">
+                                                                    <div class="form-group col-7 p-0">
+                                                                        <label for="occurs_time_inbound"
+                                                                            class="required">Occurs</label>
+                                                                        <select
+                                                                            class="select2 form-control form-control-lg custom-select"
+                                                                            id="occurs_time_inbound"
+                                                                            name="occurs_time_inbound">
+                                                                            <option value="daily">Daily</option>
+                                                                            <option value="weekly">Weekly</option>
+                                                                            <option value="monthly">Monthly</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="mt-2" id="selectOccursDayIn">
+                                                                        <div class="row align-items-center">
+                                                                            <div
+                                                                                class="col-sm-12 col-md-3 col-lg-3 col-4">
+                                                                                Recurs every
+                                                                            </div>
+                                                                            <div class="col-sm-12 col-md-9 col-8">
+                                                                                <div class="row align-items-center">
+                                                                                    <div
+                                                                                        class="col-sm-9 col-md-6 col-lg-3 col-6 input-group bootstrap-touchspin">
+                                                                                        <input type="number"
+                                                                                            name="day_frequency_inbound_count"
+                                                                                            id="day_frequency_inbound_count"
+                                                                                            class="touchspin-min-max"
+                                                                                            value="1" />
+                                                                                    </div>
+                                                                                    <div
+                                                                                        class="col-sm-3 col-md-6 col-6 input-group">
+                                                                                        day(s)
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="mt-2" id="selectOccursMonthIn"
+                                                                        style="display:none;">
+                                                                        <div id="monthly_fields">
+                                                                            <div class="form-group">
+                                                                                <div class="row align-items-center"
+                                                                                    id="selectOccursMonthIn">
+                                                                                    <div class="col-md-12 mb-md-0 mb-1">
+                                                                                        <div
+                                                                                            class="d-flex align-items-center">
+                                                                                            <div
+                                                                                                class="custom-control custom-radio-primary custom-radio">
+                                                                                                <input type="radio"
+                                                                                                    name="inbound_monthly_day"
+                                                                                                    id="inbound_monthly_day"
+                                                                                                    class="custom-control-input"
+                                                                                                    value="day"
+                                                                                                    checked />
+                                                                                                <label
+                                                                                                    class="custom-control-label"
+                                                                                                    for="inbound_monthly_day">Day</label>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="custom-control custom-radio-primary custom-radio ml-2">
+                                                                                                <input type="radio"
+                                                                                                    name="inbound_monthly_day"
+                                                                                                    id="inbound_monthly_the"
+                                                                                                    class="custom-control-input"
+                                                                                                    value="The" />
+                                                                                                <label
+                                                                                                    class="custom-control-label"
+                                                                                                    for="inbound_monthly_the">The</label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-12 mt-1"
+                                                                                        id="selectOccursMonthDayDivIn">
+                                                                                        <div id="day_txt_box">
+                                                                                            <div
+                                                                                                class="row align-items-center">
+                                                                                                <div
+                                                                                                    class="col-3 px-md-0 px-0 input-group bootstrap-touchspin">
+                                                                                                    <input type="number"
+                                                                                                        name="monthly_frequency_day_inbound"
+                                                                                                        id="monthly_frequency_day_inbound"
+                                                                                                        class="touchspin-min-max"
+                                                                                                        value="1" />
+                                                                                                </div>
+                                                                                                <div
+                                                                                                    class="col-2 px-md-0 px-0 input-group">
+                                                                                                    of every
+                                                                                                </div>
+                                                                                                <div
+                                                                                                    class="col-3 px-md-0 px-0 input-group bootstrap-touchspin">
+                                                                                                    <input type="number"
+                                                                                                        name="monthly_frequency_day_inbound_count"
+                                                                                                        id="monthly_frequency_day_inbound_count"
+                                                                                                        class="touchspin-min-max"
+                                                                                                        value="1" />
+                                                                                                </div>
+                                                                                                <div
+                                                                                                    class="col-2 px-md-1 px-0 input-group">
+                                                                                                    month(s)
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="row align-items-center"
+                                                                                            id="the_section">
+                                                                                            <div
+                                                                                                class="mb-sm-1 mb-md-0 col-md-3">
+                                                                                                <select
+                                                                                                    class="form-control"
+                                                                                                    id="the_day_of"
+                                                                                                    name="the_day_of">
+                                                                                                    <option
+                                                                                                        value="First">
+                                                                                                        First</option>
+                                                                                                    <option
+                                                                                                        value="Second">
+                                                                                                        Second</option>
+                                                                                                    <option
+                                                                                                        value="Third">
+                                                                                                        Third</option>
+                                                                                                    <option
+                                                                                                        value="Fourth">
+                                                                                                        Fourth</option>
+                                                                                                    <option
+                                                                                                        value="Last">
+                                                                                                        Last</option>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="mb-sm-1 mb-md-0 col-md-3">
+                                                                                                <select
+                                                                                                    class="form-control"
+                                                                                                    id="the_days"
+                                                                                                    name="the_days">
+                                                                                                    <option
+                                                                                                        value="Monday">
+                                                                                                        Monday</option>
+                                                                                                    <option
+                                                                                                        value="Tuesday">
+                                                                                                        Tuesday</option>
+                                                                                                    <option
+                                                                                                        value="Wednesday">
+                                                                                                        Wednesday
+                                                                                                    </option>
+                                                                                                    <option
+                                                                                                        value="Thursday">
+                                                                                                        Thursday
+                                                                                                    </option>
+                                                                                                    <option
+                                                                                                        value="Friday">
+                                                                                                        Friday</option>
+                                                                                                    <option
+                                                                                                        value="Saturday">
+                                                                                                        Saturday
+                                                                                                    </option>
+                                                                                                    <option
+                                                                                                        value="Sunday">
+                                                                                                        Sunday</option>
+                                                                                                    <option
+                                                                                                        value="Weekday">
+                                                                                                        Weekday</option>
+                                                                                                    <option
+                                                                                                        value="Weekend">
+                                                                                                        Weekend Day
+                                                                                                    </option>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="col-sm-12 text-sm-center mb-sm-1 mb-md-0 col-md-2">
+                                                                                                of every</div>
+                                                                                            <div
+                                                                                                class="col-sm-6 text-sm-center col-md-2 input-group bootstrap-touchspin">
+                                                                                                <input type="number"
+                                                                                                    name="monthly_frequency_the_inbound_count"
+                                                                                                    id="monthly_frequency_the_inbound_count"
+                                                                                                    class="touchspin-min-max"
+                                                                                                    value="1" />
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="col-sm-6 text-sm-center col-md-2">
+                                                                                                month(s)
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="demo-inline-spacing"
+                                                                        id="selectOccursWeekIn" style="display:none;">
+                                                                        <div class="row align-items-center">
+                                                                            <div class="col-md-6 col-lg-3 col-4">
+                                                                                Recurs every
+                                                                            </div>
+                                                                            <div class="col-md-9 col-8">
+                                                                                <div class="row align-items-center">
+                                                                                    <div class="col-md-3 col-6">
+                                                                                        <div
+                                                                                            class="input-group bootstrap-touchspin ml-n1">
+                                                                                            <input type="number"
+                                                                                                name="weekly_frequency_inbound_count"
+                                                                                                id="weekly_frequency_inbound_count"
+                                                                                                class="touchspin-min-max"
+                                                                                                value="1" />
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-6 col-6">
+                                                                                        <div class=" input-group">
+                                                                                            Week(s) On
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-2"></div>
+                                                                            <div class="col-md-9">
+                                                                                <div id="weekly_fields">
+                                                                                    <div class="demo-inline-spacing">
+                                                                                        <div
+                                                                                            class="custom-control custom-control-primary custom-checkbox">
+                                                                                            <input type="checkbox"
+                                                                                                name="occurs_weekly_fields_inbound"
+                                                                                                class="custom-control-input"
+                                                                                                value="Monday"
+                                                                                                id="colorCheck1" />
+                                                                                            <label
+                                                                                                class="custom-control-label"
+                                                                                                for="colorCheck1">Monday</label>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="custom-control custom-control-primary custom-checkbox">
+                                                                                            <input type="checkbox"
+                                                                                                class="custom-control-input"
+                                                                                                name="occurs_weekly_fields_inbound"
+                                                                                                value="Tuesday"
+                                                                                                id="colorCheck2" />
+                                                                                            <label
+                                                                                                class="custom-control-label"
+                                                                                                for="colorCheck2">Tuesday</label>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="custom-control custom-control-primary custom-checkbox">
+                                                                                            <input type="checkbox"
+                                                                                                class="custom-control-input"
+                                                                                                name="occurs_weekly_fields_inbound"
+                                                                                                value="Wednesday"
+                                                                                                id="colorCheck3" />
+                                                                                            <label
+                                                                                                class="custom-control-label"
+                                                                                                for="colorCheck3">Wednesday</label>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="custom-control custom-control-primary custom-checkbox">
+                                                                                            <input type="checkbox"
+                                                                                                class="custom-control-input"
+                                                                                                name="occurs_weekly_fields_inbound"
+                                                                                                value="Thursday"
+                                                                                                id="colorCheck5" />
+                                                                                            <label
+                                                                                                class="custom-control-label"
+                                                                                                for="colorCheck5">Thursday</label>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="custom-control custom-control-primary custom-checkbox">
+                                                                                            <input type="checkbox"
+                                                                                                class="custom-control-input"
+                                                                                                name="occurs_weekly_fields_inbound"
+                                                                                                value="Friday"
+                                                                                                id="colorCheck4" />
+                                                                                            <label
+                                                                                                class="custom-control-label"
+                                                                                                for="colorCheck4">Friday</label>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="custom-control custom-control-primary custom-checkbox">
+                                                                                            <input type="checkbox"
+                                                                                                class="custom-control-input"
+                                                                                                name="occurs_weekly_fields_inbound"
+                                                                                                value="Saturday"
+                                                                                                id="colorCheck6" />
+                                                                                            <label
+                                                                                                class="custom-control-label"
+                                                                                                for="colorCheck6">Saturday</label>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="custom-control custom-control-primary custom-checkbox">
+                                                                                            <input type="checkbox"
+                                                                                                class="custom-control-input"
+                                                                                                name="occurs_weekly_fields_inbound"
+                                                                                                value="Sunday"
+                                                                                                id="colorCheck7" />
+                                                                                            <label
+                                                                                                class="custom-control-label"
+                                                                                                for="colorCheck7">Sunday</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr class="my-2">
+                                                    <div class="row">
+                                                        <div class="col-md-12 mb-1">
+                                                            <strong>Daily Frequency</strong>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="row form-group align-items-center">
+                                                                <div class="col-md-2 mb-md-0 mb-1">
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio" id="occursOnceAt"
+                                                                            name="daily_frequency_type_inbound"
+                                                                            class="custom-control-input"
+                                                                            value="Occurs Once At" checked />
+                                                                        <label class="custom-control-label"
+                                                                            for="occursOnceAt">Occurs once at</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <input type="text"
+                                                                        id="daily_frequency_once_time_inbound"
+                                                                        name="daily_frequency_once_time_inbound"
+                                                                        class="form-control flatpickr-time text-left flatpickr-input"
+                                                                        placeholder="HH:MM" readonly="readonly" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="row form-group align-items-center">
+                                                                    <div class="col-md-2">
+                                                                        <div class="custom-control custom-radio">
+                                                                            <input type="radio" id="occursEvery"
+                                                                                name="daily_frequency_type_inbound"
+                                                                                class="custom-control-input"
+                                                                                value="Occurs every" />
+                                                                            <label class="custom-control-label"
+                                                                                for="occursEvery">Occurs every</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-9">
+                                                                        <div id="recursEveryDiv" style="display: none;">
+                                                                            <div class="row">
+                                                                                <div
+                                                                                    class="col-md-3 col-6 input-group bootstrap-touchspin">
+                                                                                    <input type="number"
+                                                                                        name="daily_frequency_every_time_count_inbound"
+                                                                                        id="daily_frequency_every_time_count_inbound"
+                                                                                        class="touchspin-min-max"
+                                                                                        value="1" />
+                                                                                </div>
+                                                                                <div class="col-md-3 col-6 input-group">
+                                                                                    <select class="form-control"
+                                                                                        name="daily_frequency_every_time_unit_inbound"
+                                                                                        id="daily_frequency_every_time_unit_inbound">
+                                                                                        <option value="hour">hour(s)
+                                                                                        </option>
+                                                                                        <option value="minute">minute(s)
+                                                                                        </option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group" id="startingEndingDiv"
+                                                                    style="display: none;">
+                                                                    <div class="row">
+                                                                        <div class="col-md-2">Starting at</div>
+                                                                        <div class="col-md-9">
+                                                                            <div class="form-group">
+                                                                                <input type="text"
+                                                                                    id="daily_frequency_every_time_count_start_inbound"
+                                                                                    name="daily_frequency_every_time_count_start_inbound"
+                                                                                    class="form-control flatpickr-time text-left flatpickr-input"
+                                                                                    placeholder="HH:MM"
+                                                                                    readonly="readonly" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2">Ending at</div>
+                                                                        <div class="col-md-9">
+                                                                            <div class="form-group">
+                                                                                <input type="text"
+                                                                                    id="daily_frequency_every_time_count_end_inbound"
+                                                                                    name="daily_frequency_every_time_count_end_inbound"
+                                                                                    class="form-control flatpickr-time text-left flatpickr-input"
+                                                                                    placeholder="HH:MM"
+                                                                                    readonly="readonly" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr class="my-2">
+                                                    <div class="row">
+                                                        <div class="col-md-12 mb-1">
+                                                            <strong>Duration</strong>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="row align-items-center form-group">
+                                                                <div class="col-md-2">
+                                                                    <div class="form-label required">Start Date</div>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <input type="date"
+                                                                        name="duration_inbound_start_date"
+                                                                        id="duration_inbound_start_date"
+                                                                        class="form-control" placeholder="1" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="row align-items-center form-group">
+                                                                <div class="col-md-2">
+                                                                    <div class="row w-100 text-nowrap mb-md-0 mb-1">
+                                                                        <div class="col mb-1">
+                                                                            <div
+                                                                                class="custom-control custom-radio-primary custom-radio">
+                                                                                <input type="radio"
+                                                                                    name="duration_inbound_is_end_date"
+                                                                                    id="duration_inbound_is_end_date_no"
+                                                                                    class="custom-control-input"
+                                                                                    value="no_end_date" checked />
+                                                                                <label class="custom-control-label"
+                                                                                    for="duration_inbound_is_end_date_no">No
+                                                                                    End Date</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <div
+                                                                                class="custom-control custom-radio-primary custom-radio">
+                                                                                <input type="radio"
+                                                                                    name="duration_inbound_is_end_date"
+                                                                                    id="duration_inbound_is_end_date_yes"
+                                                                                    class="custom-control-input"
+                                                                                    value="yes_end_date" />
+                                                                                <label class="custom-control-label"
+                                                                                    for="duration_inbound_is_end_date_yes">End
+                                                                                    Date</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <input type="date" name="duration_inbound_end_date"
+                                                                        id="duration_inbound_end_date"
+                                                                        class="form-control hidden" placeholder="1" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="inbound-data-one-time" style="display: none;">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-md-2">One-time Occurrence</div>
+                                                        <div class="col-md-9">
+                                                            <div class="row mx-0">
+                                                                <div class="col-6 px-0">
+                                                                    <input type="date"
+                                                                        name="one_time_occurrence_inbound_date"
+                                                                        id="one_time_occurrence_inbound_date"
+                                                                        class="form-control" placeholder="1" />
+                                                                </div>
+                                                                <div class="col-6 pl-1 pr-0">
+                                                                    <input type="text"
+                                                                        id="one_time_occurrence_inbound_time"
+                                                                        name="one_time_occurrence_inbound_time"
+                                                                        class="form-control flatpickr-time text-left flatpickr-input"
+                                                                        placeholder="HH:MM" readonly="readonly" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="outbound-shedule-setting-tab">
+                                            <div class="form-group col-12 mt-2 p-0">
+                                                <h4 class="mb-0">OutBound</h4>
+                                            </div>
+                                            <div class="form-group col-12 mt-3 p-0">
+                                                <div class="row">
+                                                    <div class="col-md-2 col-5">
+                                                        <div class="custom-control custom-radio">
+                                                            <input type="radio" name="s_configure_outbound"
+                                                                id="Schedule_configure_schedule_outound"
+                                                                class="custom-control-input" value="schedule" checked />
+                                                            <label class="custom-control-label"
+                                                                for="Schedule_configure_schedule_outound"><strong>Schedule</strong></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 col-5">
+                                                        <div class="custom-control custom-radio">
+                                                            <input type="radio" name="s_configure_outbound"
+                                                                id="Schedule_configure_click_by_user_outbound"
+                                                                class="custom-control-input" value="click_by_user" />
+                                                            <label class="custom-control-label"
+                                                                for="Schedule_configure_click_by_user_outbound"><strong>Click
+                                                                    By User</strong></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10 mt-md-2 mt-0 p-0 relation-outbound-schedule-open">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2 mb-md-0 mb-1">
+                                                        <strong>Schedule Type</strong>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-3 col-6">
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio"
+                                                                            name="schedule_type_outbound"
+                                                                            id="Schedule_type_recurring_outbound"
+                                                                            class="custom-control-input"
+                                                                            value="Recurring" checked />
+                                                                        <label class="custom-control-label"
+                                                                            for="Schedule_type_recurring_outbound">Recurring</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3 col-6">
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio"
+                                                                            name="schedule_type_outbound"
+                                                                            id="Schedule_type_one_time_outbound"
+                                                                            class="custom-control-input"
+                                                                            value="OneTime" />
+                                                                        <label class="custom-control-label"
+                                                                            for="Schedule_type_one_time_outbound">One
+                                                                            Time</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="outbound-data-recurring">
+                                                    <hr class="mb-2">
+                                                    <div class="row">
+                                                        <div class="col-md-12 mb-1">
+                                                            <strong>Frequency</strong>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="row">
+                                                                <!-- <div class="form-group col-md-2">
+																							<div class="form-label required">Occurs</div>
+																						</div> -->
+                                                                <div class="form-group col-md-9">
+                                                                    <div class="form-group col-7 p-0">
+                                                                        <label for="occurs_time_outbound"
+                                                                            class="required">Occurs</label>
+                                                                        <select
+                                                                            class="select2 form-control form-control-lg custom-select"
+                                                                            id="occurs_time_outbound"
+                                                                            name="occurs_time_outbound">
+                                                                            <option value="daily">Daily</option>
+                                                                            <option value="weekly">Weekly</option>
+                                                                            <option value="monthly">Monthly</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="mt-2" id="selectOccursDayInOutbound">
+                                                                        <div class="row align-items-center w-100">
+                                                                            <div
+                                                                                class="col-sm-12 col-md-3 col-lg-3 col-4">
+                                                                                Recurs every
+                                                                            </div>
+                                                                            <div class="col-sm-12 col-md-9 col-8">
+                                                                                <div class="row align-items-center">
+                                                                                    <div
+                                                                                        class="col-sm-9 col-md-6 col-lg-3 col-6 input-group bootstrap-touchspin">
+                                                                                        <input type="number"
+                                                                                            name="day_frequency_outbound_count"
+                                                                                            id="day_frequency_outbound_count"
+                                                                                            class="touchspin-min-max"
+                                                                                            value="1" />
+                                                                                    </div>
+                                                                                    <div
+                                                                                        class="col-sm-3 col-md-6 col-6 input-group">
+                                                                                        day(s)
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="mt-2" id="selectOccursMonthInOutbound"
+                                                                        style="display:none;">
+                                                                        <div id="monthly_fields_outbound">
+                                                                            <div class="form-group">
+                                                                                <div class="row align-items-center"
+                                                                                    id="selectOccursMonthIn">
+                                                                                    <div class="col-md-2 mb-md-0 mb-1">
+                                                                                        <div
+                                                                                            class="d-flex align-items-center">
+                                                                                            <div
+                                                                                                class="custom-control custom-radio-primary custom-radio">
+                                                                                                <input type="radio"
+                                                                                                    name="outbound_monthly_day"
+                                                                                                    id="outbound_monthly_day"
+                                                                                                    class="custom-control-input"
+                                                                                                    value="day"
+                                                                                                    checked />
+                                                                                                <label
+                                                                                                    class="custom-control-label"
+                                                                                                    for="outbound_monthly_day">Day</label>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="custom-control custom-radio-primary custom-radio ml-2">
+                                                                                                <input type="radio"
+                                                                                                    name="outbound_monthly_day"
+                                                                                                    id="outbound_monthly_the"
+                                                                                                    class="custom-control-input"
+                                                                                                    value="The" />
+                                                                                                <label
+                                                                                                    class="custom-control-label"
+                                                                                                    for="outbound_monthly_the">The</label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-12 mt-1"
+                                                                                        id="selectOccursMonthDayDivInOutbound">
+                                                                                        <div id="day_txt_box_outbound">
+                                                                                            <div
+                                                                                                class="row align-items-center">
+                                                                                                <div
+                                                                                                    class="col-3 px-md-0 px-0 input-group bootstrap-touchspin">
+                                                                                                    <input type="number"
+                                                                                                        name="monthly_frequency_day_outbound"
+                                                                                                        id="monthly_frequency_day_outbound"
+                                                                                                        class="touchspin-min-max"
+                                                                                                        value="1" />
+                                                                                                </div>
+                                                                                                <div
+                                                                                                    class="col-2 px-md-0 px-0 input-group">
+                                                                                                    of every
+                                                                                                </div>
+                                                                                                <div
+                                                                                                    class="col-3 px-md-0 px-0 input-group bootstrap-touchspin">
+                                                                                                    <input type="number"
+                                                                                                        name="monthly_frequency_day_outbound_count"
+                                                                                                        id="monthly_frequency_day_outbound_count"
+                                                                                                        class="touchspin-min-max"
+                                                                                                        value="1" />
+                                                                                                </div>
+                                                                                                <div
+                                                                                                    class="col-2 px-md-1 px-0 input-group">
+                                                                                                    month(s)
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="row row align-items-center"
+                                                                                            id="the_section_outbound">
+                                                                                            <div
+                                                                                                class="mb-sm-1 mb-md-0 col-md-3">
+                                                                                                <select
+                                                                                                    class="form-control"
+                                                                                                    id="the_day_of_outbound"
+                                                                                                    name="the_day_of">
+                                                                                                    <option
+                                                                                                        value="First">
+                                                                                                        First</option>
+                                                                                                    <option
+                                                                                                        value="Second">
+                                                                                                        Second</option>
+                                                                                                    <option
+                                                                                                        value="Third">
+                                                                                                        Third</option>
+                                                                                                    <option
+                                                                                                        value="Fourth">
+                                                                                                        Fourth</option>
+                                                                                                    <option
+                                                                                                        value="Last">
+                                                                                                        Last</option>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="mb-sm-1 mb-md-0 col-md-3">
+                                                                                                <select
+                                                                                                    class="form-control"
+                                                                                                    id="the_days_outbound"
+                                                                                                    name="the_days">
+                                                                                                    <option
+                                                                                                        value="Monday">
+                                                                                                        Monday</option>
+                                                                                                    <option
+                                                                                                        value="Tuesday">
+                                                                                                        Tuesday</option>
+                                                                                                    <option
+                                                                                                        value="Wednesday">
+                                                                                                        Wednesday
+                                                                                                    </option>
+                                                                                                    <option
+                                                                                                        value="Thursday">
+                                                                                                        Thursday
+                                                                                                    </option>
+                                                                                                    <option
+                                                                                                        value="Friday">
+                                                                                                        Friday</option>
+                                                                                                    <option
+                                                                                                        value="Saturday">
+                                                                                                        Saturday
+                                                                                                    </option>
+                                                                                                    <option
+                                                                                                        value="Sunday">
+                                                                                                        Sunday</option>
+                                                                                                    <option
+                                                                                                        value="Weekday">
+                                                                                                        Weekday</option>
+                                                                                                    <option
+                                                                                                        value="Weekend">
+                                                                                                        Weekend Day
+                                                                                                    </option>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="col-sm-12 text-sm-center mb-sm-1 mb-md-0 col-md-2">
+                                                                                                of every</div>
+                                                                                            <div
+                                                                                                class="col-sm-6 text-sm-center col-md-2 input-group bootstrap-touchspin">
+                                                                                                <input type="number"
+                                                                                                    name="monthly_frequency_the_outbound_count"
+                                                                                                    id="monthly_frequency_the_outbound_count"
+                                                                                                    class="touchspin-min-max"
+                                                                                                    value="1" />
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="col-sm-6 text-sm-center col-md-2">
+                                                                                                month(s)
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="demo-inline-spacing"
+                                                                        id="selectOccursWeekInOutbound"
+                                                                        style="display:none;">
+                                                                        <div class="row align-items-center">
+                                                                            <div class="col-md-6 col-lg-3 col-4">
+                                                                                Recurs every
+                                                                            </div>
+                                                                            <div class="col-md-9 col-8">
+                                                                                <div class="row align-items-center">
+                                                                                    <div
+                                                                                        class="col-md-3 col-6 input-group bootstrap-touchspin ml-n1 w-100">
+                                                                                        <input type="number"
+                                                                                            name="weekly_frequency_outbound_count"
+                                                                                            id="weekly_frequency_outbound_count"
+                                                                                            class="touchspin-min-max"
+                                                                                            value="1" />
+                                                                                    </div>
+                                                                                    <div
+                                                                                        class="col-md-6 col-6 input-group">
+                                                                                        Week(s) On
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-2"></div>
+                                                                            <div class="col-md-9">
+                                                                                <div id="weekly_fields_outbound">
+                                                                                    <div class="demo-inline-spacing">
+                                                                                        <div
+                                                                                            class="custom-control custom-control-primary custom-checkbox">
+                                                                                            <input type="checkbox"
+                                                                                                name="occurs_weekly_fields_outbound"
+                                                                                                class="custom-control-input"
+                                                                                                value="Monday"
+                                                                                                id="colorCheck8" />
+                                                                                            <label
+                                                                                                class="custom-control-label"
+                                                                                                for="colorCheck8">Monday</label>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="custom-control custom-control-primary custom-checkbox">
+                                                                                            <input type="checkbox"
+                                                                                                class="custom-control-input"
+                                                                                                name="occurs_weekly_fields_outbound"
+                                                                                                value="Tuesday"
+                                                                                                id="colorCheck9" />
+                                                                                            <label
+                                                                                                class="custom-control-label"
+                                                                                                for="colorCheck9">Tuesday</label>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="custom-control custom-control-primary custom-checkbox">
+                                                                                            <input type="checkbox"
+                                                                                                class="custom-control-input"
+                                                                                                name="occurs_weekly_fields_outbound"
+                                                                                                value="Wednesday"
+                                                                                                id="colorCheck10" />
+                                                                                            <label
+                                                                                                class="custom-control-label"
+                                                                                                for="colorCheck10">Wednesday</label>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="custom-control custom-control-primary custom-checkbox">
+                                                                                            <input type="checkbox"
+                                                                                                class="custom-control-input"
+                                                                                                name="occurs_weekly_fields_outbound"
+                                                                                                value="Thursday"
+                                                                                                id="colorCheck11" />
+                                                                                            <label
+                                                                                                class="custom-control-label"
+                                                                                                for="colorCheck11">Thursday</label>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="custom-control custom-control-primary custom-checkbox">
+                                                                                            <input type="checkbox"
+                                                                                                class="custom-control-input"
+                                                                                                name="occurs_weekly_fields_outbound"
+                                                                                                value="Friday"
+                                                                                                id="colorCheck12" />
+                                                                                            <label
+                                                                                                class="custom-control-label"
+                                                                                                for="colorCheck12">Friday</label>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="custom-control custom-control-primary custom-checkbox">
+                                                                                            <input type="checkbox"
+                                                                                                class="custom-control-input"
+                                                                                                name="occurs_weekly_fields_outbound"
+                                                                                                value="Saturday"
+                                                                                                id="colorCheck13" />
+                                                                                            <label
+                                                                                                class="custom-control-label"
+                                                                                                for="colorCheck13">Saturday</label>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="custom-control custom-control-primary custom-checkbox">
+                                                                                            <input type="checkbox"
+                                                                                                class="custom-control-input"
+                                                                                                name="occurs_weekly_fields_outbound"
+                                                                                                value="Sunday"
+                                                                                                id="colorCheck14" />
+                                                                                            <label
+                                                                                                class="custom-control-label"
+                                                                                                for="colorCheck14">Sunday</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr class="my-2">
+                                                    <div class="row">
+                                                        <div class="col-md-12 mb-1">
+                                                            <strong>Daily Frequency</strong>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="row form-group align-items-center">
+                                                                <div class="col-md-2 mb-md-0 mb-1">
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio" id="occursOnceAtOutbound"
+                                                                            name="daily_frequency_type_outbound"
+                                                                            class="custom-control-input"
+                                                                            value="Occurs Once At" checked />
+                                                                        <label class="custom-control-label"
+                                                                            for="occursOnceAtOutbound">Occurs once
+                                                                            at</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <input type="text"
+                                                                        id="daily_frequency_once_time_outbound"
+                                                                        name="daily_frequency_once_time_outbound"
+                                                                        class="form-control flatpickr-time text-left flatpickr-input"
+                                                                        placeholder="HH:MM" readonly="readonly" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="row form-group align-items-center">
+                                                                    <div class="col-md-2">
+                                                                        <div class="custom-control custom-radio">
+                                                                            <input type="radio" id="occursEveryOutbound"
+                                                                                name="daily_frequency_type_outbound"
+                                                                                class="custom-control-input"
+                                                                                value="Occurs every" />
+                                                                            <label class="custom-control-label"
+                                                                                for="occursEveryOutbound">Occurs
+                                                                                every</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-9" id="recursEveryDivOutbound"
+                                                                        style="display:none;">
+                                                                        <div class="row">
+                                                                            <div
+                                                                                class="col-md-3 col-6 input-group bootstrap-touchspin">
+                                                                                <input type="number"
+                                                                                    name="daily_frequency_every_time_count_outbound"
+                                                                                    id="daily_frequency_every_time_count_outbound"
+                                                                                    class="touchspin-min-max"
+                                                                                    value="1" />
+                                                                            </div>
+                                                                            <div class="col-md-3 col-6 input-group">
+                                                                                <select
+                                                                                    name="daily_frequency_every_time_unit_outbound"
+                                                                                    id="daily_frequency_every_time_unit_outbound"
+                                                                                    class="form-control" id="occurs">
+                                                                                    <option value="hour">hour(s)
+                                                                                    </option>
+                                                                                    <option value="minute">minute(s)
+                                                                                    </option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group" id="startingEndingDivOutbound"
+                                                                    style="display: none;">
+                                                                    <div class="row">
+                                                                        <div class="col-md-2">Starting at</div>
+                                                                        <div class="col-md-9">
+                                                                            <div class="col-md-12 form-group">
+                                                                                <input type="text"
+                                                                                    id="daily_frequency_every_time_count_start_outbound"
+                                                                                    name="daily_frequency_every_time_count_start_outbound"
+                                                                                    class="form-control flatpickr-time text-left flatpickr-input"
+                                                                                    placeholder="HH:MM"
+                                                                                    readonly="readonly" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2">Ending at</div>
+                                                                        <div class="col-md-9">
+                                                                            <div class="col-md-12 form-group">
+                                                                                <input type="text"
+                                                                                    id="daily_frequency_every_time_count_end_outbound"
+                                                                                    name="daily_frequency_every_time_count_end_outbound"
+                                                                                    class="form-control flatpickr-time text-left flatpickr-input"
+                                                                                    placeholder="HH:MM"
+                                                                                    readonly="readonly" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr class="my-2">
+                                                    <div class="row">
+                                                        <div class="col-md-12 mb-1">
+                                                            <strong>Duration</strong>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="row align-items-center form-group">
+                                                                <div class="col-md-2">
+                                                                    <div class="form-label required">Start Date</div>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <input type="date"
+                                                                        name="duration_outbound_start_date"
+                                                                        id="duration_outbound_start_date"
+                                                                        class="form-control" placeholder="1" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="row align-items-center form-group">
+                                                                <div class="col-md-2">
+                                                                    <div class="row w-100 text-nowrap mb-md-0 mb-1">
+                                                                        <div class="col mb-1">
+                                                                            <div
+                                                                                class="custom-control custom-radio-primary custom-radio">
+                                                                                <input type="radio"
+                                                                                    name="duration_outbound_is_end_date"
+                                                                                    id="duration_outbound_is_end_date_no"
+                                                                                    class="custom-control-input"
+                                                                                    value="no_end_date" checked />
+                                                                                <label class="custom-control-label"
+                                                                                    for="duration_outbound_is_end_date_no">No
+                                                                                    End Date</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <div
+                                                                                class="custom-control custom-radio-primary custom-radio">
+                                                                                <input type="radio"
+                                                                                    name="duration_outbound_is_end_date"
+                                                                                    id="duration_outbound_is_end_date_yes"
+                                                                                    class="custom-control-input"
+                                                                                    value="yes_end_date" />
+                                                                                <label class="custom-control-label"
+                                                                                    for="duration_outbound_is_end_date_yes">End
+                                                                                    Date</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <input type="date" name="duration_outbound_end_date"
+                                                                        id="duration_outbound_end_date"
+                                                                        class="form-control hidden" placeholder="1" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="outbound-data-one-time" style="display: none;">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-md-2">One-time Occurrence</div>
+                                                        <div class="col-md-9">
+                                                            <div class="row mx-0">
+                                                                <div class="col-6 px-0">
+                                                                    <input type="date"
+                                                                        name="one_time_occurrence_outbound_date"
+                                                                        id="one_time_occurrence_outbound_date"
+                                                                        class="form-control" placeholder="1" />
+                                                                </div>
+                                                                <div class="col-6 pl-1 pr-0">
+                                                                    <input type="text"
+                                                                        id="one_time_occurrence_outbound_time"
+                                                                        name="one_time_occurrence_outbound_time"
+                                                                        class="form-control flatpickr-time text-left flatpickr-input"
+                                                                        placeholder="HH:MM" readonly="readonly" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div id="inbound-ddep-api-selected">
+                                            <p style="color: red;">(Inbound Type : DDEP API not supported schedule)</p>
+                                            <p>DDEP API will trigger by external posting data, will not be known when
+                                                will
+                                                be triggered.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Ends Item model -->

@@ -1,0 +1,150 @@
+<%
+	const emailfailuresDetailsModel = include('email-failures-details-view.ejs');
+	const itemLogsViewModal = include('item-logs-view-modal.ejs');
+	const itemNewLogsViewModal = include('item-logs-new-view-modal.ejs');
+	const itemLogsViewDetailsModal = include('item-logs-view-details-modal.ejs');
+	const itemCurlbashViewModal = include('curl-bash-model.ejs');
+	let style = '';
+	let body = '';
+	let script = '';
+%>
+
+<% style = `<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/pickers/daterangepicker/daterangepicker.css"></script>
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/forms/wizard/bs-stepper.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/form-validation.css" />
+		<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/form-wizard.css">` %>
+
+<% body = `<div class="content-wrapper">
+				<div class="content-header row">
+					<div class="content-header-left col-md-12 col-12 mb-2">
+						<div class="row breadcrumbs-top">
+							<div class="col-sm-6 col-12">
+								<h2 class="content-header-title float-left mb-0">Email Failures</h2>
+								<div class="breadcrumb-wrapper">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item">
+											<a href="/">Home</a>
+										</li>
+										<li class="breadcrumb-item">
+											<a href="javascript:void(0);">Email Failures</a>
+										</li>
+									</ol>
+								</div>
+							</div>
+							<div class="col-sm-6 col-12 d-flex justify-content-end">
+								<div class="card mb-0">
+									<div id="emailfailuresrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+										<i data-feather="clock"></i>&nbsp;
+										<span></span> 
+									</div>
+									<div class="hidden since-time"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-body">
+					<section id="basic-datatable">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<div class="border-bottom p-1">
+										<div class="form-row align-items-end m-0">
+											
+											<div class="form-group col-sm-4 col-md-3 mb-1">
+                                                <label class="form-label" for="select-email-company">Company</label>
+                                                <select class="select2 form-control form-control-sm" id="select-email-company" name="select-email-company"></select>
+									        </div>
+
+                                            <!-- Project -->
+                                            <div class="form-group col-sm-4 col-md-3 mb-1">
+                                                <label class="form-label" for="select-email-project">Project</label>
+                                                <select class="select2 form-control form-control-sm" id="select-email-project" name="select-email-project"></select>
+                                            </div>
+
+                                            <!-- Environment -->
+                                            <div class="form-group col-sm-4 col-md-3 mb-1">
+                                                <label class="form-label" for="select-email-environment">Environment</label>
+                                                <select class="select2 form-control form-control-sm" id="select-email-environment" name="select-email-environment"></select>
+                                            </div>
+
+                                            <!-- Item -->
+                                            <div class="form-group col-sm-4 col-md-3 mb-1">
+                                                <label class="form-label" for="select-email-item">Item Name</label>
+                                                <select class="select2 form-control form-control-sm" id="select-email-item" name="select-email-item"></select>
+                                            </div>
+											
+											<div class="form-group col-sm-4 col-md-12 mb-1 d-flex align-items-end justify-content-end">
+												<div class="btn-group justify-content-end">
+													<button type="button" class="btn btn-primary mr-1" id="search-email-button">
+													    <span>Search</span>
+                                                    </button>
+                                                    <button type="button" class="dt-button btn btn-outline-secondary waves-effect mr-1" id="email-resend">
+                                                        <span>Resend</span>
+                                                    </button>
+                                                    <button type="button" class="dt-button btn btn-outline-secondary waves-effect mr-1" id="email-delete">
+                                                        <span>Delete</span>
+                                                    </button>
+                                                    <a href="/emails-failures/export" class="dt-button btn btn-outline-secondary" id="export_log_histories" type="button" tabindex="0">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download font-small-4 mr-50">
+                                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                                                        </svg>
+                                                        <span>Export</span>
+                                                    </a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<table class="datatables-basic table" id="email-failures-table">
+                                        <thead>
+                                            <tr>
+												<th>
+													<div class="custom-control custom-checkbox mt-0">
+														<input type="checkbox" name="email_select_all" id="email_select_all"
+															class="custom-control-input email-checkbox"
+															data-email-id="email_select_all" aria-label="Select Email Failure">
+														<label class="custom-control-label" for="email_select_all"></label>
+													</div>
+												</th>
+						                                                <th class="header-number">No</th>
+						                                                <th class="header-date-time">DATE TIME</th>
+						                                                <th class="header-company-name">Company Name</th>
+						                                                <th class="header-project-name">Project Name</th>
+						                                                <th class="header-item-name">Item Name</th>
+						                                                <th class="header-email-subject">Email Subject</th>
+						                                                <th class="header-resend-time">Resend Times</th>
+						                                                <th class="header-latest-status">Latest Status</th>
+						                                                <th class="header-failure-reason">Failure Reason</th>
+						                                                <th class="header-resend-message">Resend Message</th>
+						                                            </tr>
+						                                        </thead>
+									    <tbody></tbody>
+								    </table>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>` %>
+<% body += emailfailuresDetailsModel; %>
+<% body += itemLogsViewModal; %>
+<% body += itemNewLogsViewModal; %>
+<% body += itemLogsViewDetailsModal; %>
+<% body += itemCurlbashViewModal; %>
+
+<% script = `<script type="text/javascript" src="/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/app-assets/js/scripts/moment.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/forms/wizard/bs-stepper.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/pickers/daterangepicker/daterangepicker.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
+        <script type="text/javascript" src="/assets/js/emailfailures.js" defer></script>`%>
+
+<%- include('layout', { title: `email-failures-list`, style, body, script }) %>

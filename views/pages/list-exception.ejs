@@ -1,0 +1,273 @@
+<%- include("partials/head", headerData); %>
+
+<%- include("partials/header"); %>
+
+<% if (typeof(companyCode) != "undefined") { %>
+<script type="text/javascript">
+	const dataCompanyCode = "<%= companyCode %>";
+</script>
+<% } else if (typeof(headerData.companyCode) != "undefined") { %>
+<script type="text/javascript">
+	const dataCompanyCode = "<%= headerData.companyCode %>";
+</script>
+<% } else { %>
+<script type="text/javascript">
+	const noDataCompanyCode = "companyCode not found!";
+</script>
+<% } %>
+
+<!-- BEGIN: Content -->
+<div class="app-content content">
+	<div class="content-overlay"></div>
+	<div class="header-navbar-shadow"></div>
+	<div class="content-wrapper">
+		<div class="content-header row">
+			<div class="content-header-left col-md-9 col-12 mb-2">
+				<div class="row breadcrumbs-top">
+					<div class="col-12">
+						<h2 class="content-header-title float-left mb-0">Exceptions</h2>
+						<div class="breadcrumb-wrapper">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="/">Home</a>
+								</li>
+								<li class="breadcrumb-item">
+									<a href="javascript:void(0);">Exceptions</a>
+								</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content-body">
+			<section id="basic-datatable">
+				<div class="row">
+					<div class="col-2">
+						<div class="card">
+							<div class="card-header border-bottom p-1">
+								<div class="head-label">
+									<h6 class="mb-0">Error Types</h6>
+								</div>
+							</div>
+							<div class="card-header p-1">
+								<div class="search-box">
+									<span id="error-type-search-icon"><i data-feather="search"></i></span>
+									<input type="text" class="form-control" name="serach_error_type" id="serach_error_type">
+								</div>
+								<div class="list-error-types">
+									<table class="" id="exception_error_type_table">
+										<thead>
+											<tr>
+												<th>Type</th>
+												<th class="count">Count</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr style="text-align: center;display: none;">
+												<td colspan="2">No matching records found</td>
+											</tr>
+											<tr>
+												<td>Connection Error</td>
+												<td class="count connection-error">0</td>
+											</tr>
+											<tr>
+												<td>Formula Error</td>
+												<td class="count formula-error">0</td>
+											</tr>
+											<tr>
+												<td>System Error</td>
+												<td class="count system-error">0</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-10">
+						<div class="card">
+							<div class="card-header border-bottom p-1" style="display: none;">
+								<div class="head-label">
+									<h6 class="mb-0"></h6>
+								</div>
+								<div class="dt-action-buttons text-right">
+									<div class="dt-buttons d-inline-flex">
+										<div class="dropdown" style="display: none;">
+											<button class="dt-button btn btn-outline-secondary waves-effect dropdown-toggle mr-2" type="button" data-toggle="dropdown" tabindex="0">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download font-small-4 mr-50">
+													<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+												</svg>
+												<span>Import</span>
+											</button>
+											<div class="dropdown-menu dropdown-menu-right">
+												<a class="dropdown-item" tabindex="0">
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file font-small-4 mr-50">
+															<path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+															<path d="M13 2v7h7" />
+														</svg>
+														XML
+													</span>
+												</a>
+												<a class="dropdown-item" tabindex="0">
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file font-small-4 mr-50">
+															<path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+															<path d="M13 2v7h7" />
+														</svg>
+														Download XML Template
+													</span>
+												</a>
+												<a class="dropdown-item" tabindex="0">
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file font-small-4 mr-50">
+															<path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+															<path d="M13 2v7h7" />
+														</svg>
+														CVS
+													</span>
+												</a>
+												<a class="dropdown-item" tabindex="0">
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file font-small-4 mr-50">
+															<path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+															<path d="M13 2v7h7" />
+														</svg>
+														Download CSV Template
+													</span>
+												</a>
+												<a class="dropdown-item" tabindex="0">
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file font-small-4 mr-50">
+															<path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+															<path d="M13 2v7h7" />
+														</svg>
+														Excel
+													</span>
+												</a>
+												<a class="dropdown-item" tabindex="0">
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file font-small-4 mr-50">
+															<path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+															<path d="M13 2v7h7" />
+														</svg>
+														Download Excel Template
+													</span>
+												</a>
+											</div>
+										</div>
+										<div class="dropdown" style="display: none;">
+											<button class="dt-button btn btn-outline-secondary waves-effect dropdown-toggle mr-2" type="button"
+												data-toggle="dropdown" tabindex="0">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download font-small-4 mr-50">
+													<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+												</svg>
+												<span>Export</span>
+											</button>
+											<div class="dropdown-menu dropdown-menu-right">
+												<a class="dropdown-item" tabindex="0">
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file font-small-4 mr-50">
+															<path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+															<path d="M13 2v7h7" />
+														</svg>
+														Download XML Template
+													</span>
+												</a>
+												<a class="dropdown-item" tabindex="0">
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file font-small-4 mr-50">
+															<path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+															<path d="M13 2v7h7" />
+														</svg>
+														Download CSV Template
+													</span>
+												</a>
+												<a class="dropdown-item" tabindex="0">
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file font-small-4 mr-50">
+															<path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+															<path d="M13 2v7h7" />
+														</svg>
+														Download Excel Template
+													</span>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<table class="datatables-basic table" id="exception_data_table">
+								<thead>
+									<tr>
+										<th>Date</th>
+										<th>Type</th>
+										<th>Path</th>
+										<th>Project</th>
+										<th>Item</th>
+										<th>Description</th>
+										<th>Detail Description</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+<!-- END: Content -->
+
+<!-- BEGIN: View Details -->
+<div class="modal fade" id="exception-details-modal" tabindex="-1" role="dialog" aria-labelledby="details-modal-label" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+		<div class="modal-content exception">
+			<div class="modal-header">
+				<h5 class="modal-title" id="details-modal-label">Details</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body p-0" id="details-modal-body">
+				<table class="datatables-basic table" id="logs_data_table">
+					<thead>
+						<tr>
+							<th class="header-number">No</th>
+							<th class="header-action">Action</th>
+							<th class="header-description">Description</th>
+							<th class="header-type">Type</th>
+							<th class="header-http-status">Http Status</th>
+							<th class="header-time">Time</th>
+							<th class="header-details">Details</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END: View Details -->
+
+<!-- BEGIN: View Details -->
+<div class="modal fade" id="details-modal" tabindex="-1" role="dialog" aria-labelledby="details-modal-label" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="details-modal-label">Details</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<pre id="details-modal-body"></pre>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END: View Details -->
+
+<%- include("partials/footer", footerData); %>

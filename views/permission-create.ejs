@@ -1,0 +1,142 @@
+<%
+	let style = '';
+	let body = '';
+	let script = '';
+%>
+
+<% style = `<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/form-validation.css" />` %>
+
+<% body = `<div class="content-wrapper">
+				<div class="content-header row mb-2">
+					<div class="content-header-left col-md-9 col-12">
+						<div class="row breadcrumbs-top">
+							<div class="col-12">
+								<h2 class="content-header-title float-left mb-0">Permissions</h2>
+								<div class="breadcrumb-wrapper">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item">
+											<a href="/">Home</a>
+										</li>
+										<li class="breadcrumb-item">
+											<a href="/permissions">Permissions</a>
+										</li>
+										<li class="breadcrumb-item">` %>
+										<% if (typeof(alldata) != "undefined" && alldata != null && alldata.id) { %>
+											<% body += `Update Permission` %>
+										<% } else { %>
+											<% body += `Create Permission` %>
+										<% } %>
+										<% body += `</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-body">
+					<section class="permission-create">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<div class="card-body">
+										<form id="form-permission-create" action="javascript:void(0);" autocomplete="off">
+											<div class="row">
+												<div class="form-group col-12 m-0">
+													<input type="hidden" name="permission-id" id="permission-id" class="form-control" placeholder="Id"` %>
+													<% if (typeof(alldata) != "undefined" && alldata != null && alldata.id) { %>
+														<% body += ` value="` %> <% body += alldata.id %> <% body += `" readonly` %>
+													<% } %>
+													<% body += ` />
+												</div>
+												<div class="form-group col-12">
+													<label class="form-label required" for="permission-name">Permission Name</label>
+													<input type="text" name="permission-name" id="permission-name" class="form-control" placeholder="Enter Permission Name" required />
+												</div>
+												<div class="form-group col-12">
+													<div class="demo-inline-spacing">
+														<div class="custom-control custom-control-primary custom-switch mt-0">
+															<p class="mb-50 form-label" for="is-admin">Admin</p>
+															<input type="checkbox" name="is-admin" class="custom-control-input" id="is-admin" value="1" /><label class="custom-control-label" for="is-admin">When enabled this option, user can be access full menu and modify full project.</label>
+														</div>
+													</div>
+												</div>
+												<div class="form-group col-12">
+													<label class="form-label" for="permission-description">Permission Description</label>
+													<textarea name="permission-description" id="permission-description" class="form-control" placeholder="Enter Permission Description" rows="4"></textarea>
+												</div>
+											</div>
+											<div class="row mt-2">
+												<div class="form-group col-12">
+													<h4>Permission</h4>
+												</div>
+												<div class="form-group pl-3 col-12">
+													<h5 class="form-label">Projects</h5>
+													<div class="demo-inline-spacing mb-2">
+														<div class="custom-control custom-control-primary custom-switch mt-0">
+															<input type="checkbox" name="can-view-projects" class="custom-control-input" id="can-view-projects" value="1" /><label class="custom-control-label" for="can-view-projects">View Project<p class="mb-0">User can view their created project or invited project.</p></label>
+														</div>
+													</div>
+													<div class="demo-inline-spacing mb-2">
+														<div class="custom-control custom-control-primary custom-switch mt-0">
+															<input type="checkbox" name="can-create-projects" class="custom-control-input" id="can-create-projects" value="1" /><label class="custom-control-label" for="can-create-projects">Create Project<p class="mb-0">User can create a new project.</p></label>
+														</div>
+													</div>
+													<div class="demo-inline-spacing">
+														<div class="custom-control custom-control-primary custom-switch mt-0">
+															<input type="checkbox" name="can-modify-projects" class="custom-control-input" id="can-modify-projects" value="1" /><label class="custom-control-label" for="can-modify-projects">Modify Project<p class="mb-0">When enabled this option, user can be access full menu and modify full project.</p></label>
+														</div>
+													</div>
+												</div>
+												<div class="form-group pl-3 col-12">
+													<h5 class="form-label">Items</h5>
+													<div class="demo-inline-spacing mb-2">
+														<div class="custom-control custom-control-primary custom-switch mt-0">
+															<input type="checkbox" name="can-view-items" class="custom-control-input" id="can-view-items" value="1" /><label class="custom-control-label" for="can-view-items">View Project<p class="mb-0">When enabled this option, user can be access full menu and modify full project.</p></label>
+														</div>
+													</div>
+													<div class="demo-inline-spacing mb-2">
+														<div class="custom-control custom-control-primary custom-switch mt-0">
+															<input type="checkbox" name="can-create-items" class="custom-control-input" id="can-create-items" value="1" /><label class="custom-control-label" for="can-create-items">Create Project<p class="mb-0">When enabled this option, user can be access full menu and modify full project.</p></label>
+														</div>
+													</div>
+													<div class="demo-inline-spacing">
+														<div class="custom-control custom-control-primary custom-switch mt-0">
+															<input type="checkbox" name="can-modify-items" class="custom-control-input" id="can-modify-items" value="1" /><label class="custom-control-label" for="can-modify-items">Modify Project<p class="mb-0">When enabled this option, user can be access full menu and modify full project.</p></label>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="row mt-2">
+												<div class="form-group col-12">
+													<div class="demo-inline-spacing">
+														<div class="custom-control custom-control-primary custom-switch mt-0">
+															<p class="mb-50 form-label" for="is-active">Active</p>
+															<input type="checkbox" name="is-active" class="custom-control-input" id="is-active" value="1" checked /><label class="custom-control-label" for="is-active"></label>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="row mt-2">
+												<div class="form-group col-12">
+													<button class="btn btn-primary" id="create-permission" type="submit">` %>
+													<% if (typeof(alldata) != "undefined" && alldata != null && alldata.id) { %>
+														<% body += `Update Permission` %>
+													<% } else { %>
+														<% body += `Create Permission` %>
+													<% } %>
+													<% body += `</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>` %>
+
+<% script = `<script type="text/javascript" src="/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/assets/js/permissions.js"></script>` %>
+
+<%- include('layout', { title: `Permission Create`, style, body, script }) %>

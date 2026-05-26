@@ -1,0 +1,206 @@
+<%- include("partials/head", headerData); %>
+
+<%- include("partials/header"); %>
+
+<% if (typeof(companyCode) != "undefined") { %>
+<script type="text/javascript">
+	const dataCompanyCode = "<%= companyCode %>";
+</script>
+<% } else if (typeof(headerData.companyCode) != "undefined") { %>
+<script type="text/javascript">
+	const dataCompanyCode = "<%= headerData.companyCode %>";
+</script>
+<% } else { %>
+<script type="text/javascript">
+	const noDataCompanyCode = "companyCode not found!";
+</script>
+<% } %>
+
+<!-- BEGIN: Content -->
+<div class="app-content content">
+	<div class="content-overlay"></div>
+	<div class="header-navbar-shadow"></div>
+	<div class="content-wrapper">
+		<div class="content-header row">
+			<div class="content-header-left col-md-9 col-12 mb-2">
+				<div class="row breadcrumbs-top">
+					<div class="col-12">
+						<h2 class="content-header-title float-left mb-0">SMTP</h2>
+						<div class="breadcrumb-wrapper">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="/">Home</a>
+								</li>
+								<li class="breadcrumb-item">
+									<a href="javascript:void(0);">SMTP</a>
+								</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content-body">
+			<section class="horizontal-wizard">
+				<div class="bs-stepper horizontal-wizard-example">
+					<div class="bs-stepper-content">
+						<div id="create-smtp" class="content active dstepper-block">
+							<div class="content-header">
+								<% if (typeof(alldata) != "undefined" && alldata.status != 0) { %>
+								<h5 class="mb-0">Edit SMTP</h5>
+								<% } else { %>
+								<h5 class="mb-0">Create SMTP</h5>
+								<% } %>
+								<small class="text-muted">Enter Your SMTP Details.</small>
+							</div>
+							<form id="frm-save-smtp" action="javascript:void(0);" autocomplete="off">
+								<div class="row">
+									<% if (typeof(alldata) != "undefined" && alldata.status != 0 && alldata._id != "undefined") { %>
+									<input type="hidden" name="data_id" id="data_id" value="<%= alldata._id %>" />
+									<% } else { %>
+									<input type="hidden" name="data_id" id="data_id" />
+									<% } %>
+									<div class="form-group col-md-4">
+										<label class="form-label required" for="smtpServer">SMTP Server</label>
+										<% if (typeof(alldata) != "undefined" && alldata.status != 0 && alldata.smtpServer != "undefined") { %>
+										<input type="text" name="smtpServer" id="smtpServer" class="form-control" placeholder="Enter SMTP Server" value="<%= alldata.smtpServer %>" required />
+										<% } else { %>
+										<input type="text" name="smtpServer" id="smtpServer" class="form-control" placeholder="Enter SMTP Server" required />
+										<% } %>
+									</div>
+									<div class="form-group col-md-4">
+										<label class="form-label required" for="smtpPort">SMTP Port</label>
+										<% if (typeof(alldata) != "undefined" && alldata.status != 0 && alldata.smtpPort != "undefined") { %>
+										<input type="text" name="smtpPort" id="smtpPort" class="form-control" placeholder="Enter SMTP Port" aria-label="SMTP Port" value="<%= alldata.smtpPort %>" required />
+										<% } else { %>
+										<input type="text" name="smtpPort" id="smtpPort" class="form-control" placeholder="Enter SMTP Port" aria-label="SMTP Port" required />
+										<% } %>
+									</div>
+									<div class="form-group col-md-4">
+										<label class="form-label required">SMTP Properties</label>
+										<div class="demo-inline-spacing">
+											<% if (typeof(alldata) != "undefined" && alldata.status != 0) { %>
+											<div class="custom-control custom-radio" style="margin-top: 7px;">
+												<% if (typeof(alldata) != "undefined" && alldata.status != 0 && alldata.smtpProperties != "undefined" && alldata.smtpProperties == "ssl") { %>
+												<input type="radio" name="smtpProperties" id="smtpPropertiesSSL" class="custom-control-input" aria-label="SSL" value="ssl" required checked />
+												<% } else { %>
+												<input type="radio" name="smtpProperties" id="smtpPropertiesSSL" class="custom-control-input" aria-label="SSL" value="ssl" required />
+												<% } %>
+												<label class="custom-control-label" for="smtpPropertiesSSL">SSL</label>
+											</div>
+											<div class="custom-control custom-radio" style="margin-top: 7px;">
+												<% if (typeof(alldata) != "undefined" && alldata.status != 0 && alldata.smtpProperties != "undefined" && alldata.smtpProperties == "tls") { %>
+												<input type="radio" name="smtpProperties" id="smtpPropertiesTLS" class="custom-control-input" aria-label="TLS" value="tls" required checked />
+												<% } else { %>
+												<input type="radio" name="smtpProperties" id="smtpPropertiesTLS" class="custom-control-input" aria-label="TLS" value="tls" required />
+												<% } %>
+												<label class="custom-control-label" for="smtpPropertiesTLS">TLS</label>
+											</div>
+											<% } else { %>
+											<div class="custom-control custom-radio" style="margin-top: 7px;">
+												<input type="radio" name="smtpProperties" id="smtpPropertiesSSL" class="custom-control-input" aria-label="SSL" value="ssl" required />
+												<label class="custom-control-label" for="smtpPropertiesSSL">SSL</label>
+											</div>
+											<div class="custom-control custom-radio" style="margin-top: 7px;">
+												<input type="radio" name="smtpProperties" id="smtpPropertiesTLS" class="custom-control-input" aria-label="TLS" value="tls" required />
+												<label class="custom-control-label" for="smtpPropertiesTLS">TLS</label>
+											</div>
+											<% } %>
+										</div>
+									</div>
+									<div class="form-group col-md-4">
+										<label class="form-label required" for="smtpEmail">Email</label>
+										<% if (typeof(alldata) != "undefined" && alldata.status != 0 && alldata.smtpEmail != "undefined") { %>
+										<input type="text" name="smtpEmail" id="smtpEmail" class="form-control" placeholder="Enter Email" aria-label="Email" value="<%= alldata.smtpEmail %>" required />
+										<% } else { %>
+										<input type="text" name="smtpEmail" id="smtpEmail" class="form-control" placeholder="Enter Email" aria-label="Email" required />
+										<% } %>
+									</div>
+									<div class="form-group col-md-4">
+										<label class="form-label required" for="smtpAccount">Account</label>
+										<% if (typeof(alldata) != "undefined" && alldata.status != 0 && alldata.smtpAccount != "undefined") { %>
+										<input type="text" name="smtpAccount" id="smtpAccount" class="form-control" placeholder="Enter Account" aria-label="Account" value="<%= alldata.smtpAccount %>" required />
+										<% } else { %>
+										<input type="text" name="smtpAccount" id="smtpAccount" class="form-control" placeholder="Enter Account" aria-label="Account" required />
+										<% } %>
+									</div>
+									<div class="form-group col-md-4">
+										<label class="form-label required" for="smtpPassword">Password</label>
+										<% if (typeof(alldata) != "undefined" && alldata.status != 0 && alldata.smtpPassword != "undefined") { %>
+										<input type="password" name="smtpPassword" id="smtpPassword" class="form-control" placeholder="Enter Password" aria-label="Password" value="<%= alldata.smtpPassword %>" required />
+										<% } else { %>
+										<input type="password" name="smtpPassword" id="smtpPassword" class="form-control" placeholder="Enter Password" aria-label="Password" required />
+										<% } %>
+									</div>
+									<div class="form-group col-md-4">
+										<div class="demo-inline-spacing">
+											<div class="custom-control custom-control-primary custom-switch">
+												<p class="mb-50 form-label" for="smtpActive">Active</p>
+												<% if (typeof(alldata) != "undefined" && alldata.status != 0 && alldata.smtpActive != "undefined" && alldata.smtpActive == "1") { %>
+												<input type="checkbox" name="smtpActive" checked class="custom-control-input" id="smtpActive" value="1" />
+												<label class="custom-control-label" for="smtpActive"></label>
+												<% } else { %>
+												<input type="checkbox" name="smtpActive" class="custom-control-input" id="smtpActive" value="1" />
+												<label class="custom-control-label" for="smtpActive"></label>
+												<% } %>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-md-4">
+										<div class="demo-inline-spacing">
+											<div class="custom-control custom-checkbox" style="margin-top: 7px;">
+												<% if (typeof(alldata) != "undefined" && alldata.status != 0 && alldata.smtpAuthenticationSPA == "on") { %>
+												<input type="checkbox" name="authenticationSPA" id="authenticationSPA" class="custom-control-input" aria-label="Require login using Secure Password Authentication (SPA)" checked />
+												<% } else { %>
+												<input type="checkbox" name="authenticationSPA" id="authenticationSPA" class="custom-control-input" aria-label="Require login using Secure Password Authentication (SPA)" />
+												<% } %>
+												<label class="custom-control-label" for="authenticationSPA">Require login using Secure Password Authentication (SPA)</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<button class="btn btn-primary waves-effect mt-1" id="save_smtp" type="submit">Save</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<div class="content-body">
+			<section class="horizontal-wizard">
+				<div class="bs-stepper horizontal-wizard-example">
+					<div class="bs-stepper-content">
+						<div id="create-smtp" class="content active dstepper-block">
+							<div class="content-header">
+								<h5 class="mb-0">Test SMTP</h5>
+								<small class="text-muted">Test Your SMTP Details.</small>
+							</div>
+							<form id="frm-send-email" action="javascript:void(0);" autocomplete="off">
+								<div class="row">
+									<div class="form-group col-md-6">
+										<label class="form-label required" for="testEmail">Email</label>
+										<input type="email" name="testEmail" id="testEmail" class="form-control" placeholder="Enter Email" required />
+									</div>
+									<div class="form-group col-md-6">
+										<label class="form-label required" for="testSubject">Subject</label>
+										<input type="text" name="testSubject" id="testSubject" class="form-control" placeholder="Enter subject" aria-label="Subject" required />
+									</div>
+									<div class="form-group col-md-12">
+										<label class="form-label required" for="testContent">Content</label>
+										<textarea name="testContent" id="testContent" class="form-control" rows="3" required></textarea>
+									</div>
+								</div>
+								<button class="btn btn-primary waves-effect mt-1" id="send_email" type="submit">Send</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+<!-- END: Content -->
+
+<%- include("partials/footer", footerData); %>

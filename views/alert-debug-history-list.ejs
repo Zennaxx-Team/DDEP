@@ -1,0 +1,101 @@
+<%
+    const alertHistoryDetailModal = include('alert-history-detail-model.ejs');
+	const CurlbashViewModal = include('curl-bash-model.ejs');
+	const alertLogViewModal = include('alert-logs-view-model.ejs');
+	const itemLogsViewModal = include('item-logs-view-modal.ejs');
+	const itemNewLogsViewModal = include('item-logs-new-view-modal.ejs');
+	const itemLogsViewDetailsModal = include('item-logs-view-details-modal.ejs');
+	const itemCurlbashViewModal = include('curl-bash-model.ejs');
+	const alertHistoryCurlBashViewModel = include('alert-history-curl-bash-model.ejs');
+	let style = '';
+	let body = '';
+	let script = '';
+%>
+
+<% style = `<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css">
+        <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/pickers/daterangepicker/daterangepicker.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/form-validation.css" />` %>
+
+<% body = `<div class="content-wrapper">
+				<div class="content-header row mb-2">
+					<div class="content-header-left col-12">
+						<div class="row breadcrumbs-top">
+							<div class="col-sm-12 col-md-12 col-lg-8 col-12">
+								<h2 class="content-header-title float-left mb-0">Alert History (Debug)</h2>
+								<div class="breadcrumb-wrapper">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item">
+											<a href="/">Home</a>
+										</li>
+										<li class="breadcrumb-item">
+											Alert History (Debug)
+										</li>
+									</ol>
+								</div>
+							</div>
+							<div class="col-sm-12 col-md-12 col-lg-4 col-12 d-flex justify-content-end align-items-center" style="gap: 0.5rem;">
+								<div style="flex: 0 0 auto; min-width: auto;">
+									<div id="alertdebugreportrange" 
+										style="background: #fff; cursor: pointer; padding: 6px 10px; border: 1px solid #ccc; width: 100%; border-radius: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+										<i data-feather="clock"></i>&nbsp;<span></span>
+									</div>
+									<div class="hidden since-time-alert-debug"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-body">
+					<section class="alert-debug-history-listing">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<table class="table" id="alert-debug-history-data-table">
+										<thead>
+											<tr>
+												<th>No</th>
+												<th>POLICY NAME</th>
+												<th>CONDITION NAME</th>
+												<th>RULE NAME</th>
+												<th>NOTIFY</th>
+												<th>RESULT</th>
+												<th>HTTP STATUS</th>
+												<th>START TIME</th>
+                                                <th>END TIME</th>
+                                                <th>TIME CONSUMED(MS)</th>
+												<th>Actions</th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>` %>
+<% body += alertHistoryDetailModal; %>
+<% body += CurlbashViewModal; %>
+<% body += alertLogViewModal; %>
+<% body += itemLogsViewModal; %>
+<% body += itemNewLogsViewModal; %>
+<% body += itemLogsViewDetailsModal; %>
+<% body += itemCurlbashViewModal; %>
+<% body += alertHistoryCurlBashViewModel; %>
+
+
+<% script = `<script type="text/javascript" src="/app-assets/js/scripts/moment.min.js"></script>
+		<script type="text/javascript" src="/app-assets/js/scripts/hyperformula.min.js"></script>
+ 		<script type="text/javascript" src="/app-assets/vendors/js/pickers/daterangepicker/daterangepicker.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js"></script>
+		<script type="text/javascript" src="/app-assets/js/scripts/moment.min.js"></script>
+		<script type="text/javascript" src="/assets/js/alert-debug-history.js"></script>` %>
+
+<%- include('layout', { title: `Alert History (Debug)`, style, body, script }) %>

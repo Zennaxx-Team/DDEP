@@ -1,0 +1,698 @@
+<%
+	let style = '';
+	let body = '';
+	let script = '';
+%>
+
+<% style = `<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/form-validation.css" />` %>
+
+<% body = `<div class="content-wrapper">
+				<div class="content-header row mb-2">
+					<div class="content-header-left col-md-9 col-12">
+						<div class="row breadcrumbs-top">
+							<div class="col-12">
+								<h2 class="content-header-title float-left mb-0">Mapping Profiles</h2>
+								<div class="breadcrumb-wrapper">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item">
+											<a href="/">Home</a>
+										</li>
+										<li class="breadcrumb-item">
+											<a href="/template/mapping-profiles">Mapping Profiles</a>
+										</li>
+										<li class="breadcrumb-item">` %>
+										<% if (typeof(alldata) != "undefined" && alldata != null && alldata.mappingProfileId) { %>
+											<% body += `Update Mapping Profile` %>
+										<% } else { %>
+											<% body += `Create Mapping Profile` %>
+										<% } %>
+										<% body += `</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-body">
+					<section class="mapping-profile-create">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<div class="card-body">
+										<form id="form-mapping-profile-create" action="javascript:void(0);" autocomplete="off">
+											<div class="row">
+												<div class="form-group col-12 col-md-8 m-0">
+													<div class="row">
+														<div class="form-group col-12 m-0">
+															<input type="hidden" name="mapping-profile-id" id="mapping-profile-id" class="form-control" placeholder="Id"` %>
+															<% if (typeof(alldata) != "undefined" && alldata != null && alldata.mappingProfileId) { %>
+																<% body += ` value="` %> <% body += alldata.mappingProfileId %> <% body += `"` %>
+															<% } %>
+															<% body += ` readonly />
+															<input type="hidden" name="mapping-profile-history-id" id="mapping-profile-history-id" class="form-control" placeholder="Id"` %>
+															<% if (typeof(alldata) != "undefined" && alldata != null && alldata.mappingProfileHistoryId) { %>
+																<% body += ` value="` %> <% body += alldata.mappingProfileHistoryId %> <% body += `"` %>
+															<% } %>
+															<% body += ` readonly />
+														</div>
+														<div class="form-group col-12">
+															<label class="form-label required" for="mapping-profile-name">Mapping Profile Name</label>
+															<input type="text" name="mapping-profile-name" id="mapping-profile-name" class="form-control" placeholder="Enter Mapping Profile Name" required />
+														</div>
+														<div class="form-group col-12">
+															<label class="form-label required" for="version">Version</label>
+															<input type="text" name="version" id="version" class="form-control" placeholder="Enter Mapping Profile Version" required/>
+														</div>
+														<div class="form-group col-12">
+															<label class="form-label" for="mapping-profile-description">Mapping Profile Description</label>
+															<textarea name="mapping-profile-description" id="mapping-profile-description" class="form-control" placeholder="Enter Mapping Profile Description" rows="4"></textarea>
+														</div>
+														<div class="form-group col-12">
+															<label class="form-label required" for="select-mapping-company">Company</label>
+															<select class="select2 form-control form-control-lg" id="select-mapping-company" name="select-mapping-company"></select>
+														</div>
+														<div class="form-group col-12">
+															<label class="form-label required" for="select-project">Project</label>
+															<select class="select2 form-control form-control-lg" id="select-project" name="select-project"></select>
+														</div>
+														<div class="form-group col-12">
+															<hr />
+														</div>
+														<div class="form-group col-12">
+															<label class="form-label" for="return-url">Return URL</label>
+															<input type="text" name="return-url" id="return-url" class="form-control" placeholder="Enter Return URL" />
+															<p class="input-note mb-0">Signle API Flow: It will return response content to caller directly, if you require a specify link received the data.</p>
+															<p class="input-note mb-0">Multiple API Flow: It will asynchronize API one by one, must configure a return url to received the response content.</p>
+														</div>
+														<div class="form-group col-12">
+															<hr />
+														</div>
+														<div class="form-group col-12">
+															<h5>Collections Configure</h5>
+															<div class="custom-control custom-checkbox">
+																<input type="checkbox" name="send-collection-one-by-one" id="send-collection-one-by-one" class="custom-control-input" aria-label="Send Collections one by one" />
+																<label class="custom-control-label" for="send-collection-one-by-one">Send Collections one by one</label>
+																<p>When enabled this options, outbound api only will got the collections item one by one and will not included another elements</p>
+															</div>
+															<label class="form-label" for="collections-name">Collections Name</label>
+															<input type="text" name="collections-name" id="collections-name" class="form-control" placeholder="Enter Collections Name" />
+														</div>
+														<div class="form-group col-12">
+															<hr />
+														</div>
+														<div class="form-group col-12">
+															<div class="label-with-button mb-1">
+																<p class="mb-0">Configure filter to get the specify data</p>
+															</div>
+															<table id="filter-table" class="table logical-table filter-table table-bordered">
+																<thead>
+																	<tr>
+																		<th>Logical Operation</th>
+																		<th>Original Vars</th>
+																		<th>Comparison Operations</th>
+																		<th>Column Value</th>
+																		<th class="text-center">
+																			<a href="javascript:void(0);" class="btn btn-lg btn-del modal-button" id="filter-btn-add-row">
+																				<i data-feather="plus" class="font-medium-2"></i>
+																			</a>
+																		</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr>
+																		<td class="col-sm-2 logical-select">
+																			<select class="select-dropdown form-control form-control-lg" name="filter[][logical]">
+																				<option value="AND">AND</option>
+																				<option value="OR">OR</option>
+																			</select>
+																		</td>
+																		<td class="col-sm-3 autocomplete">
+																			<input type="text" name="filter[][original]" class="form-control border-0 inboound-autocomplete-filter" id="filteroriginal_0" />
+																		</td>
+																		<td class="col-sm-3 operations-select">
+																			<select class="select-dropdown form-control form-control-lg" name="filter[][operations]">
+																				<option value="==">=</option>
+																				<option value=">">></option>
+																				<option value=">=">>=</option>
+																				<option value="<"><</option>
+																				<option value="<="><=</option>
+																				<option value="<>"><></option>
+																				<option value="Contains">Contains</option>
+																			</select>
+																		</td>
+																		<td class="col-sm-2 autocomplete">
+																			<input type="text" name="filter[][column]" class="form-control border-0 inboound-autocomplete-filter" id="filtercolumn_0" />
+																		</td>
+																		<td class="col-sm-2 text-center">
+																			<a href="javascript:void(0);" type="button" class="filter-btn-del btn-del btn btn-lg modal-button">
+																				<i data-feather="minus" class="font-medium-2"></i>
+																			</a>
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+														<div class="form-group col-12">
+															<hr />
+														</div>
+														<div class="form-group col-12">
+															<h5>Format Sample</h5>
+															<div class="row m-0">
+																<div class="col-6 pl-0">
+																	<label for="select-inbound-format">Inbound Format</label>
+																	<select class="select2 form-control form-control-lg custom-select" id="select-inbound-format" name="select-inbound-format">
+																		<option value="json">JSON</option>
+																		<option value="xml">XML</option>
+																	</select>
+																</div>
+																<div class="col-6 pr-0">
+																	<label for="select-outbound-format">Outbound Format</label>
+																	<select class="select2 form-control form-control-lg custom-select" id="select-outbound-format" name="select-outbound-format">
+																		<option value="json">JSON</option>
+																		<option value="xml">XML</option>
+																	</select>
+																</div>
+															</div>
+														</div>
+														<div class="form-group col-12">
+															<div class="row m-0">
+																<div class="col-6 pl-0">
+																	<div class="form-group">
+																		<label for="inboundFormatData">Inbound/Response Format</label>
+																		<textarea class="form-control" name="inboundFormatData" id="inboundFormatData" rows="10"></textarea>
+																		<br/>
+																		<div class="text-right">
+																			<button type="button" class="btn btn-outline-primary" id="inboundDataBind">Upload</button>
+																		</div>
+																	</div>
+																</div>
+																<div class="col-6 pr-0">
+																	<div class="form-group">
+																		<label for="outboundFormatData">Outbound/Return Format</label>
+																		<textarea class="form-control" name="outboundFormatData" id="outboundFormatData" rows="10"></textarea>
+																		<br/>
+																		<div class="text-right">
+																			<button type="button" class="btn btn-outline-primary" id="outboundDataBind">Upload</button>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="form-group col-8">
+															<p style="margin-bottom: 5px;">Create Relationship: Drag & Drop the inbound column to outbound column</p>
+															<p style="margin-bottom: 5px;">Delete Relationship: Click the Relationship Line & Press "Delete" Button from Keyboard to remove the relationship</p>
+															<p style="margin-bottom: 5px;">Create Multiples Relationship : only allow the column type = array</p>
+														</div>
+														<div class="form-group propperties-btn col-4">
+															<button type="button" class="btn btn-outline-primary" id="all-inbound-properties-btn">All Properties</button>
+															<button type="button" class="btn btn-outline-primary" id="cleanup-inbound-properties-btn">Cleanup Properties</button>
+														</div>
+														<!-- * * * * * * * * * * * * * -->
+														<!-- Start of GoJS sample code -->
+														<div id="myDiagramDiv" class="form-group col-8"></div>
+														<div class="form-group col-4">
+															<div class="mapping-formula-tables">
+																<div class="tab-title-active-btn">
+																	<h4 class="card-title mb-0">Properties</h4>
+																</div>
+																<table id="mapping-formula-props" class="datatables-basic logical-table mapping-formula-props table-input table">
+																	<tbody>
+																		<tr>
+																			<td class="table-section-title" colspan="2">General</td>
+																		</tr>
+																		<tr>
+																			<td>Item</td>
+																			<td id="props-general-item"></td>
+																		</tr>
+																		<tr>
+																			<td class="table-section-title" colspan="2">Linked Items</td>
+																		</tr>
+																		<tr id="table-section-linked-items-row">
+																			<td>Key</td>
+																			<td id="props-general-linked-item-key">Name</td>
+																		</tr>
+																		<tr>
+																			<td class="table-section-title" colspan="2">Display</td>
+																		</tr>
+																		<tr>
+																			<td>Value</td>
+																			<td>
+																				<div class="autocomplete">
+																					<input type="text" name="displayvalue" id="props-display-value" class="form-control table-section-display-text autocompleteformula" />
+																				</div>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td>Default Value</td>
+																			<td>
+																				<div>
+																					<input type="text" name="displaydefaultvalue" id="props-display-default-value" class="form-control table-section-display-text" />
+																				</div>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td>Global Variable Name</td>
+																			<td>
+																				<div>
+																					<input type="text" name="displayglobalvalue" id="props-display-global-variable-name" class="form-control table-section-display-text" />
+																				</div>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td class="table-section-title" colspan="2">Visibility</td>
+																		</tr>
+																		<tr>
+																			<td>Hidden when empty</td>
+																			<td>
+																				<div>
+																					<select class="select-dropdown form-control form-control-lg" name="ishiddenempty" id="props-is-hidden-empty">
+																						<option value="FALSE">FALSE</option>
+																						<option value="TRUE">TRUE</option>
+																					</select>
+																				</div>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td>Hidden Rules</td>
+																			<td>
+																				<div class="floatright">
+																					<a href="javascript:void(0);" class="btn btn-primary settings-button" id="props-hidden-rules-popup-btn">
+																						<i data-feather="settings" class="align-middle mr-sm-25 mr-0"></i>
+																					</a>
+																				</div>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td class="table-section-title" colspan="2">Validation</td>
+																		</tr>
+																		<tr>
+																			<td>is Required?</td>
+																			<td>
+																				<div>
+																					<select class="select-dropdown form-control form-control-lg" name="isrequired" id="props-validation-is-required">
+																						<option value="FALSE">FALSE</option>
+																						<option value="TRUE">TRUE</option>
+																					</select>
+																				</div>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td>Value must be</td>
+																			<td>
+																				<div>
+																					<select class="select-dropdown form-control form-control-lg" name="valuemustbe" id="props-validation-value-must-be">
+																						<option value="">ANY</option>
+																						<option value="NUMBER">NUMBER</option>
+																						<option value="DATE">DATE</option>
+																						<option value="STRING">STRING</option>
+																					</select>
+																				</div>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td>Additional Rules</td>
+																			<td>
+																				<div class="floatright">
+																					<a href="javascript:void(0);" class="btn btn-primary settings-button" id="props-validation-additional-rules-popup-btn">
+																						<i data-feather="settings" class="align-middle mr-sm-25 mr-0"></i>
+																					</a>
+																				</div>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td class="table-section-title" colspan="2">Format</td>
+																		</tr>
+																		<tr>
+																			<td>TRIM</td>
+																			<td>
+																				<div>
+																					<select class="select-dropdown form-control form-control-lg" name="istrim" id="props-format-is-trim">
+																						<option value="FALSE">FALSE</option>
+																						<option value="TRUE">TRUE</option>
+																					</select>
+																				</div>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td>Enable Rounding</td>
+																			<td>
+																				<div>
+																					<select class="select-dropdown form-control form-control-lg" name="enablerounding" id="props-format-enable-rounding">
+																						<option value="FALSE">FALSE</option>
+																						<option value="TRUE">TRUE</option>
+																					</select>
+																				</div>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td>Enable Decimal</td>
+																			<td>
+																				<div>
+																					<select class="select-dropdown form-control form-control-lg" name="enabedecimal" id="props-format-enable-decimal">
+																						<option value="FALSE">FALSE</option>
+																						<option value="TRUE">TRUE</option>
+																					</select>
+																				</div>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td>Decimal</td>
+																			<td>
+																				<div>
+																					<input type="number" name="decimal" id="props-format-decimal" class="form-control table-section-display-text" value="2" />
+																				</div>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td>Additional Rules</td>
+																			<td>
+																				<div class="floatright">
+																					<a href="javascript:void(0);" class="btn btn-primary settings-button" id="props-format-additional-rules-popup-btn">
+																						<i data-feather="settings" class="align-middle mr-sm-25 mr-0"></i>
+																					</a>
+																				</div>
+																			</td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+														<div class="form-group col-12 m-0" id="sample">
+															<div class="d-none">
+																This sample supports three different routing styles:<br>
+																<input type="radio" name="MyRoutingStyle" onclick="changeStyle()" value="Normal" />
+																"Normal"<br>
+																<input type="radio" name="MyRoutingStyle" onclick="changeStyle()" value="ToGroup" checked="checked" />
+																"ToGroup", where the links stop at the border of the group<br>
+																<input type="radio" name="MyRoutingStyle" onclick="changeStyle()" value="ToNode" />
+																"ToNode", where the links bend at the border of the group but go all the way to the node, as normal<br>
+															</div>
+															<span class="d-none">Godmark : This is GOJS after drag and drop result you need to Save in Database</span>
+															<textarea class="form-control d-none" id="mySavedModel"></textarea> 
+															<textarea class="form-control d-none" id="txtGOJSD_Debug"></textarea>
+															<input type="text" class="form-control d-none" id="mySavedModel2" />
+														</div>
+														<!-- * * * * * * * * * * * * * -->
+														<!-- End of GoJS sample code -->
+														<div class="form-group col-12">
+															<div class="demo-inline-spacing">
+																<div class="custom-control custom-control-primary custom-switch mt-0">
+																	<p class="mb-50 form-label" for="is-active">Active</p>
+																	<input type="checkbox" name="is-active" class="custom-control-input" id="is-active" value="1" checked /><label class="custom-control-label" for="is-active"></label>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="form-group col-12 col-md-4 pl-0 m-0">
+													<p class="mb-1"><strong>Version</strong></p>
+													<table id="version-history" class="table table-bordered mapping-profiles-history mb-2">
+														<thead>
+															<tr>
+																<th>Date</th>
+																<th>Version</th>
+																<th>Description</th>
+																<th>Action</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td colspan="4">No Data</td>
+															</tr>
+														</tbody>
+													</table>
+													<p class="mt-1"><strong>Publish History</strong></p>
+													<table id="publish-history" class="table table-bordered mapping-profiles-history">
+														<thead>
+															<tr>
+																<th>Date</th>
+																<th>Version</th>
+																<th>Description</th>
+																<th>Action</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td colspan="4">No Data</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+											<div class="row mt-2">
+												<div class="form-group col-12">` %>
+													<% if (typeof(alldata) != "undefined" && alldata != null && alldata.mappingProfileId) { %>
+													<% body += `<button class="btn btn-primary" id="create-mapping-profile" type="submit">Publish to Existing Version</button>
+													<button class="btn btn-primary" id="update-mapping-profile" type="submit">Publish to New Version</button>` %>
+													<% } else { %>
+													<% body += `<button class="btn btn-primary" id="create-mapping-profile" type="submit">Create Mapping Profile</button>` %>
+													<% } %>
+												<% body += `</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+			<!-- Start All Inbound Properties Modal -->
+			<div id="all-inbound-properties-modal" class="modal additional-rules-modal" data-backdrop="true" data-keyboard="true" style="z-index: 1100;">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="d-flex justify-content-between p-1 align-items-center">
+							<p style="margin:0; font-size:1.5rem">All Properties</p>
+							<span class="close" id="all-inbound-properties-modal-close">&times;</span>
+						</div>
+						<div>
+							<div class="container properties-data">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End All Inbound Properties Modal -->
+			<!-- Start Properties Hidden rules Modal -->
+			<div id="props-hidden-rules-modal-btn" class="modal hidden-rules-modal" data-backdrop="true" data-keyboard="true" style="z-index: 1100;">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="d-flex justify-content-between p-1 align-items-center">
+							<p style="margin:0; font-size:1.5rem">Hidden Rules</p>
+							<span class="close" id="props-hidden-rules-modal-close">&times;</span>
+						</div>
+						<div>
+							<div class="container">
+								<input type="hidden" name="prop-hidden-rules-id" id="prop-hidden-rules-id" />
+								<form id="frm-save-prop-hidden-rules" autocomplete="off">
+									<div class="btn-action">
+										<button class="btn btn-lg btn-block modal-button d-flex align-items-center" id="prop-hidden-rules-btn-save" type="button"><i data-feather="save" class="font-medium-2"></i></button>
+									</div>
+									<table id="prop-hidden-rules-table" class="table logical-table prop-hidden-rules-table table-bordered">
+										<thead>
+											<tr>
+												<th>Logical Operation</th>
+												<th>Original Value</th>
+												<th>Comparison operations</th>
+												<th>Column Value</th>
+												<th class="text-center tr">
+													<a href="javascript:void(0);" class="btn btn-lg btn-del modal-button waves-effect waves-float waves-light" id="prop-hidden-rules-btn-add-row"><i data-feather="plus" class="font-medium-2"></i></a>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="col-sm-2 logical-select">
+													<select class="select-dropdown form-control form-control-lg" name="propsvalidations[][logical]">
+														<option value="AND">AND</option>
+														<option value="OR">OR</option>
+													</select>
+												</td>
+												<td class="col-sm-3 autocomplete">
+													<input type="text" name="propsvalidations[][original]" class="form-control border-0 autocompleteformula" id="prophiddenoriginal_0" />
+												</td>
+												<td class="col-sm-2 operations-select">
+													<select class="select-dropdown form-control form-control-lg" name="propsvalidations[][operations]">
+														<option value="==">=</option>
+														<option value=">">></option>
+														<option value=">=">>=</option>
+														<option value="<"><</option>
+														<option value="<="><=</option>
+														<option value="<>"><></option>
+														<option value="Contains">Contains</option>
+													</select>
+												</td>
+												<td class="col-sm-3 autocomplete">
+													<input type="text" name="propsvalidations[][column]" class="form-control border-0 autocompleteformula" id="prophiddencolumn_0" />
+												</td>
+												<td class="col-sm-2" style="text-align: -webkit-center;">
+													<a href="javascript:void(0);" type="button" class="prop-hidden-rules-btn-del btn btn-lg btn-block modal-button">
+														<i data-feather="minus" class="font-medium-2"></i>
+													</a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Properties Hidden rules Modal -->
+			<!-- Start Properties validation additional rules Modal -->
+			<div id="props-validation-additional-rules-modal-btn" class="modal additional-rules-modal" data-backdrop="true" data-keyboard="true" style="z-index: 1100;">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="d-flex justify-content-between p-1 align-items-center">
+							<p style="margin:0; font-size:1.5rem">Validation Additional Rules</p>
+							<span class="close" id="props-validation-additional-rules-modal-close">&times;</span>
+						</div>
+						<div>
+							<div class="container">
+								<form id="frm-save-prop-validation-additional-rules" autocomplete="off">
+									<div class="btn-action">
+										<button class="btn btn-lg modal-button d-flex align-items-center" id="prop-validation-additional-rules-btn-save" type="button"><i data-feather="save" class="font-medium-2"></i></button>
+									</div>
+									<table id="prop-validation-additional-rules-table" class="table logical-table prop-validation-additional-rules-table table-bordered">
+										<thead>
+											<tr>
+												<th>Logical Operation</th>
+												<th>Original Value</th>
+												<th>Comparison operations</th>
+												<th>Column Value</th>
+												<th>Then</th>
+												<th>Formula/Alerts</th>
+												<th class="text-center">
+													<a href="javascript:void(0);" class="btn-del btn btn-lg modal-button" id="prop-validation-additional-rules-btn-add-row">
+														<i data-feather="plus" class="font-medium-2"></i>
+													</a>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="col-sm-2 logical-select">
+													<select class="select-dropdown form-control form-control-lg" name="propsvalidations[][logical]">
+														<option value="AND">AND</option>
+														<option value="OR">OR</option>
+													</select>
+												</td>
+												<td class="col-sm-3 autocomplete">
+													<input type="text" name="propsvalidations[][original]" class="form-control border-0 autocompleteformula" id="proporiginal_0" />
+												</td>
+												<td class="col-sm-3 operations-select">
+													<select class="select-dropdown form-control form-control-lg" name="propsvalidations[][operations]">
+														<option value="==">=</option>
+														<option value=">">></option>
+														<option value=">=">>=</option>
+														<option value="<"><</option>
+														<option value="<="><=</option>
+														<option value="<>"><></option>
+														<option value="Contains">Contains</option>
+													</select>
+												</td>
+												<td class="col-sm-2 autocomplete">
+													<input type="text" name="propsvalidations[][column]" class="form-control border-0 autocompleteformula" id="propcolumn_0" />
+												</td>
+												<td class="col-sm-2">
+													<select class="select-dropdown form-control form-control-lg" name="propsvalidations[][then]">
+														<option value="STOP">STOP</option>
+													</select>
+												</td>
+												<td class="col-sm-2 autocomplete">
+													<input type="text" name="propsvalidations[][formula]" class="form-control border-0 autocompleteformula" id="propformula_0" />
+												</td>
+												<td class="col-sm-2 text-center">
+													<a href="javascript:void(0);" type="button" class="prop-validation-additional-rules-btn-del btn-del btn btn-lg modal-button">
+														<i data-feather="minus" class="font-medium-2"></i>
+													</a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Properties validation additional rules Modal -->
+			<!-- Start Properties format additional rules Modal -->
+			<div id="props-format-additional-rules-modal-btn" class="modal additional-rules-modal" data-backdrop="true" data-keyboard="true" style="z-index: 1100;">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="d-flex justify-content-between p-1 align-items-center">
+							<p style="margin:0; font-size:1.5rem">Format Additional Rules</p>
+							<span class="close" id="props-format-additional-rules-modal-close">&times;</span>
+						</div>
+						<div>
+							<div class="container">
+								<form id="frm-save-prop-format-additional-rules" autocomplete="off">
+									<div class="btn-action">
+										<button class="btn btn-lg modal-button d-flex align-items-center" id="prop-format-additional-rules-btn-save" type="button"><i data-feather="save" class="font-medium-2"></i></button>
+									</div>
+									<table id="prop-format-additional-rules-table" class="table logical-table prop-format-additional-rules-table table-bordered">
+										<thead>
+											<tr>
+												<th>Sequence</th>
+												<th>Options</th>
+												<th></th>
+												<th></th>
+												<th class="text-center">
+													<a href="javascript:void(0);" class="btn btn-lg btn-del modal-button" id="prop-format-additional-rules-btn-add-row">
+														<i data-feather="plus" class="font-medium-2"></i>
+													</a>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr id="prop-format-additional-rules-table-row-0">
+												<td class="col-sm-1 format-rules-icon text-center">
+													<i data-feather="code" class="font-medium-2"></i>
+												</td>
+												<td class="col-sm-3">
+													<select class="select-dropdown form-control form-control-lg format-additional-rules-name" name="formatrules[][name]" id="format-additional-rules-name-0">
+														<option value="REPLACE">REPLACE</option>
+														<option value="SUBSTRING">SUBSTRING</option>
+														<option value="To DATE">To DATE</option>
+														<option value="TRIM">TRIM</option>
+														<option value="LEFT TRIM">LEFT TRIM</option>
+														<option value="RIGHT TRIM">RIGHT TRIM</option>
+														<option value="ADD WORDS ON THE BEGINING">ADD WORDS ON THE BEGINING</option>
+														<option value="ADD WORDS ON THE END">ADD WORDS ON THE END</option>
+														<option value="FORMULA TO">FORMULA TO</option>
+													</select>
+												</td>
+												<td class="col-sm-3 prop-format-additional-rules-table-row-formulato autocomplete">
+													<input type="text" name="formatrules[][formulato]" class="form-control border-0 autocompleteformula" id="format-additional-rules-formulato-0" />
+													<select class="select-dropdown form-control form-control-lg" name="formatrules[][formulatodropdown]" id="format-additional-rules-formulatodropdown-0" style="display: none;">
+														<option value="FALSE">FALSE</option>
+														<option value="TRUE">TRUE</option>
+													</select>
+												</td>
+												<td class="col-sm-3 prop-format-additional-rules-table-row-formulatonew">
+													<input type="text" name="formatrules[][formulatonew]" class="form-control border-0" id="format-additional-rules-formulatonew-0" />
+												</td>
+												<td class="col-sm-1 text-center">
+													<a href="javascript:void(0);" type="button" class="prop-format-additional-rules-btn-del btn btn-lg btn-del modal-button">
+														<i data-feather="minus" class="font-medium-2"></i>
+													</a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Properties format additional rules Modal -->` %>
+
+<% script = `<script type="text/javascript" src="/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/assets/js/go.js" defer></script>
+		<script type="text/javascript" src="/assets/js/mapping-gojs.js" defer></script>
+		<script type="text/javascript" src="/assets/js/mapping-profiles.js" defer></script>` %>
+
+<%- include('layout', { title: `Mapping Profile Create`, style, body, script }) %>

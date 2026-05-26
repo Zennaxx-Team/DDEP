@@ -1,0 +1,55 @@
+			<!-- Starts notify email model -->
+			<div class="modal fade modal-slide-in-form modal-slide-in notify-email-model" id="notify-email-modal-slide-in" >
+				<div class="modal-dialog">
+					<div class="modal-content overflow-hidden">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+						<div class="modal-header mb-1">
+							<h5 class="modal-title" id="notify-email-label-condition">Content</h5>
+						</div>
+						<div class="modal-body flex-grow-1">
+							<section class="alert-notify-email-create">
+								<form id="form-notify-email" action="javascript:void(0);" autocomplete="off">
+									<div class="row mt-0">
+										<div class="form-group col-12 m-0 font-weight-bold green-color h4">
+											Email
+										</div>
+									</div>
+									<div class="row mt-2">
+										<div class="form-group col-12">
+											<label class="form-label" for="notify-description-email">Notify Description</label>
+											<input type="text" name="notify-description-email" id="notify-description-email" class="form-control" placeholder="Enter Notificaiton Description" />
+										</div>
+										<div class="form-group col-12">
+											<label class="form-label required" for="email-address">Email Address</label>
+											<input type="email" name="email-address" id="email-address" class="form-control" placeholder="Enter recipient email" required />
+										</div>
+										<div class="form-group col-12">
+											<label class="form-label required" for="email-subject">Email Subject</label>
+											<input type="text" name="email-subject" id="email-subject" class="form-control" placeholder="Enter email subject" required/>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-12 m-0">
+											<label class="form-label m-0"><strong>Payload</strong></label>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="form-label required" for="email-template">Template</label>
+											<textarea id="email-template" name="email-template" class="form-control" style="height: 275px;" required></textarea>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="form-label" for="email-preview">Preview</label>
+											<div id="email-preview" class="form-control" style="height: 277px; overflow: auto; border: 1px solid #ced4da; padding: 10px; resize: vertical;"></div>
+										</div>
+									</div>
+									<div class="row mt-2">
+										<div class="form-group col-12">
+											<button class="btn btn-primary" id="save-email" type="submit">Save</button>
+										</div>
+									</div>
+								</form>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Ends notify email model -->

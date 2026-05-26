@@ -1,0 +1,73 @@
+			<!-- Starts alert condition model -->
+			<div class="modal fade modal-slide-in-form modal-slide-in first-step alert-condition-model" id="alert-condition-modal-slide-in" >
+				<div class="modal-dialog">
+					<div class="modal-content overflow-hidden">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+						<div class="modal-header mb-1">
+							<h5 class="modal-title" id="alert-modal-label-condition"></h5>
+						</div>
+						<div class="modal-body flex-grow-1">
+							<section class="alert-condition-create">
+								<form id="form-condition-create" action="javascript:void(0);" autocomplete="off">
+									<div class="row">
+										<div class="form-group col-12 m-0">
+											<input type="hidden" name="condition-id" id="condition-id" class="form-control" placeholder="Id">
+										</div>
+										<div class="form-group col-12">
+											<label class="form-label required" for="select-policy">Policy</label>
+											<select class="select2 form-control form-control-lg required" id="select-policy" name="select-policy"></select>
+										</div>
+										<div class="form-group col-12">
+											<label class="form-label required" for="condition-name">Condition Name</label>
+											<input type="text" name="condition-name" id="condition-name" class="form-control" placeholder="Enter Alert condition Name" required />
+										</div>
+										<div class="form-group col-12">
+											<label class="form-label" for="condition-description">Description</label>
+											<textarea name="condition-description" id="condition-description" class="form-control" placeholder="Enter Alert condition Description" rows="4"></textarea>
+										</div>
+										<div class="form-group col-12">
+											<div class="demo-inline-spacing">
+												<div class="custom-control custom-control-primary custom-switch mt-0">
+													<p class="mb-50 form-label" for="is-active">Active</p>
+													<input type="checkbox" name="is-active" class="custom-control-input" id="is-active" value="1" checked /><label class="custom-control-label" for="is-active"></label>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row mt-2">
+										<div class="form-group col-12 m-0 font-weight-bold">
+											Moniter Rules
+										</div>
+										<div class="form-group col-12 mt-2">
+											<table id="moniter-rule-table" class="table logical-table table-bordered">
+												<thead>
+													<tr>
+														<th>Rule Name</th>
+														<th>Description</th>
+														<th>Notify Method</th>
+														<th>Created Time</th>
+														<th>Updated Time</th>
+														<th class="text-center">
+															<a href="javascript:void(0);" class="btn btn-lg btn-del modal-button" id="moniter-rule-headers-btn-add-row">
+																<i data-feather="plus" class="font-medium-2"></i>
+															</a>
+														</th>
+													</tr>
+												</thead>
+												<tbody id="moniter-rule-body">
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="row mt-2">
+										<div class="form-group col-12">
+											<button class="btn btn-primary" id="create-alert-condition" type="submit"></button>
+										</div>
+									</div>
+								</form>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Ends lert condition model -->

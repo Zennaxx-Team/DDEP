@@ -1,0 +1,64 @@
+			<!-- Starts View Item Logs -->
+			<div class="modal fade modal-slide-in-form modal-slide-in second-middle-step view-new-item-logs-modal"
+				id="view-new-item-logs-modal-slide-in" style="z-index: 1070;">
+				<div class="modal-dialog">
+					<div class="modal-content overflow-hidden">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+						<div class="modal-header mb-1">
+							<h5 class="modal-title" id="item-logs-modal-label">View Item Logs</h5>
+						</div>
+						<div class="modal-body flex-grow-1 p-0">
+							<section class="item-logs">
+								<div class="ml-1 mr-1 border w-auto">
+						<div class="d-flex justify-content-between align-items-center border p-2">
+							<!-- Left side text -->
+							<strong>Inbound Entrypoint</strong>
+
+							<!-- Right side buttons -->
+								<div>
+									<span class="hiddle_feilds">
+										<button type="button" class="btn btn-link p-0 m-0 me-1" id="log-curl-request-copy">Copy</button>
+										<span class="mx-1">|</span>
+										<button type="button" class="btn btn-link p-0 m-0 mx-1" id="log-curl-request" data-uniqueid-curl-request="">Curl Bash</button>
+										<span class="mx-1">|</span>
+									</span>
+									<button type="button" class="btn btn-link p-0 m-0 ms-1" id="log-details-page" data-uniqueid-log="">Log Details</button>
+										</div>
+									</div>
+								</div>
+								<div class="ml-1 mr-1 mb-1 border w-auto">
+									<div class="p-1">
+										<span class="inbound-entrypoint-value">-</span>
+									</div>
+								</div>
+								<table class="datatables-basic table" id="view-new-logs-data-table">
+									<thead>
+										<tr>
+											<th class="header-number">No</th>
+											<th class="header-outbound-enpoint">Outbound Endpoint</th>
+											<th class="header-time-consumed">TIME CONSUMED (MS)</th>
+											<th class="header-status">STATUS</th>
+											<th class="header-status-code">STATUS CODE</th>
+											<th class="header-curl-bash">CURL Bash</th>
+											<th class="header-request">REQUEST</th>
+											<th class="header-transformed-request">TRANSFORMED REQUEST</th>
+											<th class="header-request-filter">REQUEST FILTER</th>
+											<th class="header-validation">VALIDATION</th>
+											<th class="header-trigger-rules">TRIGGER RULES</th>
+											<th class="header-request-return-url">REQUEST RETURN URL</th>
+											<th class="header-response">RESPONSE</th>
+											<th class="header-transformed-response">TRANSFORMED RESPONSE</th>
+											<th class="header-response-filter">RESPONSE FILTER</th>
+											<th class="header-response-validation">RESPONSE VALIDATION</th>
+											<th class="header-response-return-url">RESPONSE RETURN URL</th>
+											<th class="header-response-return-url">RESPONSE FAILURE RETURN URL</th>
+										</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Ends View Item Logs -->

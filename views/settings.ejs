@@ -1,0 +1,183 @@
+<%
+	let style = '';
+	let body = '';
+	let script = '';
+%>
+
+<% style = `<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/form-validation.css" />` %>
+
+<% body = `<div class="content-wrapper">
+				<div class="content-header row">
+					<div class="content-header-left col-md-9 col-12 mb-2">
+						<div class="row breadcrumbs-top">
+							<div class="col-12">
+								<h2 class="content-header-title float-left mb-0">General Settings</h2>
+								<div class="breadcrumb-wrapper">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item">
+											<a href="/">Home</a>
+										</li>
+										<li class="breadcrumb-item">
+											<a href="javascript:void(0);">General Settings</a>
+										</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-body">
+					<section class="horizontal-wizard">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<div class="card-body">
+										<div class="content-header" style="margin-bottom: 30px;">` %>
+											<% if (typeof(alldata) != "undefined" && alldata.status != 0) { %>
+												<% body += `Edit General Settings` %>
+											<% } else { %>
+												<% body += `Create General Settings` %>
+											<% } %>
+											<% body += `
+											<small class="text-muted">Set Your General Settings.</small>
+										</div>
+										<form id="frm-save-general-settings" action="javascript:void(0);" autocomplete="off">
+											<div class="row">
+												<input type="hidden" name="data_id" id="data_id" class="form-control" placeholder="data_id"` %>
+												<% if (typeof(alldata) != "undefined" && alldata != null && alldata._id) { %>
+													<% body += ` value="` %> <% body += alldata._id %> <% body += `" readonly` %>
+												<% } %>
+												<% body += ` />
+											</div>
+											<div class="row">
+												<div class="form-group col-md-12">
+													<h4>General</h4>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group col-md-4" style="padding: 0 45px;">
+													<div class="demo-inline-spacing">
+														<div class="custom-control custom-checkbox" style="margin-top: 7px;">
+															<input type="checkbox" name="disableDefaultProjectPrefix" id="disableDefaultProjectPrefix" class="custom-control-input" aria-label="Disable Default Project Prefix"
+															` %>
+															<% if (typeof alldata !== "undefined" && alldata.status !== 0 && alldata.data[0].disableDefaultProjectPrefix=== "on") { %>
+																<% body += `checked` %>
+															<% } else { %>
+																<% body += `` %>
+															<% } %>
+															<% body += ` />
+															<label class="custom-control-label" for="disableDefaultProjectPrefix">Disable Default Project Prefix</label>
+															<div>This option will disable the default project prefix.</div>
+														</div>
+													</div>
+												</div>
+												<div class="form-group col-md-4" style="padding: 0 45px;">
+													<label class="form-label required" for="default-project-prefix">Default Project Prefix</label>
+													<input type="text" name="default-project-prefix" id="default-project-prefix" class="form-control" placeholder="Enter Default Project Prefix"` %>
+													<% if (typeof alldata !== "undefined" && alldata !== null && alldata.status !== 0 && typeof alldata.data[0].defaultProjectPrefix !== "undefined") { %>
+														<% body += ` value="${alldata.data[0].defaultProjectPrefix}" required` %>
+													<% } %>
+													<% body += ` />
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group col-md-12">
+													<h4>Diff. Checker</h4>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group col-md-12" style="padding: 0 45px;">
+													<div class="demo-inline-spacing">
+														<div class="custom-control custom-checkbox" style="margin-top: 7px;">
+
+															<input type="checkbox" name="enableDiffCheck" id="enableDiffCheck" class="custom-control-input" aria-label="Enable Diff. Checker"
+															` %>
+															<% if (typeof alldata !== "undefined" && alldata.status !== 0 && alldata.data[0].enableDiffCheck === "on") { %>
+																<% body += `checked` %>
+															<% } else { %>
+																<% body += `` %>
+															<% } %>
+															<% body += ` />
+														
+															<label class="custom-control-label" for="enableDiffCheck">Enable Diff. Checker</label>
+															<div>Diff. Checker will compare "transformed request body" vs "endpoint settings Diff. Checker template" and review it at Diff. History</div>
+														</div>
+													</div>
+												</div>
+												<div class="form-group col-md-6" style="padding: 0 45px;">
+													<label class="form-label" for="diff-check-return-url">Diff. Checker Return URL</label>
+													<input type="text" name="diff-check-return-url" id="diff-check-return-url" class="form-control" placeholder="Enter Diff. Checker Return URL"` %>
+													<% if (typeof alldata !== "undefined" && alldata !== null && alldata.status !== 0 && typeof alldata.data[0].diffCheckReturnUrl !== "undefined") { %>
+														<% body += ` value="${alldata.data[0].diffCheckReturnUrl}"` %>
+													<% } %>
+													<% body += ` />
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group col-md-12">
+													<h4>Logs</h4>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group col-md-6" style="padding: 0 45px;">
+													<div class="demo-inline-spacing">
+														<div class="custom-control custom-checkbox" style="margin-top: 7px;">
+
+															<input type="checkbox" name="enableLogs" id="enableLogs" class="custom-control-input" aria-label="Enable Logs"
+															` %>
+															<% if (typeof alldata !== "undefined" && alldata.status !== 0 && alldata.data[0].enableLogs === "on") { %>
+																<% body += `checked` %>
+															<% } else { %>
+																<% body += `` %>
+															<% } %>
+															<% body += ` />
+														
+															<label class="custom-control-label" for="enableLogs">Enable Logs</label>
+															<div>This option will log when an item enables logs</div>
+														</div>
+													</div>
+												</div>
+												<div class="form-group col-md-6" style="padding: 0 45px;"></div>
+												<div class="form-group col-md-6" style="padding: 0 45px;">
+													<div class="demo-inline-spacing">
+														<div class="custom-control custom-checkbox" style="margin-top: 7px;">
+															<input type="checkbox" name="enableFullLogs" id="enableFullLogs" class="custom-control-input" aria-label="Force enable all items logs"
+															` %>
+															<% if (typeof alldata !== "undefined" && alldata.status !== 0 && alldata.data[0].enableFullLogs === "on") { %>
+																<% body += `checked` %>
+															<% } else { %>
+																<% body += `` %>
+															<% } %>
+															<% body += ` />
+															<label class="custom-control-label" for="enableFullLogs">Force enable all items logs</label>
+															<div>This option will record all item logs, including when the item is disabled</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<button class="btn btn-primary waves-effect mt-1" id="save_general_settings" type="submit">
+												` %>
+											<% if (typeof(alldata) != "undefined" && alldata.status != 0) { %>
+												<% body += `Update` %>
+											<% } else { %>
+												<% body += `Save` %>
+											<% } %>
+											<% body += `
+											</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>` %>
+
+<% script = `<script type="text/javascript" src="/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js"></script>
+		<script type="text/javascript" src="/assets/js/general-settings.js" defer></script>` %>
+
+<%- include('layout', { title: `Settings`, style, body, script }) %>

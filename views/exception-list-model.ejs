@@ -1,0 +1,121 @@
+<!-- Starts Exception Logs -->
+<div class="modal fade modal-slide-in-form modal-slide-in first-step exception-logs-modal"
+	id="exception-logs-modal-slide-in">
+	<div class="modal-dialog" style="z-index: 1080;">
+		<div class="modal-content">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+			<div class="modal-header mb-1">
+				<h5 class="modal-title" id="exception_data_table-label">Exception</h5>
+			</div>
+			<div class="modal-body flex-grow-1 p-1">
+				<section class="item-logs">
+					<div class="row">
+						<div class="col-sm-12 col-md-4">
+							<div class="card">
+								<div class="card-header border-bottom p-1">
+									<div class="head-label">
+										<h6 class="mb-0">Error Types</h6>
+									</div>
+								</div>
+								<div class="card-header p-1">
+									<div class="list-error-types">
+										<table class="" id="exception_error_type_table">
+											<thead>
+												<tr>
+													<th>Type</th>
+													<th class="count">Count</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr style="text-align: center;display: none;">
+													<td colspan="2">No matching records found</td>
+												</tr>
+												<tr>
+													<td>Connection Error</td>
+													<td class="count connection-error">0</td>
+												</tr>
+												<tr>
+													<td>Formula Error</td>
+													<td class="count formula-error">0</td>
+												</tr>
+												<tr>
+													<td>System Error</td>
+													<td class="count system-error">0</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-12">
+							<div class="card">
+								<table class="datatables-basic table" id="exception_data_table">
+									<thead>
+										<tr>
+											<th>Date</th>
+											<th>Type</th>
+											<th>Path</th>
+											<th>Project</th>
+											<th>Item</th>
+											<th>Description</th>
+											<th>Detail Description</th>
+										</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Ends Exception Logs -->
+
+<!-- BEGIN: View Details -->
+<div class="modal fade modal-slide-in-form modal-slide-in second-middle-step" id="exception-details-modal" tabindex="-1"
+	role="dialog" aria-labelledby="details-modal-label" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content overflow-hidden exception">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+			<div class="modal-header mb-1">
+				<h5 class="modal-title" id="details-modal-label">Details</h5>
+			</div>
+			<div class="modal-body p-1 m-0" id="details-modal-body">
+				<table class="datatables-basic table" id="logs_details_table">
+					<thead>
+						<tr>
+							<th class="header-number">No</th>
+							<th class="header-action">Action</th>
+							<th class="header-description">Description</th>
+							<th class="header-type">Type</th>
+							<th class="header-http-status">Http Status</th>
+							<th class="header-time">Time</th>
+							<th class="header-details">Details</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END: View Details -->
+<!-- BEGIN: View Details -->
+<div class="modal fade modal-slide-in-form modal-slide-in second-step" id="details-modal" tabindex="-1" role="dialog"
+	aria-labelledby="details-modal-label" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+			<div class="modal-header mb-1">
+				<h5 class="modal-title" id="details-modal-label">Details</h5>
+			</div>
+			<div class="modal-body m-0 p-0">
+				<pre id="details-modal-body" class="p-1"></pre>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END: View Details -->

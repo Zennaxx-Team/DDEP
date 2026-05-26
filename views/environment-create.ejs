@@ -1,0 +1,112 @@
+<%
+	let style = '';
+	let body = '';
+	let script = '';
+%>
+
+<% style = `<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/form-validation.css" />` %>
+
+<% body = `<div class="content-wrapper">
+				<div class="content-header row mb-2">
+					<div class="content-header-left col-md-9 col-12">
+						<div class="row breadcrumbs-top">
+							<div class="col-12">
+								<h2 class="content-header-title float-left mb-0">Environments</h2>
+								<div class="breadcrumb-wrapper">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item">
+											<a href="/">Home</a>
+										</li>
+										<li class="breadcrumb-item">
+											<a href="/master/environments">Environments</a>
+										</li>
+										<li class="breadcrumb-item">` %>
+										<% if (typeof(alldata) != "undefined" && alldata != null && alldata.id) { %>
+											<% body += `Update Environment` %>
+										<% } else { %>
+											<% body += `Create Environment` %>
+										<% } %>
+										<% body += `</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-body">
+					<section class="environment-create">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<div class="card-body">
+										<form id="form-environment-create" action="javascript:void(0);" autocomplete="off">
+											<div class="row">
+												<div class="form-group col-12 m-0">
+													<input type="hidden" name="environment-id" id="environment-id" class="form-control" placeholder="Id"` %>
+													<% if (typeof(alldata) != "undefined" && alldata != null && alldata.id) { %>
+														<% body += ` value="` %> <% body += alldata.id %> <% body += `" readonly` %>
+													<% } %>
+													<% body += ` />
+												</div>
+												<div class="form-group col-12">
+													<label class="form-label required" for="select-company">Company</label>
+													<select class="select2 form-control form-control-lg" id="select-company" name="select-company"></select>
+												</div>
+												<div class="form-group col-12">
+													<label class="form-label required" for="select-project">Project</label>
+													<select class="select2 form-control form-control-lg" id="select-project" name="select-project"></select>
+												</div>
+												<div class="form-group col-12">
+													<label class="form-label required" for="environment-name">Environment Name</label>
+													<input type="text" name="environment-name" id="environment-name" class="form-control" placeholder="Enter Environment Name e.g. DEV" required />
+												</div>
+												<div class="form-group col-12">
+													<label class="form-label required" for="ddep-api-prefix">DDEP API Prefix</label>
+													<input type="text" name="ddep-api-prefix" id="ddep-api-prefix" class="form-control" placeholder="Enter DDEP API Prefix e.g. dev" required />
+													<p class="mb-0">https://{ddep-domain}/dapi/{company-code}/{project-code}/{ddep-api-prefix}/{item-configured-path}</p>
+												</div>
+												<div class="form-group col-12">
+													<label class="form-label" for="environment-description">Environment Description</label>
+													<textarea name="environment-description" id="environment-description" class="form-control" placeholder="Enter Environment Description" rows="4"></textarea>
+												</div>
+												<div class="form-group col-12">
+													<div class="demo-inline-spacing">
+														<div class="custom-control custom-control-primary custom-switch mt-0">
+															<p class="mb-50 form-label" for="is-environment-urlprefix">Disabled Environment Prefix</p>
+															<input type="checkbox" name="is-environment-urlprefix" class="custom-control-input" id="is-environment-urlprefix" value="0"/><label class="custom-control-label" for="is-environment-urlprefix"></label>
+														</div>
+													</div>
+												</div>
+												<div class="form-group col-12">
+													<div class="demo-inline-spacing">
+														<div class="custom-control custom-control-primary custom-switch mt-0">
+															<p class="mb-50 form-label" for="is-active">Active</p>
+															<input type="checkbox" name="is-active" class="custom-control-input" id="is-active" value="1" checked /><label class="custom-control-label" for="is-active"></label>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="row mt-2">
+												<div class="form-group col-12">
+													<button class="btn btn-primary" id="create-environment" type="submit">` %>
+													<% if (typeof(alldata) != "undefined" && alldata != null && alldata.id) { %>
+														<% body += `Update Environment` %>
+													<% } else { %>
+														<% body += `Create Environment` %>
+													<% } %>
+													<% body += `</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>` %>
+
+<% script = `<script type="text/javascript" src="/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/assets/js/environments.js"></script>` %>
+
+<%- include('layout', { title: `Environment Create`, style, body, script }) %>

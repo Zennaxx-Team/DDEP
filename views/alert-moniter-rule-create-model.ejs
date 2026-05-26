@@ -1,0 +1,230 @@
+<!-- Starts moniter rule model -->
+<div class="modal fade modal-slide-in-form modal-slide-in second-step moniter-rule-model"
+	id="moniter-rule-modal-slide-in">
+	<div class="modal-dialog">
+		<div class="modal-content overflow-hidden">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+			<div class="modal-header mb-1">
+				<h5 class="modal-title" id="moniter-rule-label-condition">Alert Conditions</h5>
+			</div>
+			<div class="modal-body flex-grow-1">
+				<section class="alert-rule-create">
+					<form id="form-moniter-rule-create" action="javascript:void(0);" autocomplete="off">
+						<div class="row mt-0">
+							<div class="form-group col-12 m-0 font-weight-bold">
+								Moniter Rules
+							</div>
+							<div class="form-group col-12 mt-2">
+								<label class="form-label required" for="rule-name">Rule Name</label>
+								<input type="text" name="rule-name" id="rule-name" class="form-control"
+									placeholder="Enter Rule Name" required />
+							</div>
+							<div class="form-group col-12">
+								<label class="form-label" for="rule-description">Rule Description</label>
+								<input type="text" name="rule-description" id="rule-description" class="form-control"
+									placeholder="Enter Rule Description" />
+							</div>
+							<div class="form-group col-12">
+								<label class="form-label required" for="select-security-level">Security level</label>
+								<select class="select2 form-control form-control-lg" id="select-security-level"
+									name="select-security-level">
+									<option value="">Select Security</option>
+									<option value="info">Info</option>
+									<option value="warning">Warning</option>
+									<option value="critical">Critical</option>
+								</select>
+							</div>
+						</div>
+						<!-- Company Selection -->
+						<div class="row mt-0">
+							<div class="form-group col-12">
+								<label class="form-label required" for="select-company-type">Company</label>
+								<select id="select-company-type" class="select2 form-control" name="select-company-type"></select>
+							</div>
+						</div>
+						<!-- Project Selection -->
+						<div class="row mt-0">
+							<div class="form-group col-12">
+								<label class="form-label required" for="select-project-type">Project</label>
+								<select id="select-project-type" class="select2 form-control" name="select-project-type"></select>
+							</div>
+						</div>
+						<!-- Item Selection -->
+						<div class="row mt-0">
+							<div class="form-group col-12">
+								<label class="form-label required" for="select-item-type">Item</label>
+								<select id="select-item-type" class="select2 form-control" name="select-item-type"></select>
+							</div>
+						</div>
+
+						<!-- Threshold Rules (Visible only for All Items) -->
+						<div class="row mt-2" id="threshold-rules-section">
+							<div class="form-group col-12 m-0 font-weight-bold mb-2">
+								Threshold Rules
+							</div>
+
+							<div class="form-group col-md-12 d-flex align-items-center">
+								<label class="form-label mb-0 mr-3">Duration</label>
+
+								<input type="number" id="duration-value" class="form-control mr-3"
+									style="flex: 0 0 120px;" required>
+
+								<select class="select2 form-control" id="duration-unit" style="flex: 0 0 180px;">
+									<option value="minutes">Minutes</option>
+									<option value="hours">Hours</option>
+									<option value="days">Days</option>
+								</select>
+							</div>
+
+							<!-- Group By -->
+							<div class="form-group col-md-12 d-flex align-items-center flex-wrap">
+								<label class="form-label mb-0 mr-3">Group By</label>
+
+								<select id="group-by" class="select2 form-control mr-4" style="flex: 0 0 200px;">
+									<option value="per_item">Per Item</option>
+									<option value="average">Average</option>
+								</select>
+
+								<!-- Per Item Rule -->
+								<div id="per-item-wrapper" class="d-none">
+									<div id="per-item-rule" class="d-flex align-items-center">
+										<span class="mr-2 ml-2">At least for</span>
+										<input type="number" min="1" value="1" class="form-control mr-2"
+											style="width:80px;" id="per-item-times" required>
+										<span>time(s)</span>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="row mt-1">
+							<div class="form-group col-12 m-0 font-weight-bold">
+								Variables
+							</div>
+							<div class="form-group col-12 mt-1">
+								<table id="variables-table" class="table logical-table variables-table table-bordered">
+									<thead>
+										<tr>
+											<th></th>
+											<th></th>
+											<th>Key</th>
+											<th>Value</th>
+											<th>Mask</th>
+											<th>Description</th>
+											<th>
+												<a href="javascript:void(0);" class="btn btn-lg btn-del modal-button"
+													id="variables-btn-add-row"><i data-feather="plus"
+														class="font-medium-2"></i></a>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="format-rules-icon text-center">
+												<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+													viewBox="0 0 24 24" fill="none" stroke="currentColor"
+													stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+													class="feather feather-code font-medium-2">
+													<polyline points="16 18 22 12 16 6"></polyline>
+													<polyline points="8 6 2 12 8 18"></polyline>
+												</svg>
+											</td>
+											<td class="col-sm-1 text-center">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" name="variables-status"
+														id="variables-status-0" class="custom-control-input" checked />
+													<label class="custom-control-label"
+														for="variables-status-0"></label>
+												</div>
+											</td>
+											<td class="col-sm-3">
+												<input type="text" name="variables[][key]" class="form-control border-0"
+													id="variables-key-0" />
+											</td>
+											<td class="col-sm-4">
+												<input type="text" name="variables[][value]"
+													class="form-control border-0" id="variables-value-0" />
+											</td>
+											<td class="col-sm-1 text-center">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" name="variables-mask-status"
+														id="variables-mask-status-0" class="custom-control-input"
+														checked />
+													<label class="custom-control-label"
+														for="variables-mask-status-0"></label>
+												</div>
+											</td>
+											<td class="col-sm-3">
+												<input type="text" name="variables[][description]"
+													class="form-control border-0" id="variables-description-0" />
+											</td>
+											<td class="col-sm-1 text-center">
+												<a href="javascript:void(0);" type="button"
+													class="variables-btn-del btn btn-lg btn-del modal-button">
+													<i data-feather="minus" class="font-medium-2"></i>
+												</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<div class="row mt-1">
+							<div class="col-12 d-flex align-items-center justify-content-between font-weight-bold">
+								<span>Monitor Rules</span>
+
+								<button type="button" class="btn btn-sm btn-primary" onclick="validateAndGenerate()">
+									<i data-feather="check-circle"></i> Validate & SQL Generated Query
+								</button>
+							</div>
+							<div class="form-group col-12 mt-1 moniter-rule">
+								<div class="query-builder-wrapper">
+									<div class="validation-summary" id="validation-summary">
+										<h6><i data-feather="alert-triangle"></i> Validation Errors</h6>
+										<ul id="validation-errors"></ul>
+									</div>
+									<div id="query-builder-root"></div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row mt-1">
+							<div class="form-group col-12 m-0 font-weight-bold">
+								Notify
+							</div>
+							<div class="form-group col-12 mt-1">
+								<table id="notify-table" class="table logical-table table-bordered notify-table">
+									<thead>
+										<tr>
+											<th></th>
+											<th></th>
+											<th>Description</th>
+											<th>Detial</th>
+											<th class="text-center">
+												<a href="javascript:void(0);" class="btn btn-lg btn-del modal-button"
+													id="notify-headers-btn-add-row">
+													<i data-feather="plus" class="font-medium-2"></i>
+												</a>
+											</th>
+										</tr>
+									</thead>
+									<tbody id="notify-body">
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<div class="row mt-2">
+							<div class="form-group col-12">
+								<button class="btn btn-primary" id="save-rules" type="submit">Save</button>
+							</div>
+						</div>
+					</form>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Ends moniter rule model -->

@@ -1,0 +1,2505 @@
+<%- include("partials/head", headerData); %>
+
+<%- include("partials/header"); %>
+
+<% if (typeof(companyCode) != "undefined") { %>
+<script type="text/javascript">
+	const dataCompanyCode = "<%= companyCode %>";
+</script>
+<% } else if (typeof(headerData.companyCode) != "undefined") { %>
+<script type="text/javascript">
+	const dataCompanyCode = "<%= headerData.companyCode %>";
+</script>
+<% } else { %>
+<script type="text/javascript">
+	const noDataCompanyCode = "companyCode not found!";
+</script>
+<% } %>
+
+<!-- BEGIN: Content -->
+<div class="app-content content <% if (typeof(isProject) != "undefined") { %> is-project<% } %>">
+	<div class="content-overlay"></div>
+	<div class="header-navbar-shadow"></div>
+	<div class="content-wrapper">
+		<div class="content-header row">
+			<div class="content-header-left col-md-9 col-12 mb-2">
+				<div class="row breadcrumbs-top">
+					<div class="col-12">
+						<h2 class="content-header-title float-left mb-0">Items</h2>
+						<div class="breadcrumb-wrapper">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="/">Home</a>
+								</li>
+								<li class="breadcrumb-item">
+									<a href="javascript:void(0);">Items</a>
+								</li>
+								<% if (typeof(alldata) != "undefined") { %>
+								<li class="breadcrumb-item active">Edit Item
+								<% } else if(typeof(alldata) == "undefined") { %>
+								<li class="breadcrumb-item active">Add Item
+								<% } %>
+								</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content-body">
+			<section class="horizontal-wizard">
+				<div class="bs-stepper horizontal-wizard-example">
+					<div class="bs-stepper-header">
+						<div class="step" data-target="#create-item" id="create-project-tab">
+							<button type="button" class="step-trigger">
+								<span class="bs-stepper-box">1</span>
+								<span class="bs-stepper-label">
+								<% if (typeof(alldata) != "undefined") { %>
+								<span class="bs-stepper-title">Edit Item</span>
+								<% } else { %>
+								<span class="bs-stepper-title">Create New Item</span>
+								<% } %>
+								<span class="bs-stepper-subtitle"></span>
+								</span>
+							</button>
+						</div>
+						<div class="line">
+							<i data-feather="chevron-right" class="font-medium-2"></i>
+						</div>
+						<div class="step" data-target="#inbound-step" id="inbound-tab">
+							<button type="button" class="step-trigger">
+								<span class="bs-stepper-box">2</span>
+								<span class="bs-stepper-label">
+								<span class="bs-stepper-title">Inbound</span>
+								<span class="bs-stepper-subtitle"></span>
+								</span>
+							</button>
+						</div>
+						<div class="line">
+							<i data-feather="chevron-right" class="font-medium-2"></i>
+						</div>
+						<div class="step" data-target="#inbound-filter-step" id="inbound-tab">
+							<button type="button" class="step-trigger">
+								<span class="bs-stepper-box">3</span>
+								<span class="bs-stepper-label">
+								<span class="bs-stepper-title">Inbound Filter</span>
+								<span class="bs-stepper-subtitle"></span>
+								</span>
+							</button>
+						</div>
+						<div class="line">
+							<i data-feather="chevron-right" class="font-medium-2"></i>
+						</div>
+						<div class="step" data-target="#outbound-step" id="outbound-tab">
+							<button type="button" class="step-trigger">
+								<span class="bs-stepper-box">4</span>
+								<span class="bs-stepper-label">
+								<span class="bs-stepper-title">Outbound</span>
+								<span class="bs-stepper-subtitle"></span>
+								</span>
+							</button>
+						</div>
+						<div class="line">
+							<i data-feather="chevron-right" class="font-medium-2"></i>
+						</div>
+						<div class="step" data-target="#mapping-step" id="mapping-tab">
+							<button type="button" class="step-trigger">
+								<span class="bs-stepper-box">5</span>
+								<span class="bs-stepper-label">
+								<span class="bs-stepper-title">Inbound Mapping</span>
+								<span class="bs-stepper-subtitle"></span>
+								</span>
+							</button>
+						</div>
+						<div class="line">
+							<i data-feather="chevron-right" class="font-medium-2"></i>
+						</div>
+						<div class="step" data-target="#outbound-filter-step" id="inbound-tab">
+							<button type="button" class="step-trigger">
+								<span class="bs-stepper-box">6</span>
+								<span class="bs-stepper-label">
+								<span class="bs-stepper-title">Outbound Filter</span>
+								<span class="bs-stepper-subtitle"></span>
+								</span>
+							</button>
+						</div>
+						<div class="line">
+							<i data-feather="chevron-right" class="font-medium-2"></i>
+						</div>
+						<div class="step" data-target="#outbound-mapping-step" id="outbound-mapping-tab">
+							<button type="button" class="step-trigger">
+								<span class="bs-stepper-box">7</span>
+								<span class="bs-stepper-label">
+								<span class="bs-stepper-title">Outbound Mapping</span>
+								<span class="bs-stepper-subtitle"></span>
+								</span>
+							</button>
+						</div>
+						<div class="line">
+							<i data-feather="chevron-right" class="font-medium-2"></i>
+						</div>
+						<div class="step" data-target="#schedule-step" id="schedule-tab">
+							<button type="button" class="step-trigger">
+								<span class="bs-stepper-box">8</span>
+								<span class="bs-stepper-label">
+								<span class="bs-stepper-title">Schedule</span>
+								<span class="bs-stepper-subtitle"></span>
+								</span>
+							</button>
+						</div>
+					</div>
+					<div class="bs-stepper-content">
+						<div id="create-item" class="content">
+							<div class="content-header">
+								<% if (typeof(alldata) != "undefined") { %>
+								<h5 class="mb-0">Edit Item</h5>
+								<% } else { %>
+								<h5 class="mb-0">Create Item</h5>
+								<% } %>
+								<small class="text-muted">Enter Your Item Details.</small>
+							</div>
+							<form id="frm-save-item" autocomplete="off">
+								<div class="row">
+									<% if (typeof(alldata) != "undefined") { %>
+									<input type="hidden" name="Item_id" id="Item_id" value="<%= alldata._id %>" />
+									<% } else { %>
+									<input type="hidden" name="Item_id" id="Item_id" />
+									<% } %>
+									<div class="form-group col-md-4">
+										<label class="form-label required" for="ItemCode">Item Code</label>
+										<% if (typeof(alldata) != "undefined") { %>
+										<input type="text" name="ItemCode" id="ItemCode" class="form-control" placeholder="Enter Item Code" readonly value="<%= alldata.ItemCode %>" />
+										<% } else { %>
+										<input type="text" name="ItemCode" id="ItemCode" class="form-control" placeholder="Enter Item Code" />
+										<% } %>
+									</div>
+									<div class="form-group col-md-4">
+										<label class="form-label required" for="ItemName">Item Name</label>
+										<% if (typeof(alldata) != "undefined") { %>
+										<input type="text" name="ItemName" id="ItemName" class="form-control" placeholder="Enter Item Name" aria-label="Item Code" value="<%= alldata.ItemName %>" />
+										<% } else { %>
+										<input type="text" name="ItemName" id="ItemName" class="form-control" placeholder="Enter Item Name" aria-label="Item Code" />
+										<% } %>
+									</div>
+									<div class="form-group col-md-4">
+										<label class="form-label required" for="CompanyName ">Company Name</label>
+										<% if (typeof(alldata) != "undefined") { %>
+										<input type="text" name="CompanyName" id="CompanyName" class="form-control" placeholder="Enter Company Name" aria-label="Company Name" value="<%= alldata.CompanyName %>" />
+										<% } else { %>
+										<input type="text" name="CompanyName" id="CompanyName" class="form-control" placeholder="Enter Company Name" aria-label="Company Name" />
+										<% } %>
+									</div>
+								</div>
+								<div class="row mt-1">
+									<div class="col-12">
+										<button class="btn btn-primary waves-effect" id="save_item" type="submit">Save</button>
+									</div>
+								</div>
+							</form>
+							<hr>
+							<div class="d-flex justify-content-between">
+								<button class="btn btn-outline-secondary waves-effect btn-prev" disabled>
+									<i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+									<span class="align-middle d-sm-inline-block d-none">Previous</span>
+								</button>
+								<button class="btn btn-primary waves-effect btn-next">
+									<span class="align-middle d-sm-inline-block d-none">Next</span>
+									<i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+								</button>
+							</div>
+						</div>
+						<div id="inbound-step" class="content">
+							<div class="tab-title-active-btn">
+								<h5 class="mb-0">Inbound</h5>
+								<div class="form-group mb-0 d-flex">
+									<div class="demo-inline-spacing">
+										<div class="custom-control custom-checkbox mt-0">
+											<input type="checkbox" name="inboundEnableLogs" id="inboundEnableLogs" class="custom-control-input" aria-label="Enable Logs" checked />
+											<label class="custom-control-label" for="inboundEnableLogs">Enable Logs</label>
+										</div>
+									</div>
+									<button type="button" id="is_active_inbound" data-value="Active" class="btn btn-success waves-effect">Active</button>
+								</div>
+							</div>
+							<form id="frm-save-inbound" autocomplete="off">
+								<div class="row">
+									<div class="col-12">
+										<input type="hidden" name="inbound_setting_id" id="inbound_setting_id" />
+										<div class="collapse-margin" id="inbound-accordion">
+											<div class="card">
+												<div class="card-header" id="headingOne" data-toggle="collapse" role="button" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+													<span class="lead collapse-title" style="color:blue"> Inbound Format </span>
+												</div>
+												<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#inbound-accordion">
+													<div class="card-body">
+														<div class="row">
+															<div class="col-md-6 mb-1">
+																<label class="required">Format</label>
+																<select class="select2 form-control form-control-lg custom-select" id="inboundFormat" name="inbound_format">
+																	<option value="json">JSON</option>
+																	<option value="xml">XML</option>
+																</select>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="card">
+												<div class="card-header" id="headingTwo" data-toggle="collapse" role="button" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+													<span class="lead collapse-title" style="color:blue">Synchronize Configure </span>
+												</div>
+												<div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#inbound-accordion">
+													<div class="card-body">
+														<div class="row">
+															<div class="form-group col-md-12">
+																<label class="form-label required" for="first-name">Synchronize Configure</label>
+																<div class="form-group col-md-12">
+																	<div class="row">
+																		<div class="custom-control custom-radio">
+																			<input type="radio" name="sync_type" id="Sync_type_api" class="custom-control-input" value="API" checked />
+																			<label class="custom-control-label" for="Sync_type_api">API</label>
+																		</div>&nbsp;&nbsp;
+																		<div class="custom-control custom-radio">
+																			<input type="radio" name="sync_type" id="Sync_type_ftp" class="custom-control-input" value="FTP" />
+																			<label class="custom-control-label" for="Sync_type_ftp">FTP</label>
+																		</div>&nbsp;&nbsp;
+																		<div class="custom-control custom-radio">
+																			<input type="radio" name="sync_type" id="Sync_type_sftp" class="custom-control-input" value="SFTP" />
+																			<label class="custom-control-label" for="Sync_type_sftp">SFTP</label>
+																		</div>&nbsp;&nbsp;
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<section id="collapsibleIn">
+														<div class="row">
+															<div class="col-sm-12">
+																<div class="collapse-icon">
+																	<div class="collapse-default">
+																		<div class="sync_confige_tabs" id="apiInUrlDiv">
+																			<div id="apiInTab" class="card-header">
+																				<span class="lead collapse-title"> API </span>
+																			</div>
+																			<div id="collapse1In" role="tabpanel" aria-labelledby="apiInTab" class="collapse show">
+																				<div class="card-body">
+																					<div id="api_options" class="form-group col-md-12">
+																						<div class="row">
+																							<div class="custom-control custom-radio">
+																								<input type="radio" name="api_type" id="Api_type_user" class="custom-control-input" value="User_API" />
+																								<label class="custom-control-label" for="Api_type_user">User API</label>
+																							</div>&nbsp;&nbsp;
+																							<div class="custom-control custom-radio">
+																								<input type="radio" name="api_type" id="Api_type_ddep" class="custom-control-input" value="DDEP_API" checked />
+																								<label class="custom-control-label" for="Api_type_ddep">DDEP API</label>
+																							</div>
+																						</div>
+																					</div>
+																					<div id="api_user_api_input" class="demo-inline-spacing" style="display: none;">
+																						<div class="col-md-2" style="padding-left: 0;">
+																							User API<font style="color:red">*</font>
+																						</div>
+																						<div class="col-md-9">
+																							<div class="form-group">
+																								<div class="demo-inline-spacing">
+																									<input type="text" name="api_user_api" class="form-control" id="api_user_api" />
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																					<div id="api_ddep_api_input" class="demo-inline-spacing">
+																						<div class="row col-12">
+																							<div class="col-md-2" style="margin: auto;padding-left: 0;">
+																								DDEP API<font style="color:red">*</font>
+																							</div>
+																							<div class="col-md-10">
+																								<div class="row align-items-center">
+																									<div class="col-md-4" style="margin: auto;padding-left: 0;">
+																										<span><%= api_prefix %></span>
+																									</div>
+																									<div class="col-md-8">
+																										<div class="form-group">
+																											<div class="demo-inline-spacing">
+																												<input type="text" name="api_ddep_api" class="form-control" id="api_ddep_api" />
+																											</div>
+																										</div>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																						<div class="row col-12">
+																							<div class="col-12" style="padding-left: 0;">
+																								<h4>Authorization</h4>
+																							</div>
+																							<div class="col-md-2" style="margin: auto;padding-left: 0;">
+																								Type
+																							</div>
+																							<div class="col-md-10">
+																								<select class="select2 form-control form-control-lg custom-select" id="ddep_api_auth_type" name="ddep_api_auth_type">
+																									<option value="No_Auth">No Auth</option>
+																									<option value="API_Key">API Key</option>
+																								</select>
+																							</div>
+																						</div>
+																						<div class="row col-12 authorization_api_key">
+																							<div class="col-md-2"></div>
+																							<div class="col-md-4">
+																								<input type="text" name="ddep_api_key_subscription_description" id="ddep_api_key_subscription_description" class="form-control" placeholder="Description" />
+																								<p class="error ddep_api_key_subscription_description_error">Please fill description.</p>
+																							</div>
+																							<div class="col-md-4">
+																								<button class="btn btn-primary waves-effect" id="ddep_api_key_generate_subscription_key_btn" type="button">Generate Subscription Key</button>
+																							</div>
+																							<div class="col-md-2"></div>
+																						</div>
+																						<div class="row col-12 authorization_api_key">
+																							<div class="col-md-2"></div>
+																							<div class="col-md-2">
+																								<input type="text" name="ddep_api_key_custom_key" id="ddep_api_key_custom_key" class="form-control" placeholder="Key" />
+																								<p class="error ddep_api_key_custom_key_error">Please fill key.</p>
+																							</div>
+																							<div class="col-md-4">
+																								<input type="text" name="ddep_api_key_custom_description" id="ddep_api_key_custom_description" class="form-control" placeholder="Description" />
+																								<p class="error ddep_api_key_custom_description_error">Please fill description.</p>
+																							</div>
+																							<div class="col-md-4">
+																								<button class="btn btn-primary waves-effect" id="ddep_api_key_generate_custom_key_btn" type="button">Generate Custom Key</button>
+																							</div>
+																						</div>
+																						<div class="row col-12 authorization_api_keys_table">
+																							<div class="col-12">
+																								<h4>Subscription</h4>
+																							</div>
+																							<div class="row col-12 authorization_api_keys_table_head">
+																								<div class="col-md-2">
+																									Type
+																								</div>
+																								<div class="col-md-6">
+																									Key
+																								</div>
+																								<div class="col-md-4">
+																									Description
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="sync_confige_tabs" id="ftpInDiv" style="display: none;">
+																			<div id="ftpInDivTab" class="card-header">
+																				<span class="lead collapse-title"> FTP</span>
+																			</div>
+																			<div id="collapse2In" role="tabpanel" aria-labelledby="ftpInDivTab" class="collapse show" aria-expanded="false">
+																				<div class="card-body">
+																					<div class="row">
+																						<div class="form-group col-md-2">
+																							<label class="form-label required" for="first-name">FTP/SFPT Server</label>
+																						</div>
+																						<div class="form-group col-md-9">
+																							<input type="text" name="ftp_server_link" id="ftp_server_link" class="form-control" placeholder="ftp.example.com" />
+																						</div>
+																					</div>
+																					<div class="row">
+																						<div class="form-group col-md-2">
+																							<label class="form-label required" for="first-name">Port</label>
+																						</div>
+																						<div class="form-group col-md-9">
+																							<input type="text" name="port" id="port" class="form-control" />
+																						</div>
+																					</div>
+																					<div class="row">
+																						<div class="form-group col-md-2">
+																							<label class="form-label required" for="first-name">Login Name</label>
+																						</div>
+																						<div class="form-group col-md-9">
+																							<input type="text" name="login_name" id="login_name" class="form-control" />
+																						</div>
+																					</div>
+																					<div class="row">
+																						<div class="form-group col-md-2">
+																							<label class="form-label required" for="first-name">Password</label>
+																						</div>
+																						<div class="form-group col-md-9">
+																							<input type="password" name="password" id="password" class="form-control" />
+																						</div>
+																					</div>
+																					<div class="row">
+																						<div class="form-group col-md-2">
+																							<label class="form-label required" for="first-name">Is Password Encrypted</label>
+																						</div>
+																						<div class="form-group col-md-9">
+																							<select class="select2 form-control form-control-lg custom-select" id="is_password_encrypted" name="is_password_encrypted">
+																								<option value="yes">Yes</option>
+																								<option value="no">No</option>
+																							</select>
+																						</div>
+																					</div>
+																					<div class="row">
+																						<div class="form-group col-md-2">
+																							<label class="form-label required" for="first-name">Folder</label>
+																						</div>
+																						<div class="form-group col-md-9">
+																							<input type="text" name="folderpath" id="folderpath" class="form-control" />
+																						</div>
+																					</div>
+																					<div class="row">
+																						<div class="form-group col-md-2">
+																							<label class="form-label" for="first-name">Backup Folder</label>
+																						</div>
+																						<div class="form-group col-md-9">
+																							<input type="text" name="backup_folder" id="backup_folder" class="form-control" />
+																						</div>
+																					</div>
+																					<div class="row">
+																						<div class="form-group col-md-2">
+																							<label class="form-label" for="first-name">Maximum file download per schedule/click</label>
+																						</div>
+																						<div class="form-group col-md-9">
+																							<input type="number" name="max_file_download" id="max_file_download" class="form-control" value="50" />
+																						</div>
+																					</div>
+																					<div class="row mt-1">
+																						<div class="col-md-3"></div>
+																						<div class="form-group col-md-9">
+																							<button type="button" id="conntest" class="btn btn-primary waves-effect">Connection Test</button>
+																							<span class="text-success ml-2" id="conn-alert" style="display: none;">Successfully connected with server</span>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</section>
+												</div>
+											</div>
+										</div>
+										<div class="mt-1">
+											<button class="btn btn-primary waves-effect" id="save_inbound" type="submit">Save</button>
+										</div>
+									</div>
+								</div>
+							</form>
+							<hr>
+							<div class="d-flex justify-content-between mt-1">
+								<button class="btn btn-primary waves-effect btn-prev">
+									<i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+									<span class="align-middle d-sm-inline-block d-none">Previous</span>
+								</button>
+								<button class="btn btn-primary waves-effect btn-next">
+									<span class="align-middle d-sm-inline-block d-none">Next</span>
+									<i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+								</button>
+							</div>
+						</div>
+						<div id="inbound-filter-step" class="content">
+							<div class="tab-title-active-btn">
+								<h5 class="mb-0">Inbound Filter</h5>
+								<div class="form-group mb-0 d-flex">
+									<div class="demo-inline-spacing">
+										<div class="custom-control custom-checkbox mt-0">
+											<input type="checkbox" name="inboundFilterEnableLogs" id="inboundFilterEnableLogs" class="custom-control-input" aria-label="Enable Logs" checked />
+											<label class="custom-control-label" for="inboundFilterEnableLogs">Enable Logs</label>
+										</div>
+									</div>
+									<button type="button" id="is_active_inbound_filter" data-value="Active" class="btn btn-success waves-effect">Active</button>
+								</div>
+							</div>
+							<form id="frm-save-inbound-filter" autocomplete="off">
+								<div class="row">
+									<div class="col-12">
+										<input type="hidden" name="inbound_filter_id" id="inbound_filter_id" />
+										<div style="margin: auto;width: 70%;">
+											<a href="javascript:void(0);" class="btn btn-lg btn-block modal-button" id="inbound-filter-btn-add-row"><i data-feather="plus" class="font-medium-2"></i></a>
+											<table id="inbound-filter-table" class="table myTable inbound-filter-table table-bordered">
+												<thead>
+													<tr>
+														<td>Logical Operation</td>
+														<td>Original Value</td>
+														<td>Comparison operations</td>
+														<td>Column Value</td>
+														<td></td>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td class="col-sm-2 logical-select">
+															<select class="select-dropdown form-control form-control-lg" name="inboundfilter[][logical]">
+																<option value="AND">AND</option>
+																<option value="OR">OR</option>
+															</select>
+														</td>
+														<td class="col-sm-3 autocomplete">
+															<input type="text" name="inboundfilter[][original]" class="form-control border-0 autocompleteinboundfilter" id="inboundfilteroriginal_0" />
+														</td>
+														<td class="col-sm-3 operations-select">
+															<select class="select-dropdown form-control form-control-lg" name="inboundfilter[][operations]">
+																<option value="==">=</option>
+																<option value=">">></option>
+																<option value=">=">>=</option>
+																<option value="<"><</option>
+																<option value="<="><=</option>
+																<option value="<>"><></option>
+																<option value="Contains">Contains</option>
+															</select>
+														</td>
+														<td class="col-sm-2 autocomplete">
+															<input type="text" name="inboundfilter[][column]" class="form-control border-0 autocompleteinboundfilter" id="inboundfiltercolumn_0" />
+														</td>
+														<td class="col-sm-2">
+															<a href="javascript:void(0);" type="button" class="inbound-filter-btn-del btn btn-lg btn-block modal-button">
+																<i data-feather="minus" class="font-medium-2"></i>
+															</a>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div class="mt-1">
+											<button class="btn btn-primary waves-effect" id="save_inbound_filter" type="submit">Save</button>
+										</div>
+									</div>
+								</div>
+							</form>
+							<hr>
+							<div class="d-flex justify-content-between">
+								<button class="btn btn-primary waves-effect btn-prev">
+									<i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+									<span class="align-middle d-sm-inline-block d-none">Previous</span>
+								</button>
+								<button class="btn btn-primary waves-effect btn-next">
+									<span class="align-middle d-sm-inline-block d-none">Next</span>
+									<i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+								</button>
+							</div>
+						</div>
+						<div id="outbound-step" class="content">
+							<div class="tab-title-active-btn">
+								<h5 class="mb-0">Outbound</h5>
+								<div class="form-group mb-0 d-flex">
+									<div class="demo-inline-spacing">
+										<div class="custom-control custom-checkbox mt-0">
+											<input type="checkbox" name="outboundEnableLogs" id="outboundEnableLogs" class="custom-control-input" aria-label="Enable Logs" checked />
+											<label class="custom-control-label" for="outboundEnableLogs">Enable Logs</label>
+										</div>
+									</div>
+									<button type="button" id="is_active_outbound" data-value="Active" class="btn btn-success waves-effect">Active</button>
+								</div>
+							</div>
+							<form id="frm-save-outbound" autocomplete="off">
+								<div class="row">
+									<div class="col-12">
+										<input type="hidden" name="outbound_setting_id" id="outbound_setting_id" />
+										<div class="collapse-margin" id="outbound-accordion">
+											<div class="card">
+												<div class="card-header" id="headingThree" data-toggle="collapse" role="button" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+													<span class="lead collapse-title" style="color:blue"> Outbound Format </span>
+												</div>
+												<div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#outbound-accordion">
+													<div class="card-body">
+														<div class="row">
+															<div class="col-md-6 mb-1">
+																<label class="required">Format</label>
+																<select class="select2 form-control form-control-lg custom-select" id="outbound_format" name="outbound_format">
+																	<option value="json">JSON</option>
+																	<option value="xml">XML</option>
+																</select>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="card">
+												<div class="card-header" id="headingFour" data-toggle="collapse" role="button" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+													<span class="lead collapse-title" style="color:blue">Synchronize Configure </span>
+												</div>
+												<div id="collapseFour" class="collapse show" aria-labelledby="headingFour" data-parent="#outbound-accordion">
+													<div class="card-body">
+														<div class="row">
+															<div class="form-group col-md-1">
+																<label class="form-label required" for="first-name">API URL</label>
+															</div>
+															<div class="form-group col-md-8">
+																<input type="text" name="api_url" id="api_url" class="form-control" />
+															</div>
+															<div class="col-md-2" style="margin: auto; margin-top: 0; margin-left: 0;">
+																<button type="button" class="btn btn-primary settings-button mr-1" id="outbound-validation-popup-btn">
+																	<i data-feather="settings" class="align-middle mr-sm-25 mr-0"></i>
+																</button>
+																<button type="button" class="btn btn-primary settings-button" id="outbound-specify-headers-popup-btn" data-id="outbound_specify_headers_1">Headers</button>
+															</div>
+														</div>
+														<div id="outboud_max_post_file" class="row" style="display: none;">
+															<div class="form-group col-md-1">
+																<label class="form-label" for="first-name">Maximum file post per schedule/click</label>
+															</div>
+															<div class="form-group col-md-8">
+																<input type="number" name="max_file_post" id="max_file_post" class="form-control" value="50" />
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="card">
+												<div class="card-header" id="headingGlobalHeaders" data-toggle="collapse" role="button" data-target="#collapseGlobalHeaders" aria-expanded="true" aria-controls="collapseGlobalHeaders">
+													<span class="lead collapse-title" style="color:blue">Global Headers</span>
+												</div>
+												<div id="collapseGlobalHeaders" class="collapse show" aria-labelledby="headingGlobalHeaders" data-parent="#outbound-accordion">
+													<div class="card-body">
+														<div>
+															<a href="javascript:void(0);" class="btn btn-lg btn-block modal-button" id="outbound-global-headers-btn-add-row"><i data-feather="plus" class="font-medium-2"></i></a>
+														</div>
+														<table id="outbound-global-headers-table" class="table myTable outbound-global-headers-table table-bordered">
+															<thead>
+																<tr>
+																	<td></td>
+																	<td>Key</td>
+																	<td>Value</td>
+																	<td>Description</td>
+																	<td></td>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td class="col-sm-1 text-center">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" name="outbound_global_headers_status" id="outbound_global_headers_status_0" class="custom-control-input" checked />
+																			<label class="custom-control-label" for="outbound_global_headers_status_0"></label>
+																		</div>
+																	</td>
+																	<td class="col-sm-3">
+																		<input type="text" name="outbound_global_headers[][key]" class="form-control border-0" data-class="outbound_global_headers_" id="outbound_global_headers_key_0" />
+																	</td>
+																	<td class="col-sm-4">
+																		<input type="text" name="outbound_global_headers[][value]" class="form-control border-0" data-class="outbound_global_headers_" id="outbound_global_headers_value_0" />
+																	</td>
+																	<td class="col-sm-3">
+																		<input type="text" name="outbound_global_headers[][description]" class="form-control border-0" data-class="outbound_global_headers_" id="outbound_global_headers_description_0" />
+																	</td>
+																	<td class="col-sm-1 text-center">
+																		<a href="javascript:void(0);" type="button" class="outbound-global-headers-btn-del btn btn-lg btn-block modal-button">
+																			<i data-feather="minus" class="font-medium-2"></i>
+																		</a>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+											<div class="card" id="collections_configure" style="display: none;">
+												<div class="card-header" id="headingFive" data-toggle="collapse" role="button" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+													<span class="lead collapse-title" style="color:blue">Collections Configure</span>
+												</div>
+												<div id="collapseFive" class="collapse show" aria-labelledby="headingFive" data-parent="#outbound-accordion">
+													<div class="card-body">
+														<div class="row">
+															<div class="form-group col-md-12">
+																<div class="custom-control custom-checkbox">
+																	<input type="checkbox" name="sendCollectionOnebyOne" id="sendCollectionOnebyOne" class="custom-control-input" aria-label="Send Collections one by one" />
+																	<label class="custom-control-label" for="sendCollectionOnebyOne">Send Collections one by one</label>
+																	<p>When enabled this options , outbound api only will got the collections item one by one and will not included another elements</p>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-1">
+																<label class="form-label" for="collections_name">Collections Name</label>
+															</div>
+															<div class="form-group col-md-8">
+																<input type="text" name="collections_name" id="collections_name" class="form-control" />
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="mt-1">
+											<button class="btn btn-primary waves-effect" id="save_outbound" type="submit">Save</button>
+										</div>
+									</div>
+								</div>
+							</form>
+							<hr>
+							<div class="d-flex justify-content-between">
+								<button class="btn btn-primary waves-effect btn-prev">
+									<i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+									<span class="align-middle d-sm-inline-block d-none">Previous</span>
+								</button>
+								<button class="btn btn-primary waves-effect btn-next">
+									<span class="align-middle d-sm-inline-block d-none">Next</span>
+									<i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+								</button>
+							</div>
+						</div>
+						<div id="mapping-step" class="content">
+							<div class="tab-title-active-btn">
+								<h5 class="mb-0">Inbound Mapping</h5>
+								<div class="form-group mb-0 d-flex">
+									<div class="demo-inline-spacing">
+										<div class="custom-control custom-checkbox mt-0">
+											<input type="checkbox" name="inboundMappingEnableLogs" id="inboundMappingEnableLogs" class="custom-control-input" aria-label="Enable Logs" checked />
+											<label class="custom-control-label" for="inboundMappingEnableLogs">Enable Logs</label>
+										</div>
+									</div>
+									<button type="button" id="is_active_mapping" data-value="Active" class="btn btn-success waves-effect">Active</button>
+								</div>
+							</div>
+							<form id="frm-save-mapping" autocomplete="off">
+								<div class="row">
+									<div class="col-12">
+										<div class="row">
+											<div class="col-6 pl-0">
+												<input type="hidden" name="mapping_setting_id" id="mapping_setting_id" />
+												<input type="hidden" name="props_setting_id" id="props_setting_id" />
+												<div class="form-group">
+													<label for="exampleFormControlTextarea1">Inbound Format</label>
+													<textarea class="form-control" name="InboundFormatData" id="InboundFormatData" rows="10"></textarea>
+													<br/>
+													<div class="text-right">
+														<a href="javascript:void(0);" id="InboundJson" onclick="saveBGRSJSON()" style="display: none;">Download Json</a>
+														<button type="button" class="btn btn-outline-primary waves-effect" id="InboundDataBind">Upload</button>
+													</div>
+												</div>
+											</div>
+											<div class="col-6 pr-0">
+												<div class="form-group">
+													<label for="exampleFormControlTextarea1">Outbound Format</label>
+													<textarea class="form-control" name="OutboundFormatData" id="OutboundFormatData" rows="10" ></textarea>
+													<br/>
+													<div class="text-right">
+														<a href="javascript:void(0);" id="OutboundJson" onclick="saveiRMSJSON()" style="display: none;">Download Json</a>
+														<button type="button" class="btn btn-outline-primary waves-effect" id="OutboundDataBind">Upload</button>
+													</div>
+												</div>
+											</div>
+											<div class="col-9 pl-0">
+												<p style="margin-bottom: 5px;">Create Relationship: Drag & Drop the inbound column to outbound column</p>
+												<p style="margin-bottom: 5px;">Delete Relationship: Click the Relationship Line & Press "Delete" Button from Keyboard to remove the relationship</p>
+												<p style="margin-bottom: 5px;">Create Multiples Relationship : only allow the column type = array</p>
+											</div>
+											<div class="col-3 pr-0" style="margin: auto;">
+												<button type="button" class="btn btn-outline-primary waves-effect float-right" id="cleanup-inbound-properties-btn">Cleanup Properties</button>
+												<button type="button" class="btn btn-outline-primary waves-effect float-right mr-1" id="all-inbound-properties-btn">All Properties</button>
+											</div>
+											<!-- * * * * * * * * * * * * * -->
+											<!-- Start of GoJS sample code -->
+											<div id="myDiagramDiv" class="col-9 pl-0"></div>
+											<div class="col-3 pr-0">
+												<div class="mapping-formula-tables" style="border: 1px solid rgb(204, 204, 204);border-radius: 0.357rem;">
+													<div class="tab-title-active-btn" style="padding: 1.5rem;">
+														<h4 class="card-title mb-0">Properties</h4>
+													</div>
+													<table id="mapping-formula-props" class="datatables-basic mapping-formula-props table">
+														<tbody>
+															<tr>
+																<td class="table-section-title" colspan="2">General</td>
+															</tr>
+															<tr>
+																<td>Item</td>
+																<td id="props-general-item"></td>
+															</tr>
+															<tr>
+																<td class="table-section-title" colspan="2">Linked Items</td>
+															</tr>
+															<tr id="table-section-linked-items-row">
+																<td>Key</td>
+																<td id="props-general-linked-item-key">Name</td>
+															</tr>
+															<tr>
+																<td class="table-section-title" colspan="2">Display</td>
+															</tr>
+															<tr>
+																<td>Value</td>
+																<td>
+																	<div class="autocomplete">
+																		<input type="text" name="displayvalue" id="props-display-value" class="form-control table-section-display-text autocompleteformula" />
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td>Default Value</td>
+																<td>
+																	<div>
+																		<input type="text" name="displaydefaultvalue" id="props-display-default-value" class="form-control table-section-display-text" />
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td class="table-section-title" colspan="2">Validation</td>
+															</tr>
+															<tr>
+																<td>is Required?</td>
+																<td>
+																	<div>
+																		<select class="select-dropdown form-control form-control-lg" name="isrequired" id="props-validation-is-required">
+																			<option value="FALSE">FALSE</option>
+																			<option value="TRUE">TRUE</option>
+																		</select>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td>Value must be</td>
+																<td>
+																	<div>
+																		<select class="select-dropdown form-control form-control-lg" name="valuemustbe" id="props-validation-value-must-be">
+																			<option>ANY</option>
+																			<option value="NUMBER">NUMBER</option>
+																			<option value="DATE">DATE</option>
+																			<option value="STRING">STRING</option>
+																		</select>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td>Additional Rules</td>
+																<td>
+																	<div class="floatright">
+																		<a href="javascript:void(0);" class="btn btn-primary settings-button" id="props-validation-additional-rules-popup-btn">
+																			<i data-feather="settings" class="align-middle mr-sm-25 mr-0"></i>
+																		</a>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td class="table-section-title" colspan="2">Format</td>
+															</tr>
+															<tr>
+																<td>TRIM</td>
+																<td>
+																	<div>
+																		<select class="select-dropdown form-control form-control-lg" name="istrim" id="props-format-is-trim">
+																			<option value="FALSE">FALSE</option>
+																			<option value="TRUE">TRUE</option>
+																		</select>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td>Enable Rounding</td>
+																<td>
+																	<div>
+																		<select class="select-dropdown form-control form-control-lg" name="enablerounding" id="props-format-enable-rounding">
+																			<option value="FALSE">FALSE</option>
+																			<option value="TRUE">TRUE</option>
+																		</select>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td>Enable Decimal</td>
+																<td>
+																	<div>
+																		<select class="select-dropdown form-control form-control-lg" name="enabedecimal" id="props-format-enable-decimal">
+																			<option value="FALSE">FALSE</option>
+																			<option value="TRUE">TRUE</option>
+																		</select>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td>Decimal</td>
+																<td>
+																	<div>
+																		<input type="number" name="decimal" id="props-format-decimal" class="form-control table-section-display-text" value="2" />
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td>Additional Rules</td>
+																<td>
+																	<div class="floatright">
+																		<a href="javascript:void(0);" class="btn btn-primary settings-button" id="props-format-additional-rules-popup-btn">
+																			<i data-feather="settings" class="align-middle mr-sm-25 mr-0"></i>
+																		</a>
+																	</div>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+											<div id="sample">
+												<div style="display: none;">
+													This sample supports three different routing styles:<br>
+													<input type="radio" name="MyRoutingStyle" onclick="changeStyle()" value="Normal" />
+													"Normal"<br>
+													<input type="radio" name="MyRoutingStyle" onclick="changeStyle()" value="ToGroup" checked="checked" />
+													"ToGroup", where the links stop at the border of the group<br>
+													<input type="radio" name="MyRoutingStyle" onclick="changeStyle()" value="ToNode" />
+													"ToNode", where the links bend at the border of the group but go all the way to the node, as normal<br>
+												</div>
+												<span style="display:none">Godmark : This is GOJS after drag and drop result you need to Save in Database</span>
+												<textarea id="mySavedModel" style="width:1000px;height:500px;display:none"></textarea> 
+												<textarea id="txtGOJSD_Debug" style="width:100%;height:300px;display:none"></textarea>
+												<input type="text" id="mySavedModel2" style="width:100%;height:300px;display:none" />
+											</div>
+											<!-- * * * * * * * * * * * * * -->
+											<!-- End of GoJS sample code -->
+											<div class="col-12" style="display: none;" id="Tree">
+												<div class="form-group">
+													<div class="col-md-12">
+														需要显示的tREE DIV
+													</div>
+												</div>
+											</div>
+										</div>
+										<div id="freeTextform" style="display: none">
+											<table class="table table-hover">
+												<thead>
+													<tr>
+														<th style="text-align:center;vertical-align:middle;">Inbound</th>
+														<th style="text-align:center;vertical-align:middle;">Field</th>
+														<th style="text-align:center;vertical-align:middle;">Outbound</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td> 
+															<div class="form-grou ">
+																<input type="text" id="modern-username0" class="form-control" placeholder="Input Field Name" />
+															</div>
+														</td>
+														<td style="text-align:center;vertical-align:middle;">Factory</td>
+														<td>
+															<div class="form-grou ">
+																<input type="text" id="modern-username1" class="form-control" placeholder="Input Field Name" />
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<td> 
+															<div class="form-grou ">
+																<input type="text" id="modern-username2" class="form-control" placeholder="Input Field Name" />
+															</div>
+														</td>
+														<td style="text-align:center;vertical-align:middle;">Order No.</td>
+														<td>
+															<div class="form-grou ">
+																<input type="text" id="modern-username3" class="form-control" placeholder="Input Field Name" />
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<td> 
+															<div class="form-grou ">
+															 <input type="text" id="modern-username4" class="form-control" placeholder="Input Field Name" />
+															</div>
+														</td>
+														<td style="text-align:center;vertical-align:middle;">Date</td>
+														<td>
+															<div class="form-grou ">
+																<input type="text" id="modern-username5" class="form-control" placeholder="Input Field Name" />
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<div class="form-grou ">
+																<input type="text" id="modern-username6" class="form-control" placeholder="Input Field Name" />
+															</div>
+														</td>
+														<td style="text-align:center;vertical-align:middle;">Qrcode</td>
+														<td>
+															<div class="form-grou ">
+																<input type="text" id="modern-username7" class="form-control" placeholder="Input Field Name" />
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<div class="form-grou ">
+																<input type="text" id="modern-username8" class="form-control" placeholder="Input Field Name" />
+															</div>
+														</td>
+														<td style="text-align:center;vertical-align:middle;">Barcode</td>
+														<td>
+															<div class="form-grou ">
+																<input type="text" id="modern-username9" class="form-control" placeholder="Input Field Name" />
+															</div>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div class="mt-1">
+											<button class="btn btn-relief-primary waves-effect" id="save_mapping" type="submit">Save</button>
+										</div>
+									</div>
+								</div>
+							</form>
+							<hr/>
+							<div class="d-flex justify-content-between">
+								<button class="btn btn-primary waves-effect btn-prev">
+									<i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+									<span class="align-middle d-sm-inline-block d-none">Previous</span>
+								</button>
+								<button class="btn btn-primary waves-effect btn-next">
+									<span class="align-middle d-sm-inline-block d-none">Next</span>
+									<i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+								</button>
+							</div>
+						</div>
+						<div id="outbound-filter-step" class="content">
+							<div class="tab-title-active-btn">
+								<h5 class="mb-0">Outbound Filter</h5>
+								<div class="form-group mb-0 d-flex">
+									<div class="demo-inline-spacing">
+										<div class="custom-control custom-checkbox mt-0">
+											<input type="checkbox" name="outboundFilterEnableLogs" id="outboundFilterEnableLogs" class="custom-control-input" aria-label="Enable Logs" checked />
+											<label class="custom-control-label" for="outboundFilterEnableLogs">Enable Logs</label>
+										</div>
+									</div>
+									<button type="button" id="is_active_outbound_filter" data-value="Active" class="btn btn-success waves-effect">Active</button>
+								</div>
+							</div>
+							<form id="frm-save-outbound-filter" autocomplete="off">
+								<div class="row">
+									<div class="col-12">
+										<input type="hidden" name="outbound_filter_id" id="outbound_filter_id" />
+										<div style="margin: auto;width: 70%;">
+											<a href="javascript:void(0);" class="btn btn-lg btn-block modal-button" id="outbound-filter-btn-add-row"><i data-feather="plus" class="font-medium-2"></i></a>
+											<table id="outbound-filter-table" class="table myTable outbound-filter-table table-bordered">
+												<thead>
+													<tr>
+														<td>Logical Operation</td>
+														<td>Original Value</td>
+														<td>Comparison operations</td>
+														<td>Column Value</td>
+														<td></td>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td class="col-sm-2 logical-select">
+															<select class="select-dropdown form-control form-control-lg" name="outboundfilter[][logical]">
+																<option value="AND">AND</option>
+																<option value="OR">OR</option>
+															</select>
+														</td>
+														<td class="col-sm-3 autocomplete">
+															<input type="text" name="outboundfilter[][original]" class="form-control border-0 autocompleteoutboundfilter" id="outboundfilteroriginal_0" />
+														</td>
+														<td class="col-sm-3 operations-select">
+															<select class="select-dropdown form-control form-control-lg" name="outboundfilter[][operations]">
+																<option value="==">=</option>
+																<option value=">">></option>
+																<option value=">=">>=</option>
+																<option value="<"><</option>
+																<option value="<="><=</option>
+																<option value="<>"><></option>
+																<option value="Contains">Contains</option>
+															</select>
+														</td>
+														<td class="col-sm-2 autocomplete">
+															<input type="text" name="outboundfilter[][column]" class="form-control border-0 autocompleteoutboundfilter" id="outboundfiltercolumn_0" />
+														</td>
+														<td class="col-sm-2">
+															<a href="javascript:void(0);" type="button" class="outbound-filter-btn-del btn btn-lg btn-block modal-button">
+																<i data-feather="minus" class="font-medium-2"></i>
+															</a>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div class="mt-1">
+											<button class="btn btn-primary waves-effect" id="save_outbound_filter" type="submit">Save</button>
+										</div>
+									</div>
+								</div>
+							</form>
+							<hr>
+							<div class="d-flex justify-content-between">
+								<button class="btn btn-primary waves-effect btn-prev">
+									<i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+									<span class="align-middle d-sm-inline-block d-none">Previous</span>
+								</button>
+								<button class="btn btn-primary waves-effect btn-next">
+									<span class="align-middle d-sm-inline-block d-none">Next</span>
+									<i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+								</button>
+							</div>
+						</div>
+						<div id="outbound-mapping-step" class="content">
+							<div class="tab-title-active-btn">
+								<h5 class="mb-0">Outbound Mapping</h5>
+								<div class="form-group mb-0 d-flex">
+									<div class="demo-inline-spacing">
+										<div class="custom-control custom-checkbox mt-0">
+											<input type="checkbox" name="outboundMappingEnableLogs" id="outboundMappingEnableLogs" class="custom-control-input" aria-label="Enable Logs" checked />
+											<label class="custom-control-label" for="outboundMappingEnableLogs">Enable Logs</label>
+										</div>
+									</div>
+									<button type="button" id="is_active_outbound_mapping" data-value="Active" class="btn btn-success waves-effect">Active</button>
+								</div>
+							</div>
+							<form id="frm-save-outbound-mapping" autocomplete="off">
+								<div class="row">
+									<div class="col-12">
+										<div class="row">
+											<div class="col-6 pl-0">
+												<input type="hidden" name="outbound_mapping_setting_id" id="outbound_mapping_setting_id" />
+												<input type="hidden" name="outbound_props_setting_id" id="outbound_props_setting_id" />
+												<div class="form-group">
+													<label for="exampleFormControlTextarea1">Outbound Response Format</label>
+													<textarea class="form-control" name="InboundFormatData_outbound" id="InboundFormatData_outbound" rows="10"></textarea>
+													<br/>
+													<div class="text-right">
+														<button type="button" class="btn btn-outline-primary waves-effect" id="InboundDataBind_outbound">Upload</button>
+													</div>
+												</div>
+											</div>
+											<div class="col-6 pr-0">
+												<div class="form-group">
+													<label for="exampleFormControlTextarea1">Conversion Outbound Response Format</label>
+													<textarea class="form-control" name="OutboundFormatData_outbound" id="OutboundFormatData_outbound" rows="10" ></textarea>
+													<br/>
+													<div class="text-right">
+														<button type="button" class="btn btn-outline-primary waves-effect" id="OutboundDataBind_outbound">Upload</button>
+													</div>
+												</div>
+											</div>
+											<div class="col-9 pl-0">
+												<p style="margin-bottom: 5px;">Create Relationship: Drag & Drop the inbound column to outbound column</p>
+												<p style="margin-bottom: 5px;">Delete Relationship: Click the Relationship Line & Press "Delete" Button from Keyboard to remove the relationship</p>
+												<p style="margin-bottom: 5px;">Create Multiples Relationship : only allow the column type = array</p>
+											</div>
+											<div class="col-3 pr-0" style="margin: auto;">
+												<button type="button" class="btn btn-outline-primary waves-effect float-right" id="cleanup-outbound-properties-btn">Cleanup Properties</button>
+												<button type="button" class="btn btn-outline-primary waves-effect float-right mr-1" id="all-outbound-properties-btn">All Properties</button>
+											</div>
+											<!-- * * * * * * * * * * * * * -->
+											<!-- Start of GoJS sample code -->
+											<div id="outboundMyDiagramDiv" class="col-9 pl-0"></div>
+											<div class="col-3 pr-0">
+												<div class="mapping-formula-tables" style="border: 1px solid rgb(204, 204, 204);border-radius: 0.357rem;">
+													<div class="tab-title-active-btn" style="padding: 1.5rem;">
+														<h4 class="card-title mb-0">Properties</h4>
+													</div>
+													<table id="mapping-outbound-formula-props" class="datatables-basic mapping-formula-props table">
+														<tbody>
+															<tr>
+																<td class="table-section-title" colspan="2">General</td>
+															</tr>
+															<tr>
+																<td>Item</td>
+																<td id="props-outbound-general-item"></td>
+															</tr>
+															<tr>
+																<td class="table-section-title" colspan="2">Linked Items</td>
+															</tr>
+															<tr id="table-outbound-section-linked-items-row">
+																<td>Key</td>
+																<td id="props-outbound-general-linked-item-key">Name</td>
+															</tr>
+															<tr>
+																<td class="table-section-title" colspan="2">Display</td>
+															</tr>
+															<tr>
+																<td>Value</td>
+																<td>
+																	<div class="autocomplete">
+																		<input type="text" name="displayvalue" id="props-outbound-display-value" class="form-control table-section-display-text autocompleteformulaoutbound" />
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td>Default Value</td>
+																<td>
+																	<div>
+																		<input type="text" name="displaydefaultvalue" id="props-outbound-display-default-value" class="form-control table-section-display-text" />
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td class="table-section-title" colspan="2">Validation</td>
+															</tr>
+															<tr>
+																<td>is Required?</td>
+																<td>
+																	<div>
+																		<select class="select-dropdown form-control form-control-lg" name="isrequired" id="props-outbound-validation-is-required">
+																			<option value="FALSE">FALSE</option>
+																			<option value="TRUE">TRUE</option>
+																		</select>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td>Value must be</td>
+																<td>
+																	<div>
+																		<select class="select-dropdown form-control form-control-lg" name="valuemustbe" id="props-outbound-validation-value-must-be">
+																			<option>ANY</option>
+																			<option value="NUMBER">NUMBER</option>
+																			<option value="DATE">DATE</option>
+																			<option value="STRING">STRING</option>
+																		</select>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td>Additional Rules</td>
+																<td>
+																	<div class="floatright">
+																		<a href="javascript:void(0);" class="btn btn-primary settings-button" id="props-outbound-validation-additional-rules-popup-btn">
+																			<i data-feather="settings" class="align-middle mr-sm-25 mr-0"></i>
+																		</a>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td class="table-section-title" colspan="2">Format</td>
+															</tr>
+															<tr>
+																<td>TRIM</td>
+																<td>
+																	<div>
+																		<select class="select-dropdown form-control form-control-lg" name="istrim" id="props-outbound-format-is-trim">
+																			<option value="FALSE">FALSE</option>
+																			<option value="TRUE">TRUE</option>
+																		</select>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td>Enable Rounding</td>
+																<td>
+																	<div>
+																		<select class="select-dropdown form-control form-control-lg" name="enablerounding" id="props-outbound-format-enable-rounding">
+																			<option value="FALSE">FALSE</option>
+																			<option value="TRUE">TRUE</option>
+																		</select>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td>Enable Decimal</td>
+																<td>
+																	<div>
+																		<select class="select-dropdown form-control form-control-lg" name="enabedecimal" id="props-outbound-format-enable-decimal">
+																			<option value="FALSE">FALSE</option>
+																			<option value="TRUE">TRUE</option>
+																		</select>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td>Decimal</td>
+																<td>
+																	<div>
+																		<input type="number" name="decimal" id="props-outbound-format-decimal" class="form-control table-section-display-text" value="2" />
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td>Additional Rules</td>
+																<td>
+																	<div class="floatright">
+																		<a href="javascript:void(0);" class="btn btn-primary settings-button" id="props-outbound-format-additional-rules-popup-btn">
+																			<i data-feather="settings" class="align-middle mr-sm-25 mr-0"></i>
+																		</a>
+																	</div>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+											<div id="outbound-sample">
+												<div style="display: none;">
+													This sample supports three different routing styles:<br>
+													<input type="radio" name="MyRoutingStyleOutbound" onclick="changeStyleOutbound()" value="Normal" />
+													"Normal"<br>
+													<input type="radio" name="MyRoutingStyleOutbound" onclick="changeStyleOutbound()" value="ToGroup" checked="checked" />
+													"ToGroup", where the links stop at the border of the group<br>
+													<input type="radio" name="MyRoutingStyleOutbound" onclick="changeStyleOutbound()" value="ToNode" />
+													"ToNode", where the links bend at the border of the group but go all the way to the node, as normal<br>
+												</div>
+												<span style="display:none">Godmark : This is GOJS after drag and drop result you need to Save in Database</span>
+												<textarea id="outboundmySavedModel" style="width:1000px;height:500px;display:none"></textarea> 
+												<textarea id="outbound_txtGOJSD_Debug" style="width:100%;height:300px;display:none"></textarea>
+												<input type="text" id="outboundmySavedModel2" style="width:100%;height:300px;display:none" />
+											</div>
+											<!-- * * * * * * * * * * * * * -->
+											<!-- End of GoJS sample code -->
+											<div class="col-12" style="display: none;" id="outboundTree">
+												<div class="form-group">
+													<div class="col-md-12">
+														需要显示的tREE DIV
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="mt-1">
+											<button class="btn btn-relief-primary waves-effect" id="save_mapping_outbound" type="submit">Save</button>
+										</div>
+									</div>
+								</div>
+							</form>
+							<hr/>
+							<div class="d-flex justify-content-between">
+								<button class="btn btn-primary waves-effect btn-prev">
+									<i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+									<span class="align-middle d-sm-inline-block d-none">Previous</span>
+								</button>
+								<button class="btn btn-primary waves-effect btn-next">
+									<span class="align-middle d-sm-inline-block d-none">Next</span>
+									<i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+								</button>
+							</div>
+						</div>
+						<div id="schedule-step" class="content">
+							<div class="tab-title-active-btn">
+								<h5 class="mb-0">Schedule</h5>
+								<div class="form-group mb-0 d-flex">
+									<div class="demo-inline-spacing">
+										<div class="custom-control custom-checkbox mt-0">
+											<input type="checkbox" name="ScheduleEnableLogs" id="ScheduleEnableLogs" class="custom-control-input" aria-label="Enable Logs" checked />
+											<label class="custom-control-label" for="ScheduleEnableLogs">Enable Logs</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							<form id="frm-save-schedule" autocomplete="off">
+								<div class="row">
+									<div class="col-12">
+										<input type="hidden" name="schedule_setting_id" id="schedule_setting_id" />
+										<div class="collapse-margin" id="schedule-accordion">
+											<div class="card" id="inbound_shedule_setting_tab">
+												<div class="card-header collapsed" id="headingfifth" data-toggle="collapse" role="button" data-target="#collapsefifth" aria-expanded="true" aria-controls="collapsefifth">
+													<span class="lead collapse-title" style="color:blue">Inbound</span>
+												</div>
+												<div id="collapsefifth" class="collapse show" aria-labelledby="headingfifth" data-parent="#schedule-accordion">
+													<div class="card-body">
+														<div class="form-group">
+															<div class="row">
+																<div class="col-md-2 col-5">
+																	<div class="custom-control custom-radio">
+																		<input type="radio" name="s_configure_inbound" id="Schedule_configure_schedule_inbound" class="custom-control-input" value="schedule" checked />
+																		<label class="custom-control-label" for="Schedule_configure_schedule_inbound"><strong>Schedule</strong></label>
+																	</div>
+																</div>
+																<div class="col-md-2 col-5">
+																	<div class="custom-control custom-radio">
+																		<input type="radio" name="s_configure_inbound" id="Schedule_configure_click_by_user_inbound" class="custom-control-input" value="click_by_user" />
+																		<label class="custom-control-label" for="Schedule_configure_click_by_user_inbound"><strong>Click By User</strong></label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="col-md-10 mt-md-4 mt-3 relation-schedule-open">
+															<div class="form-group row">
+																<div class="col-md-2 mb-md-0 mb-1">
+																	<strong>Schedule Type</strong>
+																</div>
+																<div class="col-md-9">
+																	<div class="form-group">
+																		<div class="row">
+																			<div class="col-md-3 col-6">
+																				<div class="custom-control custom-radio">
+																					<input type="radio" name="schedule_type_inbound" id="Schedule_type_recurring_inbound" class="custom-control-input" value="Recurring" checked />
+																					<label class="custom-control-label" for="Schedule_type_recurring_inbound">Recurring</label>
+																				</div>
+																			</div>
+																			<div class="col-md-3 col-6">
+																				<div class="custom-control custom-radio">
+																					<input type="radio" name="schedule_type_inbound" id="Schedule_type_one_time_inbound" class="custom-control-input" value="OneTime" />
+																					<label class="custom-control-label" for="Schedule_type_one_time_inbound">One Time</label>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div id="inbound-data-recurring">
+																<hr class="mb-2">
+																<div class="row">
+																	<div class="col-md-12 mb-1">
+																		<strong>Frequency</strong>
+																	</div>
+																	<div class="col-12">
+																		<div class="row">
+																			<div class="form-group col-md-2">
+																				<div class="form-label required">Occurs</div>
+																			</div>
+																			<div class="form-group col-md-9">
+																				<select class=" form-control form-control-lg" id="occurs_time_inbound" name="occurs_time_inbound">
+																					<option value="daily">Daily</option>
+																					<option value="weekly">Weekly</option>
+																					<option value="monthly">Monthly</option>
+																				</select>
+																				<div class="mt-2" id="selectOccursDayIn">
+																					<div class="row align-items-center">
+																						<div class="col-md-2 col-4">
+																							Recurs every
+																						</div>
+																						<div class="col-md-9 col-8">
+																							<div class="row align-items-center">
+																								<div class="col-md-3 col-6 input-group bootstrap-touchspin">
+																									<input type="number" name="day_frequency_inbound_count" id="day_frequency_inbound_count" class="touchspin-min-max" value="1" />
+																								</div>
+																								<div class="col-md-6 col-6 input-group">
+																									day(s)
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																				<div class="mt-2" id="selectOccursMonthIn" style="display:none;">
+																					<div id="monthly_fields">
+																						<div class="form-group">
+																							<div class="row align-items-center" id="selectOccursMonthIn">
+																								<div class="col-md-2 mb-md-0 mb-1">
+																									<div class="d-flex align-items-center">
+																										<div class="custom-control custom-radio-primary custom-radio">
+																											<input type="radio" name="inbound_monthly_day" id="inbound_monthly_day" class="custom-control-input" value="day" checked />
+																											<label class="custom-control-label" for="inbound_monthly_day">Day</label>
+																										</div>
+																										<div class="custom-control custom-radio-primary custom-radio ml-2">
+																											<input type="radio" name="inbound_monthly_day" id="inbound_monthly_the" class="custom-control-input" value="The" />
+																											<label class="custom-control-label" for="inbound_monthly_the">The</label>
+																										</div>
+																									</div>
+																								</div>
+																								<div class="col-md-9" id="selectOccursMonthDayDivIn">
+																									<div id="day_txt_box">
+																										<div class="row align-items-center">
+																											<div class="col-4 px-md-1 px-0 input-group bootstrap-touchspin">
+																												<input type="number" name="monthly_frequency_day_inbound" id="monthly_frequency_day_inbound" class="touchspin-min-max" value="1" />
+																											</div>
+																											<div class="col-2 px-md-1 px-0 input-group">
+																												of every
+																											</div>
+																											<div class="col-4 px-md-1 px-0 input-group bootstrap-touchspin">
+																												<input type="number" name="monthly_frequency_day_inbound_count" id="monthly_frequency_day_inbound_count" class="touchspin-min-max" value="1" />
+																											</div>
+																											<div class="col-2 px-md-1 px-0 input-group">
+																												month(s)
+																											</div>
+																										</div>
+																									</div>
+																									<div class="row align-items-center" id="the_section">
+																										<div class="col-md-3">
+																											<select class="form-control" id="the_day_of" name="the_day_of">
+																												<option value="First">First</option>
+																												<option value="Second">Second</option>
+																												<option value="Third">Third</option>
+																												<option value="Fourth">Fourth</option>
+																												<option value="Last">Last</option>
+																											</select>
+																										</div>
+																										<div class="col-md-3">
+																											<select class="form-control" id="the_days" name="the_days">
+																												<option value="Monday">Monday</option>
+																												<option value="Tuesday">Tuesday</option>
+																												<option value="Wednesday">Wednesday</option>
+																												<option value="Thursday">Thursday</option>
+																												<option value="Friday">Friday</option>
+																												<option value="Saturday">Saturday</option>
+																												<option value="Sunday">Sunday</option>
+																												<option value="Weekday">Weekday</option>
+																												<option value="Weekend">Weekend Day</option>
+																											</select>
+																										</div>
+																										<div class="col-md-2">of every</div>
+																										<div class="col-md-2 input-group bootstrap-touchspin">
+																											<input type="number" name="monthly_frequency_the_inbound_count" id="monthly_frequency_the_inbound_count" class="touchspin-min-max" value="1" />
+																										</div>
+																										<div class="col-md-2">
+																											month(s)
+																										</div>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																				<div class="demo-inline-spacing" id="selectOccursWeekIn" style="display:none;">
+																					<div class="row align-items-center">
+																						<div class="col-md-2 col-4">
+																							Recurs every
+																						</div>
+																						<div class="col-md-9 col-8">
+																							<div class="row align-items-center">
+																								<div class="col-md-3 col-6">
+																									<div class="input-group bootstrap-touchspin ml-n1">
+																										<input type="number" name="weekly_frequency_inbound_count" id="weekly_frequency_inbound_count" class="touchspin-min-max" value="1" />
+																									</div>
+																								</div>
+																								<div class="col-md-6 col-6">
+																									<div class=" input-group">
+																										Week(s) On
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																						<div class="col-md-2"></div>
+																						<div class="col-md-9">
+																							<div id="weekly_fields">
+																								<div class="demo-inline-spacing">
+																									<div class="custom-control custom-control-primary custom-checkbox">
+																										<input type="checkbox" name="occurs_weekly_fields_inbound" class="custom-control-input" value="Monday" id="colorCheck1" />
+																										<label class="custom-control-label" for="colorCheck1">Monday</label>
+																									</div>
+																									<div class="custom-control custom-control-primary custom-checkbox">
+																										<input type="checkbox" class="custom-control-input" name="occurs_weekly_fields_inbound" value="Tuesday" id="colorCheck2" />
+																										<label class="custom-control-label" for="colorCheck2">Tuesday</label>
+																									</div>
+																									<div class="custom-control custom-control-primary custom-checkbox">
+																										<input type="checkbox" class="custom-control-input" name="occurs_weekly_fields_inbound" value="Wednesday" id="colorCheck3" />
+																										<label class="custom-control-label" for="colorCheck3">Wednesday</label>
+																									</div>
+																									<div class="custom-control custom-control-primary custom-checkbox">
+																										<input type="checkbox" class="custom-control-input" name="occurs_weekly_fields_inbound" value="Thursday" id="colorCheck5" />
+																										<label class="custom-control-label" for="colorCheck5">Thursday</label>
+																									</div>
+																									<div class="custom-control custom-control-primary custom-checkbox">
+																										<input type="checkbox" class="custom-control-input" name="occurs_weekly_fields_inbound" value="Friday" id="colorCheck4" />
+																										<label class="custom-control-label" for="colorCheck4">Friday</label>
+																									</div>
+																									<div class="custom-control custom-control-primary custom-checkbox">
+																										<input type="checkbox" class="custom-control-input" name="occurs_weekly_fields_inbound" value="Saturday" id="colorCheck6" />
+																										<label class="custom-control-label" for="colorCheck6">Saturday</label>
+																									</div>
+																									<div class="custom-control custom-control-primary custom-checkbox">
+																										<input type="checkbox" class="custom-control-input" name="occurs_weekly_fields_inbound" value="Sunday" id="colorCheck7" />
+																										<label class="custom-control-label" for="colorCheck7">Sunday</label>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<hr class="my-2">
+																<div class="row">
+																	<div class="col-md-12 mb-1">
+																		<strong>Daily Frequency</strong>
+																	</div>
+																	<div class="col-12">
+																		<div class="row form-group align-items-center">
+																			<div class="col-md-2 mb-md-0 mb-1">
+																				<div class="custom-control custom-radio">
+																					<input type="radio" id="occursOnceAt" name="daily_frequency_type_inbound" class="custom-control-input" value="Occurs Once At" checked />
+																					<label class="custom-control-label" for="occursOnceAt">Occurs once at</label>
+																				</div>
+																			</div>
+																			<div class="col-md-9">
+																				<input type="text" id="daily_frequency_once_time_inbound" name="daily_frequency_once_time_inbound" class="form-control flatpickr-time text-left flatpickr-input" placeholder="HH:MM" readonly="readonly" />
+																			</div>
+																		</div>
+																		<div class="form-group">
+																			<div class="row form-group align-items-center">
+																				<div class="col-md-2">
+																					<div class="custom-control custom-radio">
+																						<input type="radio" id="occursEvery" name="daily_frequency_type_inbound" class="custom-control-input" value="Occurs every" />
+																						<label class="custom-control-label" for="occursEvery">Occurs every</label>
+																					</div>
+																				</div>
+																				<div class="col-md-9">
+																					<div id="recursEveryDiv" style="display: none;">
+																						<div class="row">
+																							<div class="col-md-3 col-6 input-group bootstrap-touchspin">
+																								<input type="number" name="daily_frequency_every_time_count_inbound" id="daily_frequency_every_time_count_inbound" class="touchspin-min-max" value="1" />
+																							</div>
+																							<div class="col-md-3 col-6 input-group">
+																								<select class="form-control" name="daily_frequency_every_time_unit_inbound" id="daily_frequency_every_time_unit_inbound">
+																									<option value="hour">hour(s)</option>
+																									<option value="minute">minute(s)</option>
+																								</select>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			<div class="form-group" id="startingEndingDiv" style="display: none;">
+																				<div class="row">
+																					<div class="col-md-2">Starting at</div>
+																					<div class="col-md-9">
+																						<div class="form-group">
+																							<input type="text" id="daily_frequency_every_time_count_start_inbound" name="daily_frequency_every_time_count_start_inbound" class="form-control flatpickr-time text-left flatpickr-input" placeholder="HH:MM" readonly="readonly" />
+																						</div>
+																					</div>
+																					<div class="col-md-2">Ending at</div>
+																					<div class="col-md-9">
+																						<div class="form-group">
+																							<input type="text" id="daily_frequency_every_time_count_end_inbound" name="daily_frequency_every_time_count_end_inbound" class="form-control flatpickr-time text-left flatpickr-input" placeholder="HH:MM" readonly="readonly" />
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<hr class="my-2">
+																<div class="row">
+																	<div class="col-md-12 mb-1">
+																		<strong>Duration</strong>
+																	</div>
+																	<div class="col-12">
+																		<div class="row align-items-center form-group">
+																			<div class="col-md-2">
+																				<div class="form-label required">Start Date</div>
+																			</div>
+																			<div class="col-md-9">
+																				<input type="date" name="duration_inbound_start_date" id="duration_inbound_start_date" class="form-control" placeholder="1" />
+																			</div>
+																		</div>
+																		<div class="row align-items-center form-group">
+																			<div class="col-md-2">
+																				<div class="row w-100 text-nowrap mb-md-0 mb-1">
+																					<div class="col">
+																						<div class="custom-control custom-radio-primary custom-radio">
+																							<input type="radio" name="duration_inbound_is_end_date" id="duration_inbound_is_end_date_no" class="custom-control-input" value="no_end_date" checked />
+																							<label class="custom-control-label" for="duration_inbound_is_end_date_no">No End Date</label>
+																						</div>
+																					</div>
+																					<div class="col">
+																						<div class="custom-control custom-radio-primary custom-radio">
+																							<input type="radio" name="duration_inbound_is_end_date" id="duration_inbound_is_end_date_yes" class="custom-control-input" value="yes_end_date" />
+																							<label class="custom-control-label" for="duration_inbound_is_end_date_yes">End Date</label>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			<div class="col-md-9">
+																				<input type="date" name="duration_inbound_end_date" id="duration_inbound_end_date" class="form-control hidden" placeholder="1" />
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div id="inbound-data-one-time" style="display: none;">
+																<div class="row align-items-center">
+																	<div class="col-md-2">One-time Occurrence</div>
+																	<div class="col-md-9">
+																		<div class="row mx-0">
+																			<div class="col-6 px-0">
+																				<input type="date" name="one_time_occurrence_inbound_date" id="one_time_occurrence_inbound_date" class="form-control" placeholder="1" />
+																			</div>
+																			<div class="col-6 pl-1 pr-0">
+																				<input type="text" id="one_time_occurrence_inbound_time" name="one_time_occurrence_inbound_time" class="form-control flatpickr-time text-left flatpickr-input" placeholder="HH:MM" readonly="readonly" />
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="outbound_shedule_setting_tab" class="card">
+												<div class="card-header collapsed" id="headingSix" data-toggle="collapse" role="button" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+													<span class="lead collapse-title" style="color:blue">Outbound </span>
+												</div>
+												<div id="collapseSix" class="collapse show" aria-labelledby="headingSix" data-parent="#schedule-accordion">
+													<div class="card-body">
+														<div class="form-group">
+															<div class="row">
+																<div class="col-md-2 col-5">
+																	<div class="custom-control custom-radio">
+																		<input type="radio" name="s_configure_outbound" id="Schedule_configure_schedule_outound" class="custom-control-input" value="schedule" checked />
+																		<label class="custom-control-label" for="Schedule_configure_schedule_outound"><strong>Schedule</strong></label>
+																	</div>
+																</div>
+																<div class="col-md-2 col-5">
+																	<div class="custom-control custom-radio">
+																		<input type="radio" name="s_configure_outbound" id="Schedule_configure_click_by_user_outbound" class="custom-control-input" value="click_by_user" />
+																		<label class="custom-control-label" for="Schedule_configure_click_by_user_outbound"><strong>Click By User</strong></label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="col-md-10 mt-md-4 mt-3 relation-outbound-schedule-open">
+															<div class="form-group row">
+																<div class="col-md-2 mb-md-0 mb-1">
+																	<strong>Schedule Type</strong>
+																</div>
+																<div class="col-md-9">
+																	<div class="form-group">
+																		<div class="row">
+																			<div class="col-md-3 col-6">
+																				<div class="custom-control custom-radio">
+																					<input type="radio" name="schedule_type_outbound" id="Schedule_type_recurring_outbound" class="custom-control-input" value="Recurring" checked />
+																					<label class="custom-control-label" for="Schedule_type_recurring_outbound">Recurring</label>
+																				</div>
+																			</div>
+																			<div class="col-md-3 col-6">
+																				<div class="custom-control custom-radio">
+																					<input type="radio" name="schedule_type_outbound" id="Schedule_type_one_time_outbound" class="custom-control-input" value="OneTime" />
+																					<label class="custom-control-label" for="Schedule_type_one_time_outbound">One Time</label>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div id="outbound-data-recurring">
+																<hr class="mb-2">
+																<div class="row">
+																	<div class="col-md-12 mb-1">
+																		<strong>Frequency</strong>
+																	</div>
+																	<div class="col-12">
+																		<div class="row">
+																			<div class="form-group col-md-2">
+																				<div class="form-label required">Occurs</div>
+																			</div>
+																			<div class="form-group col-md-9">
+																				<select class="select2 form-control form-control-lg custom-select" id="occurs_time_outbound" name="occurs_time_outbound">
+																					<option value="daily">Daily</option>
+																					<option value="weekly">Weekly</option>
+																					<option value="monthly">Monthly</option>
+																				</select>
+																				<div class="mt-2" id="selectOccursDayInOutbound">
+																					<div class="row align-items-center w-100">
+																						<div class="col-md-2 col-4">
+																							Recurs every
+																						</div>
+																						<div class="col-md-9 col-8">
+																							<div class="row align-items-center">
+																								<div class="col-md-3 col-6 input-group bootstrap-touchspin">
+																									<input type="number" name="day_frequency_outbound_count" id="day_frequency_outbound_count" class="touchspin-min-max" value="1" />
+																								</div>
+																								<div class="col-md-6 col-6 input-group">
+																									day(s)
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																				<div class="mt-2" id="selectOccursMonthInOutbound" style="display:none;">
+																					<div id="monthly_fields_outbound">
+																						<div class="form-group">
+																							<div class="row align-items-center" id="selectOccursMonthIn">
+																								<div class="col-md-2 mb-md-0 mb-1">
+																									<div class="d-flex align-items-center">
+																										<div class="custom-control custom-radio-primary custom-radio">
+																											<input type="radio" name="outbound_monthly_day" id="outbound_monthly_day" class="custom-control-input" value="day" checked />
+																											<label class="custom-control-label" for="outbound_monthly_day">Day</label>
+																										</div>
+																										<div class="custom-control custom-radio-primary custom-radio ml-2">
+																											<input type="radio" name="outbound_monthly_day" id="outbound_monthly_the" class="custom-control-input" value="The" />
+																											<label class="custom-control-label" for="outbound_monthly_the">The</label>
+																										</div>
+																									</div>
+																								</div>
+																								<div class="col-md-9" id="selectOccursMonthDayDivInOutbound">
+																									<div id="day_txt_box_outbound">
+																										<div class="row align-items-center">
+																											<div class="col-4 px-md-1 px-0 input-group bootstrap-touchspin">
+																												<input type="number" name="monthly_frequency_day_outbound" id="monthly_frequency_day_outbound" class="touchspin-min-max" value="1" />
+																											</div>
+																											<div class="col-2 px-md-1 px-0 input-group">
+																												of every
+																											</div>
+																											<div class="col-4 px-md-1 px-0 input-group bootstrap-touchspin">
+																												<input type="number" name="monthly_frequency_day_outbound_count" id="monthly_frequency_day_outbound_count" class="touchspin-min-max" value="1" />
+																											</div>
+																											<div class="col-2 px-md-1 px-0 input-group">
+																												month(s)
+																											</div>
+																										</div>
+																									</div>
+																									<div class="row row align-items-center" id="the_section_outbound">
+																										<div class="col-md-3">
+																											<select class="form-control" id="the_day_of_outbound" name="the_day_of">
+																												<option value="First">First</option>
+																												<option value="Second">Second</option>
+																												<option value="Third">Third</option>
+																												<option value="Fourth">Fourth</option>
+																												<option value="Last">Last</option>
+																											</select>
+																										</div>
+																										<div class="col-md-3">
+																											<select class="form-control" id="the_days_outbound" name="the_days">
+																												<option value="Monday">Monday</option>
+																												<option value="Tuesday">Tuesday</option>
+																												<option value="Wednesday">Wednesday</option>
+																												<option value="Thursday">Thursday</option>
+																												<option value="Friday">Friday</option>
+																												<option value="Saturday">Saturday</option>
+																												<option value="Sunday">Sunday</option>
+																												<option value="Weekday">Weekday</option>
+																												<option value="Weekend">Weekend Day</option>
+																											</select>
+																										</div>
+																										<div class="col-md-2">of every</div>
+																										<div class="col-md-2 input-group bootstrap-touchspin">
+																											<input type="number" name="monthly_frequency_the_outbound_count" id="monthly_frequency_the_outbound_count" class="touchspin-min-max" value="1" />
+																										</div>
+																										<div class="col-md-2">
+																											month(s)
+																										</div>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																				<div class="demo-inline-spacing" id="selectOccursWeekInOutbound" style="display:none;">
+																					<div class="row align-items-center">
+																						<div class="col-md-2 col-4">
+																							Recurs every
+																						</div>
+																						<div class="col-md-9 col-8">
+																							<div class="row align-items-center">
+																								<div class="col-md-3 col-6 input-group bootstrap-touchspin ml-n1 w-100">
+																									<input type="number" name="weekly_frequency_outbound_count" id="weekly_frequency_outbound_count" class="touchspin-min-max" value="1" />
+																								</div>
+																								<div class="col-md-6 col-6 input-group">
+																									Week(s) On
+																								</div>
+																							</div>
+																						</div>
+																						<div class="col-md-2"></div>
+																						<div class="col-md-9">
+																							<div id="weekly_fields_outbound">
+																								<div class="demo-inline-spacing">
+																									<div class="custom-control custom-control-primary custom-checkbox">
+																										<input type="checkbox" name="occurs_weekly_fields_outbound" class="custom-control-input" value="Monday" id="colorCheck8" />
+																										<label class="custom-control-label" for="colorCheck8">Monday</label>
+																									</div>
+																									<div class="custom-control custom-control-primary custom-checkbox">
+																										<input type="checkbox" class="custom-control-input" name="occurs_weekly_fields_outbound" value="Tuesday" id="colorCheck9" />
+																										<label class="custom-control-label" for="colorCheck9">Tuesday</label>
+																									</div>
+																									<div class="custom-control custom-control-primary custom-checkbox">
+																										<input type="checkbox" class="custom-control-input" name="occurs_weekly_fields_outbound" value="Wednesday" id="colorCheck10" />
+																										<label class="custom-control-label" for="colorCheck10">Wednesday</label>
+																									</div>
+																									<div class="custom-control custom-control-primary custom-checkbox">
+																										<input type="checkbox" class="custom-control-input" name="occurs_weekly_fields_outbound" value="Thursday" id="colorCheck11" />
+																										<label class="custom-control-label" for="colorCheck11">Thursday</label>
+																									</div>
+																									<div class="custom-control custom-control-primary custom-checkbox">
+																										<input type="checkbox" class="custom-control-input" name="occurs_weekly_fields_outbound" value="Friday" id="colorCheck12" />
+																										<label class="custom-control-label" for="colorCheck12">Friday</label>
+																									</div>
+																									<div class="custom-control custom-control-primary custom-checkbox">
+																										<input type="checkbox" class="custom-control-input" name="occurs_weekly_fields_outbound" value="Saturday" id="colorCheck13" />
+																										<label class="custom-control-label" for="colorCheck13">Saturday</label>
+																									</div>
+																									<div class="custom-control custom-control-primary custom-checkbox">
+																										<input type="checkbox" class="custom-control-input" name="occurs_weekly_fields_outbound" value="Sunday" id="colorCheck14" />
+																										<label class="custom-control-label" for="colorCheck14">Sunday</label>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<hr class="my-2">
+																<div class="row">
+																	<div class="col-md-12 mb-1">
+																		<strong>Daily Frequency</strong>
+																	</div>
+																	<div class="col-12">
+																		<div class="row form-group align-items-center">
+																			<div class="col-md-2 mb-md-0 mb-1">
+																				<div class="custom-control custom-radio">
+																					<input type="radio" id="occursOnceAtOutbound" name="daily_frequency_type_outbound" class="custom-control-input" value="Occurs Once At" checked />
+																					<label class="custom-control-label" for="occursOnceAtOutbound">Occurs once at</label>
+																				</div>
+																			</div>
+																			<div class="col-md-9">
+																				<input type="text" id="daily_frequency_once_time_outbound" name="daily_frequency_once_time_outbound" class="form-control flatpickr-time text-left flatpickr-input" placeholder="HH:MM" readonly="readonly" />
+																			</div>
+																		</div>
+																		<div class="form-group">
+																			<div class="row form-group align-items-center">
+																				<div class="col-md-2">
+																					<div class="custom-control custom-radio">
+																						<input type="radio" id="occursEveryOutbound" name="daily_frequency_type_outbound" class="custom-control-input" value="Occurs every" />
+																						<label class="custom-control-label" for="occursEveryOutbound">Occurs every</label>
+																					</div>
+																				</div>
+																				<div class="col-md-9" id="recursEveryDivOutbound" style="display:none;">
+																					<div class="row">
+																						<div class="col-md-3 col-6 input-group bootstrap-touchspin">
+																							<input type="number" name="daily_frequency_every_time_count_outbound" id="daily_frequency_every_time_count_outbound" class="touchspin-min-max" value="1" />
+																						</div>
+																						<div class="col-md-3 col-6 input-group" >
+																							<select name="daily_frequency_every_time_unit_outbound" id="daily_frequency_every_time_unit_outbound" class="form-control" id="occurs">
+																								<option value="hour">hour(s)</option>
+																								<option value="minute">minute(s)</option>
+																							</select>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			<div class="form-group" id="startingEndingDivOutbound" style="display: none;">
+																				<div class="row">
+																					<div class="col-md-2">Starting at</div>
+																					<div class="col-md-9">
+																						<div class="col-md-12 form-group">
+																							<input type="text" id="daily_frequency_every_time_count_start_outbound" name="daily_frequency_every_time_count_start_outbound" class="form-control flatpickr-time text-left flatpickr-input" placeholder="HH:MM" readonly="readonly" />
+																						</div>
+																					</div>
+																					<div class="col-md-2">Ending at</div>
+																					<div class="col-md-9">
+																						<div class="col-md-12 form-group">
+																							<input type="text" id="daily_frequency_every_time_count_end_outbound" name="daily_frequency_every_time_count_end_outbound" class="form-control flatpickr-time text-left flatpickr-input" placeholder="HH:MM" readonly="readonly" />
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<hr class="my-2">
+																<div class="row">
+																	<div class="col-md-12 mb-1">
+																		<strong>Duration</strong>
+																	</div>
+																	<div class="col-12">
+																		<div class="row align-items-center form-group">
+																			<div class="col-md-2">
+																				<div class="form-label required">Start Date</div>
+																			</div>
+																			<div class="col-md-9">
+																				<input type="date" name="duration_outbound_start_date" id="duration_outbound_start_date" class="form-control" placeholder="1" />
+																			</div>
+																		</div>
+																		<div class="row align-items-center form-group">
+																			<div class="col-md-2">
+																				<div class="row w-100 text-nowrap mb-md-0 mb-1">
+																					<div class="col">
+																						<div class="custom-control custom-radio-primary custom-radio">
+																							<input type="radio" name="duration_outbound_is_end_date" id="duration_outbound_is_end_date_no" class="custom-control-input" value="no_end_date" checked />
+																							<label class="custom-control-label" for="duration_outbound_is_end_date_no">No End Date</label>
+																						</div>
+																					</div>
+																					<div class="col">
+																						<div class="custom-control custom-radio-primary custom-radio">
+																							<input type="radio" name="duration_outbound_is_end_date" id="duration_outbound_is_end_date_yes" class="custom-control-input" value="yes_end_date" />
+																							<label class="custom-control-label" for="duration_outbound_is_end_date_yes">End Date</label>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			<div class="col-md-9">
+																				<input type="date" name="duration_outbound_end_date" id="duration_outbound_end_date" class="form-control hidden" placeholder="1" />
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div id="outbound-data-one-time" style="display: none;">
+																<div class="row align-items-center">
+																	<div class="col-md-2">One-time Occurrence</div>
+																	<div class="col-md-9">
+																		<div class="row mx-0">
+																			<div class="col-6 px-0">
+																				<input type="date" name="one_time_occurrence_outbound_date" id="one_time_occurrence_outbound_date" class="form-control" placeholder="1" />
+																			</div>
+																			<div class="col-6 pl-1 pr-0">
+																				<input type="text" id="one_time_occurrence_outbound_time" name="one_time_occurrence_outbound_time" class="form-control flatpickr-time text-left flatpickr-input" placeholder="HH:MM" readonly="readonly" />
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="inbound_ddep_api_selected">
+												<p style="color: red;">(Inbound Type : DDEP API not supported schedule)</p>
+												<p>DDEP API will trigger by external posting data, will not be known when will be triggered.</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							<hr>
+							<div class="d-flex justify-content-between">
+								<button class="btn btn-primary waves-effect btn-prev">
+									<i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+									<span class="align-middle d-sm-inline-block d-none">Previous</span>
+								</button>
+								<button class="btn btn-success waves-effect btn-submit">Submit</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+<!-- END: Content -->
+
+<!-- Start Outbound Specify Headers Modal -->
+<div id="outbound-specify-headers-modal" class="modal">
+	<div style="width:260px" class="d-none modal-left"></div>
+	<div class="modal-content">
+		<div class="d-flex justify-content-between p-1 align-items-center">
+			<p style="margin:0; font-size:1.5rem">Outbound Specify Headers</p>
+			<span class="close" id="outbound-specify-headers-modal-close">&times;</span>
+		</div>
+		<div>
+			<div class="container">
+				<input type="hidden" name="outbound_specify_headers_id" id="outbound_specify_headers_id" />
+				<form id="frm-save-outbound-specify-headers" autocomplete="off">
+					<div>
+						<button class="btn btn-lg btn-block modal-button d-flex align-items-center" id="outbound_specify_headers_save" type="submit"><i data-feather="save" class="font-medium-2"></i></button>
+						<a href="javascript:void(0);" class="btn btn-lg btn-block modal-button" id="outbound-specify-headers-btn-add-row"><i data-feather="plus" class="font-medium-2"></i></a>
+					</div>
+					<table id="outbound-specify-headers-table" class="table myTable outbound-specify-headers-table table-bordered">
+						<thead>
+							<tr>
+								<td></td>
+								<td>Key</td>
+								<td>Value</td>
+								<td>Description</td>
+								<td></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="col-sm-1 text-center">
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" name="outbound_specify_headers_status" id="outbound_specify_headers_status_0" class="custom-control-input" checked />
+										<label class="custom-control-label" for="outbound_specify_headers_status_0"></label>
+									</div>
+								</td>
+								<td class="col-sm-3">
+									<input type="text" name="outbound_specify_headers[][key]" class="form-control border-0" data-class="outbound_specify_headers_" id="outbound_specify_headers_key_0" />
+								</td>
+								<td class="col-sm-4">
+									<input type="text" name="outbound_specify_headers[][value]" class="form-control border-0" data-class="outbound_specify_headers_" id="outbound_specify_headers_value_0" />
+								</td>
+								<td class="col-sm-3">
+									<input type="text" name="outbound_specify_headers[][description]" class="form-control border-0" data-class="outbound_specify_headers_" id="outbound_specify_headers_description_0" />
+								</td>
+								<td class="col-sm-1 text-center">
+									<a href="javascript:void(0);" type="button" class="outbound-specify-headers-btn-del btn btn-lg btn-block modal-button">
+										<i data-feather="minus" class="font-medium-2"></i>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Outbound Validation Modal -->
+
+<!-- Start Outbound Validation Modal -->
+<div id="outbound-validation-modal" class="modal">
+	<div style="width:260px" class="d-none modal-left"></div>
+	<div class="modal-content">
+		<div class="d-flex justify-content-between p-1 align-items-center">
+			<p style="margin:0; font-size:1.5rem">Rules To Control this API When trigger</p>
+			<span class="close" id="outbound-validation-modal-close">&times;</span>
+		</div>
+		<div>
+			<div class="container">
+				<input type="hidden" name="outbound_validation_id" id="outbound_validation_id" />
+				<form id="frm-save-outbound-validation" autocomplete="off">
+					<div>
+						<p class="outbound_validation_inbounderror inbounderror">Only Inbound variable @In supported.</p>
+						<a href="javascript:void(0);" class="btn btn-lg btn-block modal-button" id="back"><i data-feather="rotate-ccw" class="font-medium-2"></i></a>
+						<button class="btn btn-lg btn-block modal-button d-flex align-items-center" id="outbound_validation_save" type="submit"><i data-feather="save" class="font-medium-2"></i></button>
+						<a href="javascript:void(0);" class="btn btn-lg btn-block modal-button" id="outbound-validation-rules-btn-add-row"><i data-feather="plus" class="font-medium-2"></i></a>
+					</div>
+					<table id="outbound-validation-rules-table" class="table myTable outbound-validation-rules-table table-bordered">
+						<thead>
+							<tr>
+								<td>Logical Operation</td>
+								<td>Original Value</td>
+								<td>Comparison operations</td>
+								<td>Column Value</td>
+								<td>Then</td>
+								<td>Formula/Alerts</td>
+								<td></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="col-sm-2 logical-select">
+									<select class="select-dropdown form-control form-control-lg" name="validations[][logical]">
+										<option value="AND">AND</option>
+										<option value="OR">OR</option>
+									</select>
+								</td>
+								<td class="col-sm-3 autocomplete">
+									<input type="text" name="validations[][original]" class="form-control border-0 autocompletevalidation" data-class="outbound_validation_" id="original_0" />
+								</td>
+								<td class="col-sm-3 operations-select">
+									<select class="select-dropdown form-control form-control-lg" name="validations[][operations]">
+										<option value="==">=</option>
+										<option value=">">></option>
+										<option value=">=">>=</option>
+										<option value="<"><</option>
+										<option value="<="><=</option>
+										<option value="<>"><></option>
+										<option value="Contains">Contains</option>
+									</select>
+								</td>
+								<td class="col-sm-2 autocomplete">
+									<input type="text" name="validations[][column]" class="form-control border-0 autocompletevalidation" data-class="outbound_validation_" id="column_0" />
+								</td>
+								<td class="col-sm-2">
+									<select class="select-dropdown form-control form-control-lg" name="validations[][then]">
+										<option value="STOP">STOP</option>
+									</select>
+								</td>
+								<td class="col-sm-2 autocomplete">
+									<input type="text" name="validations[][formula]" class="form-control border-0 autocompletevalidation" data-class="outbound_validation_" id="validformula_0" />
+								</td>
+								<td class="col-sm-2">
+									<a href="javascript:void(0);" type="button" class="outbound-validation-rules-btn-del btn btn-lg btn-block modal-button">
+										<i data-feather="minus" class="font-medium-2"></i>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Outbound Validation Modal -->
+
+<!-- Start All Inbound Properties Modal -->
+<div id="all-inbound-properties-modal" class="modal">
+	<div style="width:260px" class="d-none modal-left"></div>
+	<div class="modal-content">
+		<div class="d-flex justify-content-between p-1 align-items-center">
+			<p style="margin:0; font-size:1.5rem">All Properties</p>
+			<span class="close" id="all-inbound-properties-modal-close">&times;</span>
+		</div>
+		<div>
+			<div class="container properties-data">
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End All Inbound Properties Modal -->
+
+<!-- Start All Outbound Properties Modal -->
+<div id="all-outbound-properties-modal" class="modal">
+	<div style="width:260px" class="d-none modal-left"></div>
+	<div class="modal-content">
+		<div class="d-flex justify-content-between p-1 align-items-center">
+			<p style="margin:0; font-size:1.5rem">All Properties</p>
+			<span class="close" id="all-outbound-properties-modal-close">&times;</span>
+		</div>
+		<div>
+			<div class="container properties-data">
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End All Outbound Properties Modal -->
+
+<!-- Start Properties validation additional rules Modal -->
+<div id="props-validation-additional-rules-modal-btn" class="modal">
+	<div style="width:260px" class="d-none modal-left"></div>
+	<div class="modal-content">
+		<div class="d-flex justify-content-between p-1 align-items-center">
+			<p style="margin:0; font-size:1.5rem">Validation Additional Rules</p>
+			<span class="close" id="props-validation-additional-rules-modal-close">&times;</span>
+		</div>
+		<div>
+			<div class="container">
+				<input type="hidden" name="prop-validation-additional-rules-id" id="prop-validation-additional-rules-id" />
+				<form id="frm-save-prop-validation-additional-rules" autocomplete="off">
+					<div>
+						<!-- <p class="prop-validation-additional-rules-inbounderror inbounderror">Only Inbound variable @In supported.</p> -->
+						<button class="btn btn-lg btn-block modal-button d-flex align-items-center" id="prop-validation-additional-rules-btn-save" type="submit"><i data-feather="save" class="font-medium-2"></i></button>
+						<a href="javascript:void(0);" class="btn btn-lg btn-block modal-button" id="prop-validation-additional-rules-btn-add-row"><i data-feather="plus" class="font-medium-2"></i></a>
+					</div>
+					<table id="prop-validation-additional-rules-table" class="table myTable prop-validation-additional-rules-table table-bordered">
+						<thead>
+							<tr>
+								<td>Logical Operation</td>
+								<td>Original Value</td>
+								<td>Comparison operations</td>
+								<td>Column Value</td>
+								<td>Then</td>
+								<td>Formula/Alerts</td>
+								<td></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="col-sm-2 logical-select">
+									<select class="select-dropdown form-control form-control-lg" name="propsvalidations[][logical]">
+										<option value="AND">AND</option>
+										<option value="OR">OR</option>
+									</select>
+								</td>
+								<td class="col-sm-3 autocomplete">
+									<input type="text" name="propsvalidations[][original]" class="form-control border-0 autocompleteformula" id="proporiginal_0" />
+								</td>
+								<td class="col-sm-3 operations-select">
+									<select class="select-dropdown form-control form-control-lg" name="propsvalidations[][operations]">
+										<option value="==">=</option>
+										<option value=">">></option>
+										<option value=">=">>=</option>
+										<option value="<"><</option>
+										<option value="<="><=</option>
+										<option value="<>"><></option>
+										<option value="Contains">Contains</option>
+									</select>
+								</td>
+								<td class="col-sm-2 autocomplete">
+									<input type="text" name="propsvalidations[][column]" class="form-control border-0 autocompleteformula" id="propcolumn_0" />
+								</td>
+								<td class="col-sm-2">
+									<select class="select-dropdown form-control form-control-lg" name="propsvalidations[][then]">
+										<option value="STOP">STOP</option>
+									</select>
+								</td>
+								<td class="col-sm-2 autocomplete">
+									<input type="text" name="propsvalidations[][formula]" class="form-control border-0 autocompleteformula" id="propformula_0" />
+								</td>
+								<td class="col-sm-2">
+									<a href="javascript:void(0);" type="button" class="prop-validation-additional-rules-btn-del btn btn-lg btn-block modal-button">
+										<i data-feather="minus" class="font-medium-2"></i>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Properties validation additional rules Modal -->
+
+<!-- Start Properties format additional rules Modal -->
+<div id="props-format-additional-rules-modal-btn" class="modal">
+	<div style="width:260px" class="d-none modal-left"></div>
+	<div class="modal-content">
+		<div class="d-flex justify-content-between p-1 align-items-center">
+			<p style="margin:0; font-size:1.5rem">Format Additional Rules</p>
+			<span class="close" id="props-format-additional-rules-modal-close">&times;</span>
+		</div>
+		<div>
+			<div class="container">
+				<input type="hidden" name="prop-format-additional-rules-id" id="prop-format-additional-rules-id" />
+				<form id="frm-save-prop-format-additional-rules" autocomplete="off">
+					<div>
+						<!-- <p class="prop-format-additional-rules-inbounderror inbounderror">Only Inbound variable @In supported.</p> -->
+						<button class="btn btn-lg btn-block modal-button d-flex align-items-center" id="prop-format-additional-rules-btn-save" type="submit"><i data-feather="save" class="font-medium-2"></i></button>
+						<a href="javascript:void(0);" class="btn btn-lg btn-block modal-button" id="prop-format-additional-rules-btn-add-row"><i data-feather="plus" class="font-medium-2"></i></a>
+					</div>
+					<table id="prop-format-additional-rules-table" class="table myTable prop-format-additional-rules-table table-bordered">
+						<thead>
+							<tr>
+								<td>Sequence</td>
+								<td>Options</td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr id="prop-format-additional-rules-table-row-0">
+								<td class="col-sm-1 format-rules-icon">
+									<i data-feather="code" class="font-medium-2"></i>
+								</td>
+								<td class="col-sm-3">
+									<select class="select-dropdown form-control form-control-lg format-additional-rules-name" name="formatrules[][name]" id="format-additional-rules-name-0">
+										<option value="REPLACE">REPLACE</option>
+										<option value="SUBSTRING">SUBSTRING</option>
+										<option value="To DATE">To DATE</option>
+										<option value="TRIM">TRIM</option>
+										<option value="LEFT TRIM">LEFT TRIM</option>
+										<option value="RIGHT TRIM">RIGHT TRIM</option>
+										<option value="ADD WORDS ON THE BEGINING">ADD WORDS ON THE BEGINING</option>
+										<option value="ADD WORDS ON THE END">ADD WORDS ON THE END</option>
+										<option value="FORMULA TO">FORMULA TO</option>
+									</select>
+								</td>
+								<td class="col-sm-3 prop-format-additional-rules-table-row-formulato autocomplete">
+									<input type="text" name="formatrules[][formulato]" class="form-control border-0 autocompleteformula" id="format-additional-rules-formulato-0" />
+									<select class="select-dropdown form-control form-control-lg" name="formatrules[][formulatodropdown]" id="format-additional-rules-formulatodropdown-0" style="display: none;">
+										<option value="FALSE">FALSE</option>
+										<option value="TRUE">TRUE</option>
+									</select>
+								</td>
+								<td class="col-sm-3 prop-format-additional-rules-table-row-formulatonew">
+									<input type="text" name="formatrules[][formulatonew]" class="form-control border-0" id="format-additional-rules-formulatonew-0" />
+								</td>
+								<td class="col-sm-1">
+									<a href="javascript:void(0);" type="button" class="prop-format-additional-rules-btn-del btn btn-lg btn-block modal-button">
+										<i data-feather="minus" class="font-medium-2"></i>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Properties format additional rules Modal -->
+
+<!-- Start Properties Outbound validation additional rules Modal -->
+<div id="props-outbound-validation-additional-rules-modal-btn" class="modal">
+	<div style="width:260px" class="d-none modal-left"></div>
+	<div class="modal-content">
+		<div class="d-flex justify-content-between p-1 align-items-center">
+			<p style="margin:0; font-size:1.5rem">Validation Additional Rules</p>
+			<span class="close" id="props-outbound-validation-additional-rules-modal-close">&times;</span>
+		</div>
+		<div>
+			<div class="container">
+				<input type="hidden" name="prop-outbound-validation-additional-rules-id" id="prop-outbound-validation-additional-rules-id" />
+				<form id="frm-save-prop-outbound-validation-additional-rules" autocomplete="off">
+					<div>
+						<button class="btn btn-lg btn-block modal-button d-flex align-items-center" id="prop-outbound-validation-additional-rules-btn-save" type="submit"><i data-feather="save" class="font-medium-2"></i></button>
+						<a href="javascript:void(0);" class="btn btn-lg btn-block modal-button" id="prop-outbound-validation-additional-rules-btn-add-row"><i data-feather="plus" class="font-medium-2"></i></a>
+					</div>
+					<table id="prop-outbound-validation-additional-rules-table" class="table myTable prop-outbound-validation-additional-rules-table table-bordered">
+						<thead>
+							<tr>
+								<td>Logical Operation</td>
+								<td>Original Value</td>
+								<td>Comparison operations</td>
+								<td>Column Value</td>
+								<td>Then</td>
+								<td>Formula/Alerts</td>
+								<td></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="col-sm-2 logical-select">
+									<select class="select-dropdown form-control form-control-lg" name="propsvalidations[][logical]">
+										<option value="AND">AND</option>
+										<option value="OR">OR</option>
+									</select>
+								</td>
+								<td class="col-sm-3 autocomplete">
+									<input type="text" name="propsvalidations[][original]" class="form-control border-0 autocompleteformulaoutbound" id="propoutboundoriginal_0" />
+								</td>
+								<td class="col-sm-3 operations-select">
+									<select class="select-dropdown form-control form-control-lg" name="propsvalidations[][operations]">
+										<option value="==">=</option>
+										<option value=">">></option>
+										<option value=">=">>=</option>
+										<option value="<"><</option>
+										<option value="<="><=</option>
+										<option value="<>"><></option>
+										<option value="Contains">Contains</option>
+									</select>
+								</td>
+								<td class="col-sm-2 autocomplete">
+									<input type="text" name="propsvalidations[][column]" class="form-control border-0 autocompleteformulaoutbound" id="propoutboundcolumn_0" />
+								</td>
+								<td class="col-sm-2">
+									<select class="select-dropdown form-control form-control-lg" name="propsvalidations[][then]">
+										<option value="STOP">STOP</option>
+									</select>
+								</td>
+								<td class="col-sm-2 autocomplete">
+									<input type="text" name="propsvalidations[][formula]" class="form-control border-0 autocompleteformulaoutbound" id="propoutboundformula_0" />
+								</td>
+								<td class="col-sm-2">
+									<a href="javascript:void(0);" type="button" class="prop-outbound-validation-additional-rules-btn-del btn btn-lg btn-block modal-button">
+										<i data-feather="minus" class="font-medium-2"></i>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Properties outbound validation additional rules Modal -->
+
+<!-- Start Properties outbound format additional rules Modal -->
+<div id="props-outbound-format-additional-rules-modal-btn" class="modal">
+	<div style="width:260px" class="d-none modal-left"></div>
+	<div class="modal-content">
+		<div class="d-flex justify-content-between p-1 align-items-center">
+			<p style="margin:0; font-size:1.5rem">Format Additional Rules</p>
+			<span class="close" id="props-outbound-format-additional-rules-modal-close">&times;</span>
+		</div>
+		<div>
+			<div class="container">
+				<input type="hidden" name="prop-format-additional-rules-id" id="prop-outbound-format-additional-rules-id" />
+				<form id="frm-save-prop-outbound-format-additional-rules" autocomplete="off">
+					<div>
+						<button class="btn btn-lg btn-block modal-button d-flex align-items-center" id="prop-outbound-format-additional-rules-btn-save" type="submit"><i data-feather="save" class="font-medium-2"></i></button>
+						<a href="javascript:void(0);" class="btn btn-lg btn-block modal-button" id="prop-outbound-format-additional-rules-btn-add-row"><i data-feather="plus" class="font-medium-2"></i></a>
+					</div>
+					<table id="prop-outbound-format-additional-rules-table" class="table myTable prop-outbound-format-additional-rules-table table-bordered">
+						<thead>
+							<tr>
+								<td>Sequence</td>
+								<td>Options</td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr id="prop-outbound-format-additional-rules-table-row-0">
+								<td class="col-sm-1 format-rules-icon">
+									<i data-feather="code" class="font-medium-2"></i>
+								</td>
+								<td class="col-sm-3">
+									<select class="select-dropdown form-control form-control-lg format-outbound-additional-rules-name" name="formatrules[][name]" id="format-outbound-additional-rules-name-0">
+										<option value="REPLACE">REPLACE</option>
+										<option value="SUBSTRING">SUBSTRING</option>
+										<option value="To DATE">To DATE</option>
+										<option value="TRIM">TRIM</option>
+										<option value="LEFT TRIM">LEFT TRIM</option>
+										<option value="RIGHT TRIM">RIGHT TRIM</option>
+										<option value="ADD WORDS ON THE BEGINING">ADD WORDS ON THE BEGINING</option>
+										<option value="ADD WORDS ON THE END">ADD WORDS ON THE END</option>
+										<option value="FORMULA TO">FORMULA TO</option>
+									</select>
+								</td>
+								<td class="col-sm-3 prop-outbound-format-additional-rules-table-row-formulato autocomplete">
+									<input type="text" name="formatrules[][formulato]" class="form-control border-0 autocompleteformulaoutbound" id="format-outbound-additional-rules-formulato-0" />
+									<select class="select-dropdown form-control form-control-lg" name="formatrules[][formulatodropdown]" id="format-outbound-additional-rules-formulatodropdown-0" style="display: none;">
+										<option value="FALSE">FALSE</option>
+										<option value="TRUE">TRUE</option>
+									</select>
+								</td>
+								<td class="col-sm-3 prop-outbound-format-additional-rules-table-row-formulatonew">
+									<input type="text" name="formatrules[][formulatonew]" class="form-control border-0" id="format-outbound-additional-rules-formulatonew-0" />
+								</td>
+								<td class="col-sm-1">
+									<a href="javascript:void(0);" type="button" class="prop-outbound-format-additional-rules-btn-del btn btn-lg btn-block modal-button">
+										<i data-feather="minus" class="font-medium-2"></i>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Properties format additional rules Modal -->
+
+<%- include("partials/footer", footerData); %>

@@ -1,0 +1,245 @@
+<%
+	const itemLogsViewModal = include('item-logs-view-modal.ejs');
+	const itemNewLogsViewModal = include('item-logs-new-view-modal.ejs');
+	const itemLogsViewDetailsModal = include('item-logs-view-details-modal.ejs');
+	const itemCurlbashViewModal = include('curl-bash-model.ejs');
+	const itemlogModal = include('item-create-model.ejs');
+
+	const companyCreateModal = include('company-create-model.ejs');
+	const projectCreateModal = include('project-create-model.ejs');
+	const environmentCreateModal = include('environment-create-model.ejs');
+	const partyCreateModal = include('party-create-modal.ejs');
+	const mappingProfileCreateModal = include('mapping-profile-create-modal.ejs');
+	const publishHistoryModel = include('publish-version-history-model.ejs');
+	const addToFavouriteModel = include('add-to-favourite-create-model.ejs');
+	const myFavouriteModel = include('my-favourite-model.ejs');
+	const logDescriptionModel = include('item-log-description-model.ejs');
+	const reviewedDescriptionModel = include('reviewed-save-model.ejs');
+	const reviewedListModel = include('reviewed-list-model.ejs');
+	const itemActionModel = include('item-action-model.ejs');
+	
+	let style = '';
+	let body = '';
+	let script = '';
+%>
+
+<% style = `<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/pickers/daterangepicker/daterangepicker.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/forms/wizard/bs-stepper.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/form-validation.css" />
+		<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/form-wizard.css">` %>
+
+<% body = `<div class="content-wrapper">
+				<div class="content-header row">
+					<div class="content-header-left col-md-12 col-12 mb-2">
+						<div class="row breadcrumbs-top">
+							<div class="col-sm-6 col-12">
+								<h2 class="content-header-title float-left mb-0">Logs</h2>
+								<div class="breadcrumb-wrapper">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item">
+											<a href="/">Home</a>
+										</li>
+										<li class="breadcrumb-item">
+											<a href="javascript:void(0);">Logs</a>
+										</li>
+									</ol>
+								</div>
+							</div>
+							<div class="col-sm-6 col-12 d-flex justify-content-end">
+								<div class="card mb-0">
+									<div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+										<i data-feather="clock"></i>&nbsp;
+										<span></span> 
+									</div>
+									<div class="hidden since-time"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-body">
+					<section id="basic-datatable">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<div class="border-bottom p-1">
+										<div class="form-row align-items-end m-0">
+										<!-- Company -->
+										<div class="form-group col-sm-4 col-md-3 mb-1">
+											<label class="form-label" for="select-log-company">Company</label>
+											<select class="select2 form-control form-control-sm" id="select-log-company" name="select-log-company"></select>
+										</div>
+
+										<!-- Project -->
+										<div class="form-group col-sm-4 col-md-3 mb-1">
+											<label class="form-label" for="select-log-project">Project</label>
+											<select class="select2 form-control form-control-sm" id="select-log-project" name="select-log-project"></select>
+										</div>
+
+										<!-- Environment -->
+										<div class="form-group col-sm-4 col-md-3 mb-1">
+											<label class="form-label" for="select-log-environment">Environment</label>
+											<select class="select2 form-control form-control-sm" id="select-log-environment" name="select-log-environment"></select>
+										</div>
+
+										<!-- Item -->
+										<div class="form-group col-sm-4 col-md-3 mb-1">
+											<label class="form-label" for="select-log-item">Item Name</label>
+											<select class="select2 form-control form-control-sm" id="select-log-item" name="select-log-item"></select>
+										</div>
+
+										<!-- Description -->
+										<div class="form-group col-sm-4 col-md-3 mb-1">
+											<label class="form-label" for="log-description ">Descr</label>
+											<input class="form-control" id="log-description" name="log-description"></select>
+										</div>
+
+										<!-- HTTP Status -->
+										<div class="form-group col-sm-4 col-md-3 mb-1">
+											<label class="form-label" for="log-httpstatus ">HTTP Status</label>
+											<input class="form-control" id="log-httpstatus" name="log-httpstatus"></select>
+										</div>
+
+										<!-- Triggered Status -->
+										<div class="form-group col-sm-4 col-md-3 mb-1">
+											<label class="form-label" for="select-log-trigger-status">Triggered Status</label>
+											<select class="select2 form-control form-control-sm" id="select-log-trigger-status" name="select-log-trigger-status">
+												<option value="">All</option>
+												<option value="triggered">Triggered</option>
+												<option value="not_triggered">Not Triggered</option>
+											</select>
+										</div>
+
+										<!-- UNIQUE ID -->
+										<div class="form-group col-sm-4 col-md-3 mb-1">
+											<label class="form-label" for="log-uniqueId">UNIQUE ID</label>
+											<input class="form-control" id="log-uniqueId" name="log-uniqueId"></select>
+										</div>
+
+										<!-- Path -->
+										<div class="form-group col-sm-4 col-md-3 mb-1">
+											<label class="form-label" for="log-path ">Path</label>
+											<input class="form-control" id="log-path" name="log-path"></select>
+										</div>
+
+										<!-- Reviewed  -->
+										<div class="form-group col-sm-4 col-md-3 mb-1">
+											<label class="form-label" for="select-log-reviewed">Reviewed</label>
+											<select class="select2 form-control form-control-sm" id="select-log-reviewed" name="select-log-reviewed">
+												<option value="">All</option>
+												<option value="reviewed">Reviewed</option>
+												<option value="not_reviewed">Not Reviewed</option>
+											</select>
+										</div>
+
+										<!-- Buttons (Search, Import, Export) -->
+										<div class="form-group col-sm-12 col-md-12 mb-1 d-flex align-items-end justify-content-end">
+											<div class="btn-group justify-content-end">
+												<button type="button" class="btn btn-primary mr-1" id="search-button">
+													<span>Search</span>
+												</button>
+												<button type="button" class="dt-button btn btn-outline-secondary waves-effect mr-1" id="add-to-favourite">
+													<span>Add to Favourites</span>
+												</button>
+												<button type="button" class="dt-button btn btn-outline-secondary waves-effect mr-1" id="my-favourites">
+													<span>My Favourites</span>
+												</button>
+												<button type="button" class="dt-button btn btn-outline-secondary waves-effect mr-1" id="my-reviewed">
+													<span>Reviewed</span>
+												</button>
+												<button class="dt-button btn btn-outline-secondary waves-effect mr-2" id="import_log_histories" data-toggle="modal" data-target="#import_logs_history" type="button" tabindex="0">
+													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-upload font-small-4 mr-50">
+														<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+														<polyline points="17 8 12 3 7 8"></polyline>
+														<line x1="12" y1="3" x2="12" y2="15"></line>
+													</svg>
+													<span>Import</span>
+												</button>
+												<a href="/logs/export" class="dt-button btn btn-outline-secondary" id="export_log_histories" type="button" tabindex="0">
+													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download font-small-4 mr-50">
+														<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+													</svg>
+													<span>Export</span>
+												</a>
+											</div>
+										</div>
+									</div>
+									</div>
+									<table class="datatables-basic table" id="logs_data_table">
+										<thead>
+											<tr>
+												<th class="header-number">No</th>
+												<th class="header-item-id">Item Name</th>
+												<th class="header-unique-id">Unique ID</th>
+												<th class="header-type">Type</th>
+												<th class="header-path">Path</th>
+												<th class="header-desc">DESCR</th>
+												<th class="header-reviewed">
+													<div class="d-flex align-items-center">
+														<div class="custom-control custom-checkbox mt-0 mr-1">
+														<input type="checkbox" name="reviewed_select_all" id="reviewed_select_all"
+															class="custom-control-input reviewed-checkbox"
+															data-reviewed-id="reviewed_select_all" aria-label="Select reviewed">
+														<label class="custom-control-label" for="reviewed_select_all"></label>
+														</div>
+														Reviewed
+													</div>
+												</th>
+												<th class="header-result">Result</th>
+												<th class="header-http-status">HTTP Status</th>
+												<th class="header-start-time">Start Time</th>
+												<th class="header-end-time">End Time</th>
+												<th class="header-time-consumed">Time Consumed(ms)</th>
+												<th class="header-details">Details</th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>` %>
+<% body += itemLogsViewModal; %>
+<% body += itemNewLogsViewModal; %>
+<% body += itemLogsViewDetailsModal; %>
+<% body += itemCurlbashViewModal; %>
+<% body += partyCreateModal; %>
+<% body += mappingProfileCreateModal; %>
+<% body += publishHistoryModel; %>
+<% body += companyCreateModal; %>	
+<% body += projectCreateModal; %>
+<% body += environmentCreateModal; %>
+<% body += addToFavouriteModel; %>
+<% body += myFavouriteModel; %>
+<% body += itemlogModal; %>
+<% body += logDescriptionModel; %>
+<% body += reviewedDescriptionModel; %>
+<% body += reviewedListModel; %>
+<% body += itemActionModel; %>
+
+<% script = `<script type="text/javascript" src="/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/app-assets/js/scripts/moment.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/forms/wizard/bs-stepper.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/pickers/daterangepicker/daterangepicker.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
+		<script type="text/javascript" src="/assets/js/go.js" defer></script>
+		<script type="text/javascript" src="/assets/js/mapping-gojs.js" defer></script>
+		<script type="text/javascript" src="/assets/js/mapping-profiles.js" defer></script>
+		<script type="text/javascript" src="/assets/js/parties.js" defer></script>
+		<script type="text/javascript" src="/assets/js/items.js" defer></script>
+		<script type="text/javascript" src="/assets/js/companies.js" defer></script>
+		<script type="text/javascript" src="/assets/js/projects.js" defer></script>
+		<script type="text/javascript" src="/assets/js/environments.js" defer></script>
+		<script type="text/javascript" src="/assets/js/logs.js" defer></script>` %>
+
+<%- include('layout', { title: `Logs`, style, body, script }) %>

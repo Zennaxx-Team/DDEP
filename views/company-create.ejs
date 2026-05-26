@@ -1,0 +1,119 @@
+<%
+	let style = '';
+	let body = '';
+	let script = '';
+%>
+
+<% style = `<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/form-validation.css" />` %>
+
+<% body = `<div class="content-wrapper">
+				<div class="content-header row mb-2">
+					<div class="content-header-left col-md-9 col-12">
+						<div class="row breadcrumbs-top">
+							<div class="col-12">
+								<h2 class="content-header-title float-left mb-0">Companies</h2>
+								<div class="breadcrumb-wrapper">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item">
+											<a href="/">Home</a>
+										</li>
+										<li class="breadcrumb-item">
+											<a href="/master/companies">Companies</a>
+										</li>
+										<li class="breadcrumb-item">` %>
+										<% if (typeof(alldata) != "undefined" && alldata != null && alldata.id) { %>
+											<% body += `Update Company` %>
+										<% } else { %>
+											<% body += `Create Company` %>
+										<% } %>
+										<% body += `</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-body">
+					<section class="company-create">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<div class="card-body">
+										<form id="form-company-create" action="javascript:void(0);" autocomplete="off">
+											<div class="row">
+												<div class="form-group col-12 m-0">
+													<input type="hidden" name="company-id" id="company-id" class="form-control" placeholder="Id"` %>
+													<% if (typeof(alldata) != "undefined" && alldata != null && alldata.id) { %>
+														<% body += ` value="` %> <% body += alldata.id %> <% body += `" readonly` %>
+													<% } %>
+													<% body += ` />
+												</div>
+												<div class="form-group col-12">
+													<label class="form-label required" for="company-code">Company Code</label>
+													<input type="text" name="company-code" id="company-code" class="form-control" placeholder="Enter Company Code" required />
+												</div>
+												<div class="form-group col-12">
+													<label class="form-label required" for="company-name">Company Name</label>
+													<input type="text" name="company-name" id="company-name" class="form-control" placeholder="Enter Company Name" required />
+												</div>
+												<div class="form-group col-12">
+													<label class="form-label" for="sequence">Sequence</label>
+													<input type="text" name="sequence" id="sequence" class="form-control" placeholder="Enter Sequence" />
+												</div>
+												<div class="form-group col-12">
+													<label class="form-label" for="company-description">Company Description</label>
+													<textarea name="company-description" id="company-description" class="form-control" placeholder="Enter Company Description" rows="4"></textarea>
+												</div>
+												<div class="form-group col-12">
+													<label class="form-label required" for="default-project-prefix">Default Project Prefix</label>
+													<input name="default-project-prefix" id="default-project-prefix" class="form-control" placeholder="Enter Default Project Prefix" required/>
+												</div>
+												<div class="form-group col-12">
+													<div class="demo-inline-spacing">
+														<div class="custom-control custom-control-primary custom-switch mt-0">
+															<p class="mb-50 form-label" for="is-disable-default-project-prefix">Disable Default Project Prefix</p>
+															<input type="checkbox" name="is-disable-default-project-prefix" class="custom-control-input" id="is-disable-default-project-prefix" value="0"/><label class="custom-control-label" for="is-disable-default-project-prefix"></label>
+														</div>
+													</div>
+												</div>
+												<div class="form-group col-12">
+													<div class="demo-inline-spacing">
+														<div class="custom-control custom-control-primary custom-switch mt-0">
+															<p class="mb-50 form-label" for="is-disable-company-urlprefix">Disable Company Prefix</p>
+															<input type="checkbox" name="is-disable-company-urlprefix" class="custom-control-input" id="is-disable-company-urlprefix" value="0"/><label class="custom-control-label" for="is-disable-company-urlprefix"></label>
+														</div>
+													</div>
+												</div>
+												<div class="form-group col-12">
+													<div class="demo-inline-spacing">
+														<div class="custom-control custom-control-primary custom-switch mt-0">
+															<p class="mb-50 form-label" for="is-active">Active</p>
+															<input type="checkbox" name="is-active" class="custom-control-input" id="is-active" value="1" checked /><label class="custom-control-label" for="is-active"></label>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="row mt-2">
+												<div class="form-group col-12">
+													<button class="btn btn-primary" id="create-company" type="submit">` %>
+													<% if (typeof(alldata) != "undefined" && alldata != null && alldata.id) { %>
+														<% body += `Update Company` %>
+													<% } else { %>
+														<% body += `Create Company` %>
+													<% } %>
+													<% body += `</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>` %>
+
+<% script = `<script type="text/javascript" src="/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/assets/js/companies.js"></script>` %>
+
+<%- include('layout', { title: `Company Create`, style, body, script }) %>

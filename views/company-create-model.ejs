@@ -1,0 +1,72 @@
+			<!-- Starts Company model -->
+			<div class="modal fade modal-slide-in-form modal-slide-in second-middle-step company-create-model" id="company-create-modal-slide-in" style="z-index: 1080;">
+				<div class="modal-dialog">
+					<div class="modal-content overflow-hidden">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+						<div class="modal-header mb-1">
+							<h5 class="modal-title" id="company-modal-label"></h5>
+						</div>
+						<div class="modal-body flex-grow-1">
+							<section class="company-create">
+								<form id="form-company-create" action="javascript:void(0);" autocomplete="off">
+									<div class="row">
+										<div class="form-group col-12 m-0">
+											<input type="hidden" name="company-id" id="company-id" class="form-control" placeholder="Id" />
+										</div>
+										<div class="form-group col-12">
+											<label class="form-label required" for="company-code">Company Code</label>
+											<input type="text" name="company-code" id="company-code" class="form-control" placeholder="Enter Company Code" required />
+										</div>
+										<div class="form-group col-12">
+											<label class="form-label required" for="company-name">Company Name</label>
+											<input type="text" name="company-name" id="company-name" class="form-control" placeholder="Enter Company Name" required />
+										</div>
+										<div class="form-group col-12">
+											<label class="form-label" for="sequence">Sequence</label>
+											<input type="text" name="sequence" id="sequence" class="form-control" placeholder="Enter Sequence" />
+										</div>
+										<div class="form-group col-12">
+											<label class="form-label" for="company-description">Company Description</label>
+											<textarea name="company-description" id="company-description" class="form-control" placeholder="Enter Company Description" rows="4"></textarea>
+										</div>
+										<div class="form-group col-12">
+											<label class="form-label required" for="default-project-prefix">Default Project Prefix</label>
+											<input name="default-project-prefix" id="default-project-prefix" class="form-control" placeholder="Enter Default Project Prefix" required/>
+										</div>
+										<div class="form-group col-12">
+											<div class="demo-inline-spacing">
+												<div class="custom-control custom-control-primary custom-switch mt-0">
+													<p class="mb-50 form-label" for="is-disable-default-project-prefix">Disable Default Project Prefix</p>
+													<input type="checkbox" name="is-disable-default-project-prefix" class="custom-control-input" id="is-disable-default-project-prefix" value="0"/><label class="custom-control-label" for="is-disable-default-project-prefix"></label>
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-12">
+											<div class="demo-inline-spacing">
+												<div class="custom-control custom-control-primary custom-switch mt-0">
+													<p class="mb-50 form-label" for="is-disable-company-urlprefix">Disable Company Prefix</p>
+													<input type="checkbox" name="is-disable-company-urlprefix" class="custom-control-input" id="is-disable-company-urlprefix" value="0"/><label class="custom-control-label" for="is-disable-company-urlprefix"></label>
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-12">
+											<div class="demo-inline-spacing">
+												<div class="custom-control custom-control-primary custom-switch mt-0">
+													<p class="mb-50 form-label" for="is-company-active">Active</p>
+													<input type="checkbox" name="is-company-active" class="custom-control-input" id="is-company-active" value="1" checked /><label class="custom-control-label" for="is-company-active"></label>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row mt-2">
+										<div class="form-group col-12">
+											<button class="btn btn-primary" id="create-company" type="submit"></button>
+										</div>
+									</div>
+								</form>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Ends Company model -->

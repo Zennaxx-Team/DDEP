@@ -1,0 +1,124 @@
+<%
+    const itemCurlbashViewModal = include('curl-bash-model.ejs');
+    const itemLogsViewDetailsModal = include('item-logs-view-details-modal.ejs');
+	let style = '';
+	let body = '';
+	let script = '';
+%>
+
+<% style = `<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/pickers/daterangepicker/daterangepicker.css"></script>
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/forms/wizard/bs-stepper.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/form-validation.css" />
+		<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/form-wizard.css">` %>
+
+<% body = `<div class="content-wrapper">
+				<div class="content-header row">
+					<div class="content-header-left col-md-12 col-12 mb-2">
+						<div class="row breadcrumbs-top">
+							<div class="col-sm-6 col-12">
+								<h2 class="content-header-title float-left mb-0">Datas</h2>
+								<div class="breadcrumb-wrapper">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item">
+											<a href="/">Home</a>
+										</li>
+										<li class="breadcrumb-item">
+											<a href="javascript:void(0);">Datas</a>
+										</li>
+									</ol>
+								</div>
+							</div>
+							<div class="col-sm-6 col-12 d-flex justify-content-end">
+								<div class="card mb-0">
+									<div id="datarange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+										<i data-feather="clock"></i>&nbsp;
+										<span></span> 
+									</div>
+									<div class="hidden since-time"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-body">
+					<section id="basic-datatable">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<div class="border-bottom p-1">
+										<div class="form-row align-items-end m-0">
+											
+											<!-- Triggered Status -->
+											<div class="form-group col-sm-4 col-md-3 mb-1">
+												<label class="form-label" for="select-request-trigger-status">Triggered Status</label>
+												<select class="select2 form-control form-control-sm" id="select-request-trigger-status" name="select-request-trigger-status">
+													<option value="">All</option>
+													<option value="triggered">Triggered</option>
+													<option value="not_triggered">Not Triggered</option>
+												</select>
+											</div>
+
+											<div class="form-group col-sm-4 col-md-3 mb-1">
+												<label class="form-label" for="select-data-item">Item Name</label>
+												<select class="select2 form-control form-control-sm" id="select-data-item" name="select-data-item"></select>
+											</div>
+											
+											<div class="form-group col-sm-4 col-md-12 mb-1 d-flex align-items-end justify-content-end">
+												<div class="btn-group justify-content-end">
+													<button type="button" class="btn btn-primary mr-1" id="search-request-button">
+														<span>Search</span>
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<table class="datatables-basic table" id="request-table">
+									<thead>
+										<tr>
+											<th class="header-number">No</th>
+											<th class="header-request-id">RequestId</th>
+                                            <th class="header-item-name">Item Name</th>
+											<th class="header-time-consumed">Time Consumed(ms)</th>
+											<th class="header-status">Status</th>
+											<th class="header-http-status">HTTP Status</th>
+											<th class="header-curl-bash">CURL Bash</th>
+											<th class="header-request">REQUEST</th>
+											<th class="header-request-filter">REQUEST FILTER</th>
+											<th class="header-request-validation">REQUEST VALIDATION</th>
+											<th class="header-transformed-request">TRANSFORMED REQUEST</th>
+											<th class="header-triggered-status">TRIGGERED RULES</th>
+											<th class="header-log-description">Log Description</th>
+											<th class="header-response">RESPONSE</th>
+											<th class="header-response-filter">RESPONSE FILTER</th>
+											<th class="header-response-validation">RESPONSE VALIDATION</th>
+											<th class="header-transformed-response">TRANSFORMED RESPONSE</th>
+											
+										</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>` %>
+<% body += itemLogsViewDetailsModal; %>
+<% body += itemCurlbashViewModal; %>
+
+<% script = `<script type="text/javascript" src="/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/app-assets/js/scripts/moment.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/forms/wizard/bs-stepper.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/pickers/daterangepicker/daterangepicker.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
+		<script type="text/javascript" src="/assets/js/datas.js" defer></script>` %>
+
+<%- include('layout', { title: `Datas`, style, body, script }) %>

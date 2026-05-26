@@ -1,0 +1,88 @@
+<%- include("partials/head", headerData); %>
+
+<%- include("partials/header"); %>
+
+<% if (typeof(companyCode) != "undefined") { %>
+<script type="text/javascript">
+	const dataCompanyCode = "<%= companyCode %>";
+</script>
+<% } else if (typeof(headerData.companyCode) != "undefined") { %>
+<script type="text/javascript">
+	const dataCompanyCode = "<%= headerData.companyCode %>";
+</script>
+<% } else { %>
+<script type="text/javascript">
+	const noDataCompanyCode = "companyCode not found!";
+</script>
+<% } %>
+
+<!-- BEGIN: Content -->
+<div class="app-content content">
+	<div class="content-overlay"></div>
+	<div class="header-navbar-shadow"></div>
+	<div class="content-wrapper">
+		<div class="content-header row">
+			<div class="content-header-left col-md-9 col-12 mb-2">
+				<div class="row breadcrumbs-top">
+					<div class="col-12">
+						<h2 class="content-header-title float-left mb-0">Tools</h2>
+						<div class="breadcrumb-wrapper">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="/">Home</a>
+								</li>
+								<li class="breadcrumb-item">
+									<a href="javascript:void(0);">Tools</a>
+								</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content-body">
+			<section class="horizontal-wizard">
+				<div class="bs-stepper horizontal-wizard-example">
+					<div class="bs-stepper-content">
+						<div id="create-tools" class="content active dstepper-block">
+							<div class="content-header">
+								<h5 class="mb-0">Test DDEP Inbound Outbound</h5>
+								<small class="text-muted">Enter Your DDEP Details.</small>
+							</div>
+							<form id="frm-post-tools" action="javascript:void(0);" autocomplete="off">
+								<div class="row">
+									<div class="form-group col-md-12">
+										<label class="form-label required" for="ddepInboundAPI">DDEP Inbound API</label>
+										<input type="text" name="ddepInboundAPI" id="ddepInboundAPI" class="form-control" placeholder="Enter DDEP Inbound API" required />
+									</div>
+									<div class="form-group col-md-12">
+										<label class="form-label required" for="ddepInboundData">DDEP Inbound Data</label>
+										<textarea name="ddepInboundData" id="ddepInboundData" class="form-control" placeholder="Enter DDEP Inbound Data" rows="8" required></textarea>
+									</div>
+									<div class="form-group col-md-12">
+										<button class="btn btn-primary waves-effect mt-1" id="post_tools" type="submit">Post</button>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-md-12">
+										<label class="form-label" for="ddepOutboundPostData">DDEP Outbound Data</label>
+										<textarea name="ddepOutboundPostData" id="ddepOutboundPostData" class="form-control" placeholder="DDEP Outbound Data" rows="8" readonly></textarea>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-md-12">
+										<label class="form-label" for="ddepOutboundResponseData">DDEP Outbound Response Data</label>
+										<textarea name="ddepOutboundResponseData" id="ddepOutboundResponseData" class="form-control" placeholder="DDEP Outbound Response Data" rows="8" readonly></textarea>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+<!-- END: Content -->
+
+<%- include("partials/footer", footerData); %>

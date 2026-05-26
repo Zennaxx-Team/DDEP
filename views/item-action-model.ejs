@@ -1,0 +1,553 @@
+<!-- Starts Item model -->
+<div class="modal fade modal-slide-in-form modal-slide-in second-step item-action-model" id="item-action-modal-slide-in"
+    data-backdrop="true" data-keyboard="true" style="z-index: 1060;">
+    <div class="modal-dialog">
+        <div class="modal-content overflow-hidden">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+            <div class="modal-header mb-1">
+                <h5 class="modal-title" id="item-action-modal-label">Create Action</h5>
+            </div>
+            <div class="header-navbar">
+                <div class="navbar navbar-expand-lg align-items-center navbar-light navbar-shadow"
+                    style="min-height: 0px; border-radius: 0px;">
+                    <div class="navbar-container d-flex content">
+                        <div class="bookmark-wrapper d-flex align-items-center">
+                            <ul class="nav navbar-nav bookmark-icons mb-pos-wrapper">
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link addIcon"><i class="ficon"
+                                            data-feather="plus-circle"></i></a></li>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link printerIcon"><i class="ficon"
+                                            data-feather="printer"></i></a></li>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link refreshIcon"><i class="ficon"
+                                            data-feather="refresh-ccw"></i></a></li>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link trashIcon"><i class="ficon"
+                                            data-feather="trash-2"></i></a></li>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link menuIcon"><i class="ficon"
+                                            data-feather="menu"></i></a></li>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link cornerdownIcon"><i
+                                            class="ficon" data-feather="corner-down-left"></i></a></li>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link action-item"
+                                        id="action-item" role="button" title="Create clone item"><i class="ficon"
+                                            data-feather="save"></i></a></li>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link dollarIcon"><i class="ficon"
+                                            data-feather="dollar-sign"></i></a></li>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link downloadIcon"><i class="ficon"
+                                            data-feather="download-cloud"></i></a></li>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link columnIcon"><i class="ficon"
+                                            data-feather="columns"></i></a></li>
+                            </ul>
+                            <div class="d-inline-flex d-mbile-box">
+                                <a class="pr-1 dropdown-toggle hide-arrow text-primary" data-toggle="dropdown"
+                                    aria-expanded="true">
+                                    <svg t="1710208216723" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                        xmlns="http://www.w3.org/2000/svg" p-id="1479"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink" width="30" height="30">
+                                        <path
+                                            d="M206.116734 596.023523c46.398166-0.727906 83.429277-38.940285 82.701371-85.336645-0.717069-46.40539-38.927642-83.438308-85.325808-82.710401-46.407197 0.7261-83.438308 38.927642-82.710402 85.334838 0.727906 46.409003 38.927642 83.429277 85.334839 82.712208zM820.51854 596.023523c46.396359-0.727906 83.427471-38.940285 82.699565-85.336645-0.717069-46.40539-38.927642-83.438308-85.325808-82.710401-46.407197 0.7261-83.438308 38.927642-82.710402 85.334838 0.729713 46.409003 38.927642 83.429277 85.336645 82.712208zM513.313122 596.023523c46.407197-0.727906 83.438308-38.940285 82.710401-85.336645-0.729713-46.40539-38.927642-83.438308-85.336645-82.710401-46.396359 0.7261-83.427471 38.927642-82.710401 85.334838 0.729713 46.409003 38.929448 83.429277 85.336645 82.712208z"
+                                            fill="#fff" p-id="1480"></path>
+                                    </svg>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-mobile-box" x-placement="top-end"
+                                    style="position: absolute; transform: translate3d(1328px, -266px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                    <a href="javascript:;" class="dropdown-item addIcon">
+                                        <i class="ficon" data-feather="plus-circle"></i>
+                                    </a>
+                                    <a href="javascript:;" class="dropdown-item printerIcon">
+                                        <i class="ficon" data-feather="printer"></i>
+                                    </a>
+                                    <a href="javascript:;" class="dropdown-item refreshIcon">
+                                        <i class="ficon" data-feather="refresh-ccw"></i>
+                                    </a>
+                                    <a href="javascript:;" class="dropdown-item trashIcon">
+                                        <i class="ficon" data-feather="trash-2"></i>
+                                    </a>
+                                    <a href="javascript:;" class="dropdown-item menuIcon">
+                                        <i class="ficon" data-feather="menu"></i>
+                                    </a>
+                                    <a href="javascript:;" class="dropdown-item cornerdownIcon">
+                                        <i class="ficon" data-feather="corner-down-left"></i>
+                                    </a>
+                                    <a href="javascript:;" class="dropdown-item action-item" id="action-item"
+                                        title="Create clone item">
+                                        <i class="ficon" data-feather="save"></i>
+                                    </a>
+                                    <a href="javascript:;" class="dropdown-item dollarIcon">
+                                        <i class="ficon" data-feather="dollar-sign"></i>
+                                    </a>
+                                    <a href="javascript:;" class="dropdown-item downloadIcon">
+                                        <i class="ficon" data-feather="download-cloud"></i>
+                                    </a>
+                                    <a href="javascript:;" class="dropdown-item columnIcon">
+                                        <i class="ficon" data-feather="columns"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body flex-grow-1">
+                <section class="mb-2">
+                    <form id="form-action-create" autocomplete="off">
+                        <div class="row">
+                            <div class="form-group col-12 col-xs-12 col-sm-12 col-md-6">
+                                <label class="form-label required" for="item-action-description">Description</label>
+                                <textarea type="text" name="item-action-description" id="item-action-description"
+                                    class="form-control" placeholder="Enter Item Action Description"
+                                    required></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-12 col-xs-12 col-sm-12 col-md-6">
+                                <label class="form-label required" for="select-trigger-when-type">Trigger When</label>
+                                <select class="select2 form-control form-control-lg custom-select"
+                                    id="select-trigger-when-type" name="select-trigger-when-type">
+                                    <option value="Pre-Request">Pre-Request</option>
+                                    <option value="After-Transformed-Request">After-Transformed Request</option>
+                                    <option value="After-Transformed-Response">After-Transformed Response</option>
+                                    <option value="End-Of-Session">End of Session</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <table id="outbound-action-validation-rules-table"
+                                    class="table logical-table outbound-action-validation-rules-table table-bordered mt-2">
+                                    <thead>
+                                        <tr>
+                                            <th>Logical Operation</th>
+                                            <th>Original Value</th>
+                                            <th>Comparison operations</th>
+                                            <th>Column Value</th>
+                                            <th>Then</th>
+                                            <th class="text-center">
+                                                <a href="javascript:void(0);" class="btn btn-lg btn-del modal-button"
+                                                    id="outbound-action-validation-rules-btn-add-row"><i data-feather="plus"
+                                                        class="font-medium-2"></i></a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="col-sm-2 logical-select">
+                                                <select class="select-dropdown form-control form-control-lg"
+                                                    name="actionvalidations[][logical]">
+                                                    <option value="AND">AND</option>
+                                                    <option value="OR">OR</option>
+                                                </select>
+                                            </td>
+                                            <td class="col-sm-3 autocomplete">
+                                                <input type="text" name="actionvalidations[][original]"
+                                                    class="form-control border-0 autocompletevalidation"
+                                                    id="validation-original-0" />
+                                            </td>
+                                            <td class="col-sm-3 operations-select">
+                                                <select class="select-dropdown form-control form-control-lg"
+                                                    name="actionvalidations[][operations]">
+                                                    <option value="==">=</option>
+                                                    <option value=">">></option>
+                                                    <option value=">=">>=</option>
+                                                    <option value="<"><</option>
+                                                    <option value="<="><=</option>
+                                                    <option value="<>"><></option>
+                                                    <option value="Contains">Contains</option>
+                                                </select>
+                                            </td>
+                                            <td class="col-sm-2 autocomplete">
+                                                <input type="text" name="actionvalidations[][column]"
+                                                    class="form-control border-0 autocompletevalidation"
+                                                    data-class="outbound_validation_" id="validation-column-0" />
+                                            </td>
+                                            <td class="col-sm-2">
+                                                <select
+                                                    class="select-dropdown form-control form-control-lg format-then-name"
+                                                    name="actionvalidations[][then]">
+                                                    <option value="SKIP">SKIP</option>
+                                                </select>
+                                            </td>
+                                            <td class="col-sm-2 text-center">
+                                                <a href="javascript:void(0);" type="button"
+                                                    class="outbound-action-validation-rules-btn-del btn btn-lg btn-del modal-button">
+                                                    <i data-feather="minus" class="font-medium-2"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-12 m-0 notify-model">
+                                <div class="demo-inline-spacing">
+                                    <div class="custom-control custom-radio active">
+                                        <input type="radio" id="customRadio1" name="customRadio"
+                                            class="custom-control-input" value="Webhook" checked />
+                                        <label class="custom-control-label " for="customRadio1">
+                                            <img class="webhook-01" alt="webhook"
+                                                src="../../assets/images/svg/webhook-01.svg">
+                                            <img class="webhook-02" alt="webhook"
+                                                src="../../assets/images/svg/webhook-02.svg">
+                                            Webhook
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="customRadio2" name="customRadio"
+                                            class="custom-control-input" value="Email" />
+                                        <label class="custom-control-label" for="customRadio2">
+                                            <i data-feather="mail" class="mr-sm-25 mr-0"></i> Email</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div id="webhook-section">
+                            <div class="row mt-2">
+                                <div class="form-group col-12 m-0 font-weight-bold green-color h4">
+                                    Webhook
+                                </div>
+                            </div>
+
+                            <div class="row mt-1">
+                                <div class="form-group col-12 col-xs-12 col-sm-12 col-md-6">
+                                    <label class="form-label required" for="item-action-webhook-url">URL</label>
+                                    <input type="text" name="item-action-webhook-url" id="item-action-webhook-url"
+                                        class="form-control" placeholder="Enter webhook url" required />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-12 col-xs-12 col-sm-12 col-md-6">
+                                    <label class="form-label required" for="select-webhook-method">Method</label>
+                                    <select class="select2 form-control form-control-lg custom-select"
+                                        id="select-webhook-method" name="select-webhook-method">
+                                        <option value="POST">POST</option>
+                                        <option value="GET">GET</option>
+                                        <option value="PUT">PUT</option>
+                                        <option value="PATCH">PATCH</option>
+                                        <option value="DELETE">DELETE</option>
+                                        <option value="Customize">Customize</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row" id="webhook-method-custom-row" style="display:none;">
+                                <div class="form-group col-12 col-xs-12 col-sm-12 col-md-6">
+                                    <label class="form-label required" for="webhook-method-custom-value">Custom Method
+                                        Expression</label>
+                                    <input type="text" name="webhook-method-custom-value"
+                                        id="webhook-method-custom-value" class="form-control"
+                                        placeholder="e.g., =@req.method or =@querystring{reqMethod}" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-12 col-xs-12 col-sm-12 col-md-6">
+                                    <label class="form-label required" for="select-webhook-body-type">Body Type</label>
+                                    <select class="select2 form-control form-control-lg custom-select"
+                                        id="select-webhook-body-type" name="select-webhook-body-type">
+                                        <option value="TEXT">TEXT</option>
+                                        <option value="JSON">JSON</option>
+                                        <option value="HTML">HTML</option>
+                                        <option value="XML">XML</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-12 m-0 font-weight-bold h4">
+                                    Header
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <table id="webhook-headers-table"
+                                        class="table logical-table webhook-headers-table table-bordered mt-1">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th>Key</th>
+                                                <th>Value</th>
+                                                <th>Mask</th>
+                                                <th>Description</th>
+                                                <th>
+                                                    <a href="javascript:void(0);"
+                                                        class="btn btn-lg btn-del modal-button"
+                                                        id="webhook-headers-btn-add-row"><i data-feather="plus"
+                                                            class="font-medium-2"></i></a>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="format-rules-icon text-center"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-code font-medium-2">
+                                                        <polyline points="16 18 22 12 16 6"></polyline>
+                                                        <polyline points="8 6 2 12 8 18"></polyline>
+                                                    </svg></td>
+                                                <td class="col-sm-1 text-center">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" name="webhook-headers-status"
+                                                            id="webhook-headers-status-0" class="custom-control-input"
+                                                            checked />
+                                                        <label class="custom-control-label"
+                                                            for="webhook-headers-status-0"></label>
+                                                    </div>
+                                                </td>
+                                                <td class="col-sm-3">
+                                                    <input type="text" name="webhook-headers[][key]"
+                                                        class="form-control border-0" id="webhook-headers-key-0" />
+                                                </td>
+                                                <td class="col-sm-4">
+                                                    <input type="text" name="webhook-headers[][value]"
+                                                        class="form-control border-0" id="webhook-headers-value-0" />
+                                                </td>
+                                                <td class="col-sm-1 text-center">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" name="webhook-headers-mask-status"
+                                                            id="webhook-headers-mask-status-0"
+                                                            class="custom-control-input" checked />
+                                                        <label class="custom-control-label"
+                                                            for="webhook-headers-mask-status-0"></label>
+                                                    </div>
+                                                </td>
+                                                <td class="col-sm-3">
+                                                    <input type="text" name="webhook-headers[][description]"
+                                                        class="form-control border-0"
+                                                        id="webhook-headers-description-0" />
+                                                </td>
+                                                <td class="col-sm-1 text-center">
+                                                    <a href="javascript:void(0);" type="button"
+                                                        class="webhook-headers-btn-del btn btn-lg btn-del modal-button">
+                                                        <i data-feather="minus" class="font-medium-2"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-12 m-0 font-weight-bold h4">
+                                    Variables
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <table id="webhook-variables-table"
+                                        class="table logical-table webhook-variables-table table-bordered mt-1">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th>Key</th>
+                                                <th>Value</th>
+                                                <th>Mask</th>
+                                                <th>Description</th>
+                                                <th>
+                                                    <a href="javascript:void(0);"
+                                                        class="btn btn-lg btn-del modal-button"
+                                                        id="webhook-variables-btn-add-row"><i data-feather="plus"
+                                                            class="font-medium-2"></i></a>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="format-rules-icon text-center"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-code font-medium-2">
+                                                        <polyline points="16 18 22 12 16 6"></polyline>
+                                                        <polyline points="8 6 2 12 8 18"></polyline>
+                                                    </svg></td>
+                                                <td class="col-sm-1 text-center">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" name="webhook-variables-status"
+                                                            id="webhook-variables-status-0" class="custom-control-input"
+                                                            checked />
+                                                        <label class="custom-control-label"
+                                                            for="webhook-variables-status-0"></label>
+                                                    </div>
+                                                </td>
+                                                <td class="col-sm-3">
+                                                    <input type="text" name="webhook-variables[][key]"
+                                                        class="form-control border-0" id="webhook-variables-key-0" />
+                                                </td>
+                                                <td class="col-sm-4">
+                                                    <input type="text" name="webhook-variables[][value]"
+                                                        class="form-control border-0" id="webhook-variables-value-0" />
+                                                </td>
+                                                <td class="col-sm-1 text-center">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" name="webhook-variables-mask-status"
+                                                            id="webhook-variables-mask-status-0"
+                                                            class="custom-control-input" checked />
+                                                        <label class="custom-control-label"
+                                                            for="webhook-variables-mask-status-0"></label>
+                                                    </div>
+                                                </td>
+                                                <td class="col-sm-3">
+                                                    <input type="text" name="webhook-variables[][description]"
+                                                        class="form-control border-0"
+                                                        id="webhook-variables-description-0" />
+                                                </td>
+                                                <td class="col-sm-1 text-center">
+                                                    <a href="javascript:void(0);" type="button"
+                                                        class="webhook-variables-btn-del btn btn-lg btn-del modal-button">
+                                                        <i data-feather="minus" class="font-medium-2"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-12 m-0 font-weight-bold h4">
+                                    Content
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <textarea type="text" name="webhook-content" id="webhook-content"
+                                        class="form-control mt-1" placeholder="Enter webhook Content"
+                                        rows="10"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="email-section">
+                            <div class="row mt-2">
+                                <div class="form-group col-12 m-0 font-weight-bold green-color h4">
+                                    Email
+                                </div>
+                            </div>
+
+                            <div class="row mt-1">
+                                <div class="form-group col-12 col-xs-12 col-sm-12 col-md-6">
+                                    <label class="form-label required" for="item-action-email-to">Email To</label>
+                                    <input type="text" name="item-action-email-to" id="item-action-email-to"
+                                        class="form-control" placeholder="Enter Email" required />
+                                </div>
+                            </div>
+
+                            <div class="row mt-1">
+                                <div class="form-group col-12 col-xs-12 col-sm-12 col-md-6">
+                                    <label class="form-label required" for="item-action-email-subject">Email
+                                        Subject</label>
+                                    <input type="text" name="item-action-email-subject" id="item-action-email-subject"
+                                        class="form-control" placeholder="Enter Email Subject" required />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-12 m-0 font-weight-bold h4">
+                                    Variables
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <table id="email-variables-table"
+                                        class="table logical-table email-variables-table table-bordered mt-1">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th>Key</th>
+                                                <th>Value</th>
+                                                <th>Mask</th>
+                                                <th>Description</th>
+                                                <th>
+                                                    <a href="javascript:void(0);"
+                                                        class="btn btn-lg btn-del modal-button"
+                                                        id="email-variables-btn-add-row"><i data-feather="plus"
+                                                            class="font-medium-2"></i></a>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="format-rules-icon text-center"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-code font-medium-2">
+                                                        <polyline points="16 18 22 12 16 6"></polyline>
+                                                        <polyline points="8 6 2 12 8 18"></polyline>
+                                                    </svg></td>
+                                                <td class="col-sm-1 text-center">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" name="email-variables-status"
+                                                            id="email-variables-status-0" class="custom-control-input"
+                                                            checked />
+                                                        <label class="custom-control-label"
+                                                            for="email-variables-status-0"></label>
+                                                    </div>
+                                                </td>
+                                                <td class="col-sm-3">
+                                                    <input type="text" name="email-variables[][key]"
+                                                        class="form-control border-0" id="email-variables-key-0" />
+                                                </td>
+                                                <td class="col-sm-4">
+                                                    <input type="text" name="email-variables[][value]"
+                                                        class="form-control border-0" id="email-variables-value-0" />
+                                                </td>
+                                                <td class="col-sm-1 text-center">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" name="email-variables-mask-status"
+                                                            id="email-variables-mask-status-0"
+                                                            class="custom-control-input" checked />
+                                                        <label class="custom-control-label"
+                                                            for="email-variables-mask-status-0"></label>
+                                                    </div>
+                                                </td>
+                                                <td class="col-sm-3">
+                                                    <input type="text" name="email-variables[][description]"
+                                                        class="form-control border-0"
+                                                        id="email-variables-description-0" />
+                                                </td>
+                                                <td class="col-sm-1 text-center">
+                                                    <a href="javascript:void(0);" type="button"
+                                                        class="email-variables-btn-del btn btn-lg btn-del modal-button">
+                                                        <i data-feather="minus" class="font-medium-2"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-12 m-0 font-weight-bold h4">
+                                    Content
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <textarea type="text" name="email-content" id="email-content"
+                                        class="form-control mt-1" placeholder="Enter Email Content"
+                                        rows="10"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Ends Item model -->

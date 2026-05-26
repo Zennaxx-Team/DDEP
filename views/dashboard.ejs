@@ -1,0 +1,228 @@
+<%
+	const itemLogsModal = include('item-logs-modal.ejs');
+	const itemLogsViewModal = include('item-logs-view-modal.ejs');
+	const itemNewLogsViewModal = include('item-logs-new-view-modal.ejs');
+	const itemLogsViewDetailsModal = include('item-logs-view-details-modal.ejs');
+	const itemCurlbashViewModal = include('curl-bash-model.ejs');
+	const logDesscriptionModel = include('item-log-description-model.ejs');
+	const exceptionLogsModal = include('exception-list-model.ejs');
+	let style = '';
+	let body = '';
+	let script = '';
+%>
+
+<% style = `<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css">
+        <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/pickers/daterangepicker/daterangepicker.css">
+        <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/form-validation.css" />
+        <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/charts/apexcharts.css" />
+        <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/charts/chart-apex.min.css" />
+        ` %>
+
+<% body = `<div class="content-wrapper">
+                <div class="content-header row">
+					<div class="content-header-left col-md-12 col-12 mb-2">
+						<div class="row breadcrumbs-top">
+							<div class="col-sm-12 col-md-12 col-lg-4 col-12">
+								<h2 class="content-header-title float-left mb-0">Dashboard</h2>
+								<div class="breadcrumb-wrapper">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item">
+											<a href="/">Home</a>
+										</li>
+										<li class="breadcrumb-item">
+											<a href="javascript:void(0);">Dashboard</a>
+										</li>
+									</ol>
+								</div>
+							</div>
+							<div class="col-sm-12 col-md-12 col-lg-8 col-12 d-flex justify-content-end align-items-center" style="gap: 0.5rem;">
+								<!-- Log Description Input -->
+								<div style="flex: 1 1 auto; min-width: 220px; max-width: 220px;">
+									<input type="text" 
+										class="form-control" 
+										id="dashboard-log-description" 
+										name="dashboard-log-description" 
+										placeholder="Log Description">
+								</div>
+								<div class="d-flex justify-content-center align-items-center"
+									style="width: 36px; height: 36px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; background-color: #fff;">
+									<i data-feather="search" id="dashboard-log-search-btn"></i>
+								</div>
+								<div style="flex: 1 1 auto; min-width: 0; max-width: 220px;">
+									<select class="select2 form-control form-control-sm w-100" 
+										id="select-dashboard-item" 
+										name="select-dashboard-item">
+									</select>
+								</div>
+								<div style="flex: 0 0 220px; min-width: 220px;">
+									<div id="dashboardreportrange" 
+										style="background: #fff; cursor: pointer; padding: 6px 10px; border: 1px solid #ccc; width: 100%; border-radius: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+										<i data-feather="clock"></i>&nbsp;<span></span>
+									</div>
+									<div class="hidden since-time-dashboard"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-body">
+					<section class="">
+						<div class="row match-height">
+                            <div class="col-12 col-sm-6 col-md-4">
+                                <div class="card">
+                                    <div class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start">
+                                        <div>
+                                            <h4 class="card-title mb-25">Throughput</h4>
+                                            <small class="card-sub-title">30 mins = 5 minutes</small>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="line-chart-1" style="max-height: 250px;"></div>
+                                    </div>
+                                </div>
+							</div>
+                            <div class="col-12 col-sm-6 col-md-4">
+								<div class="card">
+									<div class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start">
+										<div>
+											<h4 class="card-title mb-25">Exceptions</h4>
+											<small class="card-sub-title">30 mins = 5 minutes</small>
+										</div>
+									</div>
+									<div class="card-body">
+										<div id="line-chart-2" style="max-height: 250px;"></div>
+									</div>
+								</div>
+							</div>
+							<div class="col-12 col-sm-6 col-md-4">
+								<div class="card">
+									<div class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start">
+										<div>
+											<h4 class="card-title mb-25">Alert Conditions</h4>
+										</div>
+									</div>
+									<div class="card-body">
+										<p>Add recommended alert conditions in a few steps.</p>
+										<button class="btn add-new btn-primary mt-50 click-popup" tabindex="0" aria-controls="DataTables_Table_0" type="button" data-toggle="modal" data-target="#modals-slide-in">
+											<span>Add recommended conditions</span>
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="col-12 col-sm-6 col-md-4">
+								<div class="card">
+									<div class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start">
+										<div>
+											<h4 class="card-title mb-25">Network</h4>
+											<small class="card-sub-title">30 mins = 5 minutes</small>
+										</div>
+									</div>
+									<div class="card-body">
+										<div id="line-chart-3" style="max-height: 250px;"></div>
+									</div>
+								</div>
+							</div>
+                            <div class="col-12 col-sm-12 col-md-8">
+								<div class="card">
+									<div class="card-body">
+										<ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+											<li class="nav-item">
+												<a class="nav-link active" id="transactions-tab-fill" data-toggle="tab" href="#transactions-fill" role="tab" aria-controls="transactions-fill" aria-selected="true">Transactions</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" id="slowest-tab-fill" data-toggle="tab" href="#slowest-fill" role="tab" aria-controls="slowest-fill" aria-selected="false">Top 10 Slowest</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" id="exceptions-tab-fill" data-toggle="tab" href="#exceptions-fill" role="tab" aria-controls="exceptions-fill" aria-selected="false">Exceptions</a>
+											</li>
+										</ul>
+										<div class="tab-content pt-1">
+											<div class="tab-pane active" id="transactions-fill" role="tabpanel" aria-labelledby="transactions-tab-fill">
+												<div class="table-responsive">
+													<table class="table table-bg-color transactions-table">
+														<thead>
+															<tr>
+																<th class="home-table-01">No</th>
+																<th class="home-table-02">Item Name</th>
+																<th class="home-table-03">Path</th>
+																<th class="home-table-04">Log Description</th>
+																<th class="home-table-05">HTTP Status</th>
+																<th class="home-table-06">Start Time</th>
+																<th class="home-table-07">Time Consumed (MS)</th>
+															</tr>
+														</thead>
+														<tbody></tbody>
+													</table>
+												</div>
+											</div>
+											<div class="tab-pane" id="slowest-fill" role="tabpanel" aria-labelledby="slowest-tab-fill">
+												<div class="table-responsive">
+													<table class="table table-bg-color slowest-table">
+														<thead>
+															<tr>
+																<th>No</th>
+																<th>Item Name</th>
+																<th>Path</th>
+																<th>Log Description</th>
+																<th>HTTP Status</th>
+																<th>Start Time</th>
+																<th>Time Consumed (MS)</th>
+															</tr>
+														</thead>
+														<tbody></tbody>
+													</table>
+												</div>
+											</div>
+											<div class="tab-pane" id="exceptions-fill" role="tabpanel" aria-labelledby="exceptions-tab-fill">
+												<div class="table-responsive">
+													<table class="table table-bg-color exceptions-table">
+														<thead>
+															<tr>
+																<th>No</th>
+																<th>Item Name</th>
+																<th>Type</th>
+																<th>Path</th>
+																<th>Details Desscription</th>
+																<th>Start Time</th>
+															</tr>
+														</thead>
+														<tbody></tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>` %>
+<% body += itemLogsModal; %>
+<% body += itemLogsViewModal; %>
+<% body += itemNewLogsViewModal; %>
+<% body += itemLogsViewDetailsModal; %>
+<% body += itemCurlbashViewModal; %>
+<% body += logDesscriptionModel; %>
+<% body += exceptionLogsModal; %>
+
+<% script = `
+        <script type="text/javascript" src="/app-assets/js/scripts/moment.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js"></script>
+        <script type="text/javascript" src="/app-assets/vendors/js/charts/apexcharts.min.js"></script>
+        <script type="text/javascript" src="/app-assets/vendors/js/pickers/daterangepicker/daterangepicker.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com/modules/accessibility.js"></script>
+		<script type="text/javascript" src="https://code.highcharts.com/modules/exporting.js"></script>
+		<script type="text/javascript" src="https://code.highcharts.com/modules/export-data.js"></script>
+		<script type="text/javascript" src="https://code.highcharts.com/modules/boost.js"></script>
+		<script type="text/javascript" src="/assets/js/dashboard.js"></script>` %>
+
+<%- include('layout', { title: `Dashboard`, style, body, script }) %>

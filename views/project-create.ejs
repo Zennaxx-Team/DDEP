@@ -1,0 +1,141 @@
+<%
+	let style = '';
+	let body = '';
+	let script = '';
+%>
+
+<% style = `<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/form-validation.css" />` %>
+
+<% body = `<div class="content-wrapper">
+				<div class="content-header row mb-2">
+					<div class="content-header-left col-md-9 col-12">
+						<div class="row breadcrumbs-top">
+							<div class="col-12">
+								<h2 class="content-header-title float-left mb-0">Projects</h2>
+								<div class="breadcrumb-wrapper">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item">
+											<a href="/">Home</a>
+										</li>
+										<li class="breadcrumb-item">
+											<a href="/master/projects">Projects</a>
+										</li>
+										<li class="breadcrumb-item">` %>
+										<% if (typeof(alldata) != "undefined" && alldata != null && alldata.id) { %>
+											<% body += `Update Project` %>
+										<% } else { %>
+											<% body += `Create Project` %>
+										<% } %>
+										<% body += `</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-body">
+					<section class="project-create">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<div class="card-body">
+										<form id="form-project-create" action="javascript:void(0);" autocomplete="off">
+											<div class="row">
+												<div class="form-group col-12 m-0">
+													<input type="hidden" name="project-id" id="project-id" class="form-control" placeholder="Id"` %>
+													<% if (typeof(alldata) != "undefined" && alldata != null && alldata.id) { %>
+														<% body += ` value="` %> <% body += alldata.id %> <% body += `" readonly` %>
+													<% } %>
+													<% body += ` />
+												</div>
+												<div class="form-group col-12">
+													<label class="form-label required" for="select-company">Company</label>
+													<select class="select2 form-control form-control-lg required" id="select-company" name="select-company"></select>
+												</div>
+												<div class="form-group col-12">
+													<label class="form-label required" for="project-code">Project Code</label>
+													<input type="text" name="project-code" id="project-code" class="form-control" placeholder="Enter Project Code" required />
+												</div>
+												<div class="form-group col-12">
+													<label class="form-label required" for="project-name">Project Name</label>
+													<input type="text" name="project-name" id="project-name" class="form-control" placeholder="Enter Project Name" required />
+												</div>
+												<div class="form-group col-12">
+													<label class="form-label" for="sequence">Sequence</label>
+													<input type="text" name="sequence" id="sequence" class="form-control" placeholder="Enter Sequence" />
+												</div>
+												<div class="form-group col-12">
+													<label class="form-label" for="project-description">Project Description</label>
+													<textarea name="project-description" id="project-description" class="form-control" placeholder="Enter Project Description" rows="4"></textarea>
+												</div>
+												<div class="form-group col-12">
+													<div class="demo-inline-spacing">
+														<div class="custom-control custom-control-primary custom-switch mt-0">
+															<p class="mb-50 form-label" for="is-project-urlprefix">Disabled Project Prefix</p>
+															<input type="checkbox" name="is-project-urlprefix" class="custom-control-input" id="is-project-urlprefix" value="0"/><label class="custom-control-label" for="is-project-urlprefix"></label>
+														</div>
+													</div>
+												</div>
+												<div class="form-group col-12">
+													<div class="demo-inline-spacing">
+														<div class="custom-control custom-control-primary custom-switch mt-0">
+															<p class="mb-50 form-label" for="is-active">Active</p>
+															<input type="checkbox" name="is-active" class="custom-control-input" id="is-active" value="1" checked /><label class="custom-control-label" for="is-active"></label>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="row mt-2">
+												<div class="form-group col-12">
+													<h4>Members</h4>
+												</div>
+												<div class="form-group col-12">
+													<label>User/User Group</label>
+													<select class="select2 form-control form-control-lg" id="select-user"></select>
+												</div>
+												<div class="form-group col-12 col-md-9">
+													<label>Permission</label>
+													<select class="select2 form-control form-control-lg" id="select-permission"></select>
+												</div>
+												<div class="form-group col-12 col-md-3 text-right">
+													<a href="javascript:void(0);" class="btn btn-primary mt-2" id="add-permission">Add</a>
+												</div>
+												<div class="col-12 mt-2">
+													<table class="table table-bordered border-0" id="permission-listing">
+														<thead>
+															<tr>
+																<th>User/User Group</th>
+																<th>Permission</th>
+																<th>Created Date</th>
+																<th>Last Updated Date</th>
+																<th></th>
+															</tr>
+														</thead>
+														<tbody></tbody>
+													</table>
+												</div>
+											</div>
+											<div class="row mt-2">
+												<div class="form-group col-12">
+													<button class="btn btn-primary" id="create-project" type="submit">` %>
+													<% if (typeof(alldata) != "undefined" && alldata != null && alldata.id) { %>
+														<% body += `Update Project` %>
+													<% } else { %>
+														<% body += `Create Project` %>
+													<% } %>
+													<% body += `</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>` %>
+
+<% script = `<script type="text/javascript" src="/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/assets/js/projects.js"></script>` %>
+
+<%- include('layout', { title: `Project Create`, style, body, script }) %>

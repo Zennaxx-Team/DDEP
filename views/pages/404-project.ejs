@@ -1,0 +1,45 @@
+<%- include("partials/head", headerData); %>
+
+<% if (typeof(companyCode) != "undefined") { %>
+<script type="text/javascript">
+	const dataCompanyCode = "<%= companyCode %>";
+</script>
+<% } else if (typeof(headerData.companyCode) != "undefined") { %>
+<script type="text/javascript">
+	const dataCompanyCode = "<%= headerData.companyCode %>";
+</script>
+<% } else { %>
+<script type="text/javascript">
+	const noDataCompanyCode = "companyCode not found!";
+</script>
+<% } %>
+
+<!-- BEGIN: Content -->
+<div id="not-authorized-root">
+	<div class="blank-page">
+		<div class="app-content content">
+			<div class="content-wrapper">
+				<div class="content-body">
+					<div class="misc-wrapper">
+						<a class="brand-logo" href="/">
+							<img src="/app-assets/images/a4appz-logo-slogan-usage-02.png" alt="logo" height="46" width="200">
+						</a>
+						<div class="misc-inner p-2 p-sm-3">
+							<div class="w-100 text-center">
+								<h2 class="mb-1">You are not authorized! 🔐</h2>
+								<p class="mb-2">The Webtrends Marketing Lab website in IIS uses the default IUSR account credentials to access the web pages it serves.</p>
+								<div>
+									<a class="btn-sm-block mb-1 btn btn-primary" href="/projects/project-list">Back to project</a>
+								</div>
+								<img class="img-fluid" src="/app-assets/images/not-authorized.svg" alt="Not authorized page">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END: Content -->
+
+<%- include("partials/footer", footerData); %>

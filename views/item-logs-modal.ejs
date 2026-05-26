@@ -1,0 +1,50 @@
+<!-- Starts Item Logs -->
+<div class="modal fade modal-slide-in-form modal-slide-in first-step item-logs-modal" id="item-logs-modal-slide-in">
+	<div class="modal-dialog" style="z-index: 1080;">
+		<div class="modal-content">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+			<div class="modal-header mb-1">
+				<h5 class="modal-title" id="item-logs-modal-label">Item Logs</h5>
+			</div>
+			<div class="modal-body flex-grow-1 p-0">
+				<div class="content-header row">
+					<div class="content-header-left col-md-12 col-12 mb-2">
+						<div class="row breadcrumbs-top">
+							<div class="col-sm-12 col-12 d-flex justify-content-end">
+								<div class="card mb-0" style="margin-left: 30px; margin-right: 30px;">
+									<div id="itemLogRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+										<i data-feather="clock"></i>&nbsp;
+										<span></span> 
+									</div>
+									<div class="hidden since-time-item"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<section class="item-logs">
+					<table class="datatables-basic table" id="logs-data-table">
+						<thead>
+							<tr>
+								<th class="header-number">No</th>
+								<th class="header-item-id">Item Name</th>
+								<th class="header-unique-id">Unique ID</th>
+								<th class="header-type">Type</th>
+								<th class="header-path">Path</th>
+								<th class="header-desc">DESCR</th>
+								<th class="header-result">Result</th>
+								<th class="header-http-status">HTTP Status</th>
+								<th class="header-start-time">Start Time</th>
+								<th class="header-end-time">End Time</th>
+								<th class="header-time-consumed">Time Consumed (ms)</th>
+								<th class="header-details">View</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Ends Item Logs -->

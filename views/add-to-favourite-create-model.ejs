@@ -1,0 +1,57 @@
+<!-- Starts add-to-favourite model -->
+<div class="modal fade modal-slide-in-form modal-slide-in second-step add-to-favourite-create-model"
+    id="add-to-favourite-create-modal-slide-in" style="z-index: 1090;">
+    <div class="modal-dialog">
+        <div class="modal-content overflow-hidden">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+            <div class="modal-header mb-1">
+                <h5 class="modal-title" id="add-to-favourite-modal-label">Add Favourite</h5>
+            </div>
+            <div class="modal-body flex-grow-1">
+                <section class="add-to-favourite-create">
+                    <form id="form-add-to-favourite-create" action="javascript:void(0);" autocomplete="off">
+                        <div class="row">
+                            <div class="form-group col-12 m-0">
+                                <input type="hidden" name="add-to-favourite-id" id="add-to-favourite-id"
+                                    class="form-control" placeholder="Id" />
+                            </div>
+                            <div class="form-group col-12">
+                                <label class="form-label required" for="add-to-favourite-name">Favourite Name</label>
+                                <input type="text" name="add-to-favourite-name" id="add-to-favourite-name"
+                                    class="form-control" placeholder="Enter Project Name" required />
+                            </div>
+                            <div class="form-group col-12">
+                                <label class="form-label" for="add-to-favourite-sequence">Sequence</label>
+                                <input type="text" name="add-to-favourite-sequence" id="add-to-favourite-sequence"
+                                    class="form-control" placeholder="Enter Sequence" />
+                            </div>
+                            <div class="form-group col-12">
+                                <label class="form-label" for="add-to-favourite-description">Favourite
+                                    Description</label>
+                                <textarea name="add-to-favourite-description" id="add-to-favourite-description"
+                                    class="form-control" placeholder="Enter Project Description" rows="4"></textarea>
+                            </div>
+                            <div class="form-group col-12">
+                                <div class="demo-inline-spacing">
+                                    <div class="custom-control custom-control-primary custom-switch mt-0">
+                                        <p class="mb-50 form-label" for="is-add-to-favourite-active">Active</p>
+                                        <input type="checkbox" name="is-add-to-favourite-active"
+                                            class="custom-control-input" id="is-add-to-favourite-active" value="1"
+                                            checked /><label class="custom-control-label"
+                                            for="is-add-to-favourite-active"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="form-group col-12">
+                                <button class="btn btn-primary" id="create-add-to-favourite" type="submit">Add Favourite</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Ends add-to-favourite model -->

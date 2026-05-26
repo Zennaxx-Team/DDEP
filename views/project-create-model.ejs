@@ -1,0 +1,108 @@
+<!-- Starts project model -->
+<div class="modal fade modal-slide-in-form modal-slide-in second-middle-step project-create-model"  id="project-create-modal-slide-in" style="z-index: 1080;">
+	<div class="modal-dialog">
+		<div class="modal-content overflow-hidden">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+			<div class="modal-header mb-1">
+				<h5 class="modal-title" id="project-modal-label"></h5>
+			</div>
+			<div class="modal-body flex-grow-1">
+				<section class="project-create">
+					<form id="form-project-create" action="javascript:void(0);" autocomplete="off">
+						<div class="row">
+							<div class="form-group col-12 m-0">
+								<input type="hidden" name="project-id" id="project-id" class="form-control" placeholder="Id" />
+							</div>
+							<div class="form-group col-12">
+								<label class="form-label required" for="select-project-company">Company</label>
+								<select class="select2 form-control form-control-lg required" id="select-project-company" name="select-project-company"></select>
+							</div>
+							<div class="form-group col-12">
+								<label class="form-label required" for="project-code">Project Code</label>
+								<input type="text" name="project-code" id="project-code" class="form-control" placeholder="Enter Project Code" required />
+							</div>
+							<div class="form-group col-12">
+								<label class="form-label required" for="project-name">Project Name</label>
+								<input type="text" name="project-name" id="project-name" class="form-control" placeholder="Enter Project Name" required />
+							</div>
+							<div class="form-group col-12">
+								<label class="form-label" for="project-sequence">Sequence</label>
+								<input type="text" name="project-sequence" id="project-sequence" class="form-control" placeholder="Enter Sequence" />
+							</div>
+							<div class="form-group col-12">
+								<label class="form-label" for="project-description">Project Description</label>
+								<textarea name="project-description" id="project-description" class="form-control" placeholder="Enter Project Description" rows="4"></textarea>
+							</div>
+							<div class="form-group col-12">
+								<div class="demo-inline-spacing">
+									<div class="custom-control custom-control-primary custom-switch mt-0">
+										<p class="mb-50 form-label" for="is-project-urlprefix">Disabled Project Prefix</p>
+										<input type="checkbox" name="is-project-urlprefix" class="custom-control-input" id="is-project-urlprefix" value="0" /><label class="custom-control-label" for="is-project-urlprefix"></label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group col-12">
+								<div class="demo-inline-spacing">
+									<div class="custom-control custom-control-primary custom-switch mt-0">
+										<p class="mb-50 form-label" for="is-project-active">Active</p>
+										<input type="checkbox" name="is-project-active" class="custom-control-input" id="is-project-active" value="1" checked /><label class="custom-control-label" for="is-project-active"></label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row mt-2">
+							<div class="form-group col-12">
+								<h4>Notifications</h4>
+							</div>
+							<div class="form-group col-12">
+								<label class="form-label" for="email-title">Email Title</label>
+								<input type="text" name="email-title" id="email-title" class="form-control" placeholder="Enter Email Title" />
+							</div>
+							<div class="form-group col-12">
+								<label class="form-label" for="userProjectEmail">Email</label>
+								<input type="text" name="userProjectEmail" id="userProjectEmail" class="form-control" placeholder="Enter Email" />
+								<span>(Use "," Comma to separate emails)</span>
+							</div>
+						</div>
+						<div class="row mt-2">
+							<div class="form-group col-12">
+								<h4>Members</h4>
+							</div>
+							<div class="form-group col-12">
+								<label>User/User Group</label>
+								<select class="select2 form-control form-control-lg" id="select-user"></select>
+							</div>
+							<div class="form-group col-12 col-md-9">
+								<label>Permission</label>
+								<select class="select2 form-control form-control-lg" id="select-permission"></select>
+							</div>
+							<div class="form-group col-12 col-md-3 text-right">
+								<a href="javascript:void(0);" class="btn btn-primary mt-2" id="add-permission">Add</a>
+							</div>
+							<div class="col-12 mt-2">
+								<table class="table table-bordered border-0" id="permission-listing">
+									<thead>
+										<tr>
+											<th>User/User Group</th>
+											<th>Permission</th>
+											<th>Created Date</th>
+											<th>Last Updated Date</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+							</div>
+						</div>
+						<div class="row mt-2">
+							<div class="form-group col-12">
+								<button class="btn btn-primary" id="create-project" type="submit"></button>
+							</div>
+						</div>
+					</form>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Ends project model -->

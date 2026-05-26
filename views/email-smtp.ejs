@@ -1,0 +1,192 @@
+<%
+	let style = '';
+	let body = '';
+	let script = '';
+%>
+
+<% style = `<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/form-validation.css" />` %>
+
+<% body = `<div class="content-wrapper">
+				<div class="content-header row">
+					<div class="content-header-left col-md-9 col-12 mb-2">
+						<div class="row breadcrumbs-top">
+							<div class="col-12">
+								<h2 class="content-header-title float-left mb-0">SMTP</h2>
+								<div class="breadcrumb-wrapper">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item">
+											<a href="/">Home</a>
+										</li>
+										<li class="breadcrumb-item">
+											<a href="javascript:void(0);">SMTP</a>
+										</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-body">
+					<section class="horizontal-wizard">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<div class="card-body">
+										<div class="content-header">` %>
+											<% if (typeof alldata !== "undefined" && alldata !== null && alldata.status !== 0) { %>
+												<% body += `Edit SMTP` %>
+											<% } else { %>
+												<% body += `Create SMTP` %>
+											<% } %>
+											<% body += `
+											<small class="text-muted">Enter Your SMTP Details.</small>
+										</div>
+										<form id="frm-save-smtp" action="javascript:void(0);" autocomplete="off">
+											<div class="row">
+												<input type="hidden" name="data_id" id="data_id" class="form-control" placeholder="data_id"` %>
+												<% if (typeof alldata !== "undefined" && alldata !== null && alldata._id) { %>
+													<% body += ` value="${alldata._id}" readonly` %>
+												<% } %>
+												<% body += ` />
+											</div>
+											<div class="row">
+												<div class="form-group col-md-4">
+													<label class="form-label required" for="smtpServer">SMTP Server</label>
+													<input type="text" name="smtpServer" id="smtpServer" class="form-control" placeholder="Enter SMTP Server"` %>
+													<% if (typeof alldata !== "undefined" && alldata !== null && alldata.status !== 0 && typeof alldata.smtpServer !== "undefined") { %>
+														<% body += ` value="${alldata.smtpServer}" required` %>
+													<% } %>
+													<% body += ` />
+												</div>
+												<div class="form-group col-md-4">
+													<label class="form-label required" for="smtpPort">SMTP Port</label>
+													<input type="text" name="smtpPort" id="smtpPort" class="form-control" placeholder="Enter SMTP Port" aria-label="SMTP Port"` %>
+													<% if (typeof alldata !== "undefined" && alldata !== null && alldata.status !== 0 && typeof alldata.smtpPort !== "undefined") { %>
+														<% body += ` value="${alldata.smtpPort}" required` %>
+													<% } %>
+													<% body += ` />
+												</div>
+												<div class="form-group col-md-4">
+													<label class="form-label required">SMTP Properties</label>
+													<div class="demo-inline-spacing">
+														<div class="custom-control custom-radio" style="margin-top: 7px;">
+															<input type="radio" name="smtpProperties" id="smtpPropertiesSSL" class="custom-control-input" aria-label="SSL" value="ssl"` %>
+															<% if (typeof alldata !== "undefined" && alldata !== null && alldata.status !== 0 && typeof alldata.smtpProperties !== "undefined" && alldata.smtpProperties === "ssl") { %>
+																<% body += ` checked` %>
+															<% } %>
+															<% body += ` required />
+															<label class="custom-control-label" for="smtpPropertiesSSL">SSL</label>
+														</div>
+														<div class="custom-control custom-radio" style="margin-top: 7px;">
+															<input type="radio" name="smtpProperties" id="smtpPropertiesTLS" class="custom-control-input" aria-label="TLS" value="tls"` %>
+															<% if (typeof alldata !== "undefined" && alldata !== null && alldata.status !== 0 && typeof alldata.smtpProperties !== "undefined" && alldata.smtpProperties === "tls") { %>
+																<% body += ` checked` %>
+															<% } %>
+															<% body += ` required />
+															<label class="custom-control-label" for="smtpPropertiesTLS">TLS</label>
+														</div>
+													</div>
+												</div>
+												<div class="form-group col-md-4">
+													<label class="form-label required" for="smtpEmail">Email</label>
+													<input type="text" name="smtpEmail" id="smtpEmail" class="form-control" placeholder="Enter Email" aria-label="Email"` %>
+													<% if (typeof alldata !== "undefined" && alldata !== null && alldata.status !== 0 && typeof alldata.smtpEmail !== "undefined") { %>
+														<% body += ` value="${alldata.smtpEmail}" required` %>
+													<% } %>
+													<% body += ` />
+												</div>
+												<div class="form-group col-md-4">
+													<label class="form-label required" for="smtpAccount">Account</label>
+													<input type="text" name="smtpAccount" id="smtpAccount" class="form-control" placeholder="Enter Account" aria-label="Account"` %>
+													<% if (typeof alldata !== "undefined" && alldata !== null && alldata.status !== 0 && typeof alldata.smtpAccount !== "undefined") { %>
+														<% body += ` value="${alldata.smtpAccount}" required` %>
+													<% } %>
+													<% body += ` />
+												</div>
+												<div class="form-group col-md-4">
+													<label class="form-label required" for="smtpPassword">Password</label>
+													<input type="password" name="smtpPassword" id="smtpPassword" class="form-control" placeholder="Enter Password" aria-label="Password"` %>
+													<% if (typeof alldata !== "undefined" && alldata !== null && alldata.status !== 0 && typeof alldata.smtpPassword !== "undefined") { %>
+														<% body += ` value="${alldata.smtpPassword}" required` %>
+													<% } %>
+													<% body += ` />
+												</div>
+												<div class="form-group col-md-4">
+													<div class="demo-inline-spacing">
+														<div class="custom-control custom-control-primary custom-switch">
+															<p class="mb-50 form-label" for="smtpActive">Active</p>
+															<input type="checkbox" name="smtpActive" class="custom-control-input" id="smtpActive" value="1"` %>
+															<% if (typeof alldata !== "undefined" && alldata !== null && alldata.status !== 0 && typeof alldata.smtpActive !== "undefined" && alldata.smtpActive === "1") { %>
+																<% body += ` checked` %>
+															<% } %>
+															<% body += ` />
+															<label class="custom-control-label" for="smtpActive"></label>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group col-md-4">
+													<div class="demo-inline-spacing">
+														<div class="custom-control custom-checkbox" style="margin-top: 7px;">
+															<input type="checkbox" name="authenticationSPA" id="authenticationSPA" class="custom-control-input" aria-label="Require login using Secure Password Authentication (SPA)"` %>
+															<% if (typeof alldata !== "undefined" && alldata !== null && alldata.status !== 0 && typeof alldata.smtpAuthenticationSPA !== "undefined" && alldata.smtpAuthenticationSPA === "on") { %>
+																<% body += ` checked` %>
+															<% } %>
+															<% body += ` />
+															<label class="custom-control-label" for="authenticationSPA">Require login using Secure Password Authentication (SPA)</label>
+														</div>
+													</div>
+												</div>
+											</div>
+											<button class="btn btn-primary waves-effect mt-1" id="save_smtp" type="submit">Save</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="content-body">
+					<section class="horizontal-wizard">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<div class="card-body">
+										<div class="content-header">
+											<h5 class="mb-0">Test SMTP</h5>
+											<small class="text-muted">Test Your SMTP Details.</small>
+										</div>
+										<form id="frm-send-email" action="javascript:void(0);" autocomplete="off">
+											<div class="row">
+												<div class="form-group col-md-6">
+													<label class="form-label required" for="testEmail">Email</label>
+													<input type="email" name="testEmail" id="testEmail" class="form-control" placeholder="Enter Email" required />
+												</div>
+												<div class="form-group col-md-6">
+													<label class="form-label required" for="testSubject">Subject</label>
+													<input type="text" name="testSubject" id="testSubject" class="form-control" placeholder="Enter subject" aria-label="Subject" required />
+												</div>
+												<div class="form-group col-md-12">
+													<label class="form-label required" for="testContent">Content</label>
+													<textarea name="testContent" id="testContent" class="form-control" rows="3" required></textarea>
+												</div>
+											</div>
+											<button class="btn btn-primary waves-effect mt-1" id="send_email" type="submit">Send</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>` %>
+
+<% script = `<script type="text/javascript" src="/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js"></script>
+		<script type="text/javascript" src="/assets/js/email-smtp.js" defer></script>` %>
+
+<%- include('layout', { title: `Email Smtp Setting`, style, body, script }) %>

@@ -1,0 +1,83 @@
+<%
+	const alertConditionModal = include('alert-condition-create-model.ejs');
+	const moniterRuleModal = include('alert-moniter-rule-create-model.ejs');
+	const notifyModal = include('alert-moniter-notify-create-model.ejs');
+	const sqlModel = include('alert-moniter-notify-query-model.ejs');
+	const notifyWebhookModal = include('alert-moniter-notify-webhook-create-model.ejs');
+	const notifyEmailModal = include('alert-moniter-notify-email-create-model.ejs');
+	const alertPolicyModal = include('alert-policy-create-model.ejs');
+	let style = '';
+	let body = '';
+	let script = '';
+%>
+
+<% style = `<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/form-validation.css" />` %>
+
+<% body = `<div class="content-wrapper">
+				<div class="content-header row mb-2">
+					<div class="content-header-left col-md-9 col-12">
+						<div class="row breadcrumbs-top">
+							<div class="col-12">
+								<h2 class="content-header-title float-left mb-0">Alert Conditions</h2>
+								<div class="breadcrumb-wrapper">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item">
+											<a href="/">Home</a>
+										</li>
+										<li class="breadcrumb-item">
+											Alert Conditions
+										</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-body">
+					<section class="alert-condition-listing">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<table class="table" id="alert-condition-data-table">
+										<thead>
+											<tr>
+												<th>No</th>
+												<th>Conditon Name</th>
+												<th>Description</th>
+												<th>Policy Name</th>
+												<th>Creator</th>
+												<th>Created Time</th>
+												<th>Updated Time</th>
+												<th>Active</th>
+												<th>Actions</th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>` %>
+<% body += alertConditionModal; %>
+<% body += moniterRuleModal; %>
+<% body += notifyModal; %>
+<% body += notifyWebhookModal; %>
+<% body += notifyEmailModal; %>
+<% body += alertPolicyModal; %>
+<% body += sqlModel; %>
+
+<% script = `<script type="text/javascript" src="/app-assets/js/scripts/hyperformula.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js"></script>
+		<script type="text/javascript" src="/app-assets/js/scripts/moment.min.js"></script>
+		<script type="text/javascript" src="/assets/js/alert-condition.js"></script>
+		<script type="text/javascript" src="/assets/js/alert-policy.js"></script>` %>
+
+<%- include('layout', { title: `Alert Conditions`, style, body, script }) %>

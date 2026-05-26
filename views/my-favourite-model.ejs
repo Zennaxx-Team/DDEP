@@ -1,0 +1,87 @@
+<!-- Starts add-to-favourite model -->
+<div class="modal fade modal-slide-in-form modal-slide-in second-middle-step my-favourite-model"
+    id="my-favourite-modal-slide-in" style="z-index: 1080;">
+    <div class="modal-dialog">
+        <div class="modal-content overflow-hidden">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+            <div class="modal-header mb-1">
+                <h5 class="modal-title" id="my-favourite-label">Add Favourite</h5>
+            </div>
+            <div class="modal-body flex-grow-1">
+                <section class="my-favourite">
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <button class="nav-link active" id="nav-favourites-tab" data-toggle="tab"
+                                data-target="#nav-favourites" type="button" role="tab" aria-controls="nav-favourites"
+                                aria-selected="true">
+                                My Favourites
+                            </button>
+                            <button class="nav-link" id="nav-recent-search-tab" data-toggle="tab"
+                                data-target="#nav-recent-search" type="button" role="tab"
+                                aria-controls="nav-recent-search" aria-selected="false">
+                                Recent Search
+                            </button>
+                        </div>
+                    </nav>
+
+                    <!-- Table belongs only inside My Favourites tab -->
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-favourites" role="tabpanel"
+                            aria-labelledby="nav-favourites-tab">
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <table class="table" id="favourites-data-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Favourite name</th>
+                                                    <th>Description</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent search tab (no table) -->
+                        <div class="tab-pane fade" id="nav-recent-search" role="tabpanel"
+                            aria-labelledby="nav-recent-search-tab">
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <table class="table" id="query-data-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Company</th>
+                                                    <th>Project</th>
+                                                    <th>Environment</th>
+                                                    <th>Item Name</th>
+                                                    <th>Descr</th>
+                                                    <th>HTTP Status</th>
+                                                    <th>Triggered Status</th>
+                                                    <th>UNIQUE ID</th>
+                                                    <th>Path</th>
+                                                    <th>Time</th>
+                                                    <th>From Date</th>
+                                                    <th>To Date</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Ends add-to-favourite model -->

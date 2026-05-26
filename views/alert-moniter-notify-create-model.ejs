@@ -1,0 +1,250 @@
+<!-- Starts moniter rule model -->
+<div class="modal fade modal-slide-in-form modal-slide-in thired-step" id="notify-modal-slide-in">
+	<div class="modal-dialog">
+		<div class="modal-content overflow-hidden">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+			<div class="modal-header mb-1">
+				<h5 class="modal-title" id="notify-label-condition">Alert Conditions Action</h5>
+			</div>
+			<div class="modal-body flex-grow-1">
+				<section class="mb-2">
+					<form id="form-notify-action-create" autocomplete="off">
+						<div class="row">
+							<div class="form-group col-12 col-xs-12 col-sm-12 col-md-6">
+								<label class="form-label required" for="notify-action-description">Notify
+									Description</label>
+								<textarea type="text" name="notify-action-description" id="notify-action-description"
+									class="form-control" placeholder="Enter Notify Action Description"
+									required></textarea>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-12 m-0 alert-model">
+								<div class="demo-inline-spacing">
+									<div class="custom-control custom-radio active">
+										<input type="radio" id="customRadio1webhook" name="customRadioalert"
+											class="custom-control-input" value="Webhook" checked />
+										<label class="custom-control-label " for="customRadio1webhook">
+											<img class="webhook-01" alt="webhook"
+												src="../../assets/images/svg/webhook-01.svg">
+											<img class="webhook-02" alt="webhook"
+												src="../../assets/images/svg/webhook-02.svg">
+											Webhook
+										</label>
+									</div>
+									<div class="custom-control custom-radio">
+										<input type="radio" id="customRadio2email" name="customRadioalert"
+											class="custom-control-input" value="Email" />
+										<label class="custom-control-label" for="customRadio2email">
+											<i data-feather="mail" class="mr-sm-25 mr-0"></i> Email</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div id="notify-webhook-section">
+							<div class="row mt-2">
+								<div class="form-group col-12 m-0 font-weight-bold green-color h4">
+									Webhook
+								</div>
+							</div>
+
+							<div class="row mt-1">
+								<div class="form-group col-12 col-xs-12 col-sm-12 col-md-6">
+									<label class="form-label required" for="notify-item-action-webhook-url">URL</label>
+									<input type="text" name="notify-item-action-webhook-url"
+										id="notify-item-action-webhook-url" class="form-control"
+										placeholder="Enter webhook url" required />
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="form-group col-12 col-xs-12 col-sm-12 col-md-6">
+									<label class="form-label required" for="notify-select-webhook-method">Method</label>
+									<select class="select2 form-control form-control-lg custom-select"
+										id="notify-select-webhook-method" name="notify-select-webhook-method">
+										<option value="POST">POST</option>
+										<option value="GET">GET</option>
+										<option value="PUT">PUT</option>
+										<option value="PATCH">PATCH</option>
+										<option value="DELETE">DELETE</option>
+										<option value="Customize">Customize</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="row" id="notify-webhook-method-custom-row" style="display:none;">
+								<div class="form-group col-12 col-xs-12 col-sm-12 col-md-6">
+									<label class="form-label required" for="notify-webhook-method-custom-value">Custom
+										Method
+										Expression</label>
+									<input type="text" name="notify-webhook-method-custom-value"
+										id="notify-webhook-method-custom-value" class="form-control"
+										placeholder="e.g., =@req.method or =@querystring{reqMethod}" />
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="form-group col-12 col-xs-12 col-sm-12 col-md-6">
+									<label class="form-label required" for="notify-select-webhook-body-type">Body
+										Type</label>
+									<select class="select2 form-control form-control-lg custom-select"
+										id="notify-select-webhook-body-type" name="notify-select-webhook-body-type">
+										<option value="TEXT">TEXT</option>
+										<option value="JSON">JSON</option>
+										<option value="HTML">HTML</option>
+										<option value="XML">XML</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="form-group col-12 m-0 font-weight-bold h4">
+									Header
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-12">
+									<table id="notify-webhook-headers-table"
+										class="table logical-table notify-webhook-headers-table table-bordered mt-1">
+										<thead>
+											<tr>
+												<th></th>
+												<th></th>
+												<th>Key</th>
+												<th>Value</th>
+												<th>Mask</th>
+												<th>Description</th>
+												<th>
+													<a href="javascript:void(0);"
+														class="btn btn-lg btn-del modal-button"
+														id="notify-webhook-headers-btn-add-row"><i data-feather="plus"
+															class="font-medium-2"></i></a>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="format-rules-icon text-center">
+													<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+														viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round" class="feather feather-code font-medium-2">
+														<polyline points="16 18 22 12 16 6"></polyline>
+														<polyline points="8 6 2 12 8 18"></polyline>
+													</svg>
+												</td>
+												<td class="col-sm-1 text-center">
+													<div class="custom-control custom-checkbox">
+														<input type="checkbox" name="notify-webhook-headers-status"
+															id="notify-webhook-headers-status-0"
+															class="custom-control-input" checked />
+														<label class="custom-control-label"
+															for="notify-webhook-headers-status-0"></label>
+													</div>
+												</td>
+												<td class="col-sm-3">
+													<input type="text" name="notify-webhook-headers[][key]"
+														class="form-control border-0"
+														id="notify-webhook-headers-key-0" />
+												</td>
+												<td class="col-sm-4">
+													<input type="text" name="notify-webhook-headers[][value]"
+														class="form-control border-0"
+														id="notify-webhook-headers-value-0" />
+												</td>
+												<td class="col-sm-1 text-center">
+													<div class="custom-control custom-checkbox">
+														<input type="checkbox" name="notify-webhook-headers-mask-status"
+															id="notify-webhook-headers-mask-status-0"
+															class="custom-control-input" checked />
+														<label class="custom-control-label"
+															for="notify-webhook-headers-mask-status-0"></label>
+													</div>
+												</td>
+												<td class="col-sm-3">
+													<input type="text" name="notify-webhook-headers[][description]"
+														class="form-control border-0"
+														id="notify-webhook-headers-description-0" />
+												</td>
+												<td class="col-sm-1 text-center">
+													<a href="javascript:void(0);" type="button"
+														class="notify-webhook-headers-btn-del btn btn-lg btn-del modal-button">
+														<i data-feather="minus" class="font-medium-2"></i>
+													</a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="form-group col-12 m-0 font-weight-bold h4">
+									Content
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-12">
+									<textarea type="text" name="notify-webhook-content" id="notify-webhook-content"
+										class="form-control mt-1" placeholder="Enter webhook content"
+										rows="10"></textarea>
+								</div>
+							</div>
+						</div>
+
+						<div id="notify-email-section">
+							<div class="row mt-2">
+								<div class="form-group col-12 m-0 font-weight-bold green-color h4">
+									Email
+								</div>
+							</div>
+
+							<div class="row mt-1">
+								<div class="form-group col-12 col-xs-12 col-sm-12 col-md-6">
+									<label class="form-label required" for="notify-item-action-email-to">Email
+										To</label>
+									<input type="text" name="notify-item-action-email-to"
+										id="notify-item-action-email-to" class="form-control" placeholder="Enter Email"
+										required />
+								</div>
+							</div>
+
+							<div class="row mt-1">
+								<div class="form-group col-12 col-xs-12 col-sm-12 col-md-6">
+									<label class="form-label required" for="notify-item-action-email-subject">Email
+										Subject</label>
+									<input type="text" name="notify-item-action-email-subject"
+										id="notify-item-action-email-subject" class="form-control"
+										placeholder="Enter Email Subject" required />
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="form-group col-12 m-0 font-weight-bold h4">
+									Content
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-12">
+									<textarea type="text" name="notify-email-content" id="notify-email-content"
+										class="form-control mt-1" placeholder="Enter email Content"
+										rows="10"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="row mt-2">
+							<div class="form-group col-12">
+								<button class="btn btn-primary" id="save-action" type="button">Save</button>
+							</div>
+						</div>
+					</form>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Ends moniter rule model -->

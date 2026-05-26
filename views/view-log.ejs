@@ -1,0 +1,144 @@
+<%
+	const itemCurlbashViewModal = include('curl-bash-model.ejs');
+	let style = '';
+	let body = '';
+	let script = '';
+%>
+
+<% style = `<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css">` %>
+
+<% body = `<div class="content-wrapper">
+				<div class="content-header row">
+					<div class="content-header-left col-md-9 col-12 mb-2">
+						<div class="row breadcrumbs-top">
+							<div class="col-12">
+								<h2 class="content-header-title float-left mb-0">Logs</h2>
+								<div class="breadcrumb-wrapper">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item">
+											<a href="/">Home</a>
+										</li>
+										<li class="breadcrumb-item">
+											<a href="javascript:void(0);">Logs</a>
+										</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-body">
+					<section id="basic-datatable">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<input type="hidden" name="unique_id" id="unique_id" class="form-control" placeholder="Id"` %>
+									<% if (typeof(alldata) != "undefined" && alldata != null && alldata.unique_id) { %>
+										<% body += ` value="` %> <% body += alldata.unique_id %> <% body += `" readonly` %>
+									<% } %>
+									<% body += ` />
+								<div class="endpoint_title">
+									<div class="ml-1 mr-1 mt-2 border w-auto">
+										<div class="d-flex justify-content-between align-items-center border p-2">
+											<!-- Left side text -->
+											<strong>Inbound Entrypoint</strong>
+
+											<!-- Right side buttons -->
+											<div>
+												<span class="hiddle_feilds">
+													<button type="button" class="btn btn-link p-0 m-0 me-1" id="log-curl-request-copy">Copy</button>
+													<span class="mx-1">|</span>
+													<button type="button" class="btn btn-link p-0 m-0 mx-1" id="log-curl-request" data-uniqueid-curl-request="">Curl Bash</button>
+													<span class="mx-1">|</span>
+												</span>
+												<button type="button" class="btn btn-link p-0 m-0 ms-1" id="log-details-page" data-uniqueid-log="">Log Details</button>
+											</div>
+										</div>
+									</div>
+									<div class="ml-1 mr-1 mb-1 border w-auto">
+										<div class="p-1">
+											<span class="inbound-entrypoint-value">-</span>
+										</div>
+									</div>
+								</div>
+								<table class="datatables-basic table" id="logs_data_table">
+									<thead>
+										<tr>
+											<th class="header-number">No</th>
+											<th class="header-action">Action</th>
+											<th class="header-description">Description</th>
+											<th class="header-type">Type</th>
+											<th class="header-http-status">Http Status</th>
+											<th class="header-time">Time</th>
+											<th class="header-details">Details</th>
+										</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+								<table class="datatables-basic table" id="logs_new_data_table">
+									<thead>
+										<tr>
+											<th class="header-number">No</th>
+											<th class="header-outbound-enpoint">Outbound Endpoint</th>
+											<th class="header-time-consumed">TIME CONSUMED (MS)</th>
+											<th class="header-status">STATUS</th>
+											<th class="header-status-code">STATUS CODE</th>
+											<th class="header-curl-bash">CURL Bash</th>
+											<th class="header-request">REQUEST</th>
+											<th class="header-transformed-request">TRANSFORMED REQUEST</th>
+											<th class="header-request-filter">REQUEST FILTER</th>
+											<th class="header-validation">VALIDATION</th>
+											<th class="header-trigger-rules">TRIGGER RULES</th>
+											<th class="header-request-return-url">REQUEST RETURN URL</th>
+											<th class="header-response">RESPONSE</th>
+											<th class="header-transformed-response">TRANSFORMED RESPONSE</th>
+											<th class="header-response-filter">RESPONSE FILTER</th>
+											<th class="header-response-validation">RESPONSE VALIDATION</th>
+											<th class="header-response-return-url">RESPONSE RETURN URL</th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="modal fade modal-slide-in-form modal-slide-in" id="details-modal" tabindex="-1" role="dialog" aria-labelledby="details-modal-label" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content overflow-hidden">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+							<div class="modal-header mb-1">
+								<h5 class="modal-title" id="item-logs-modal-label">View Item Logs Details</h5>
+							</div>
+							<div class="modal-body flex-grow-1 p-0">
+
+								<section class="item-logs">
+									<div class="position-relative">
+										<button type="button" class="btn btn-sm btn-primary position-absolute"
+											style="top: 8px; right: 8px; z-index: 1;" id="copy-content-btn">
+											Copy
+										</button>
+										<button type="button" class="btn btn-link p-0 m-0 mx-1" id="log-req-res-request"
+											data-uniqueid-curl-request="" style="display: none;">Curl Bash</button>
+
+										<pre id="details-modal-body" class="p-1"></pre>
+										<div id="table-content" class="p-1"></div>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>` %>
+<% body += itemCurlbashViewModal; %>				
+
+<% script = `<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js"></script>
+		<script type="text/javascript" src="/assets/js/logs-view.js" defer></script>` 
+		%>
+
+<%- include('layout', { title: `View-logs`, style, body, script }) %>

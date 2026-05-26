@@ -1,0 +1,38 @@
+<!-- Starts alert history model -->
+<div class="modal fade modal-slide-in-form modal-slide-in first-step alert-history-model"
+    id="alert-history-modal-slide-in">
+    <div class="modal-dialog">
+        <div class="modal-content overflow-hidden">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+            <div class="modal-header mb-1">
+                <h5 class="modal-title" id="alert-modal-label-condition"></h5>
+            </div>
+            <div class="modal-body flex-grow-1">
+                <section>
+                    <div class="row all-item mt-1"></div>
+                    <div class="row">
+                        <div class="col-12 mb-1">
+                            <h4>Monitor Rules</h4>
+                        </div>
+                        <div class="col-12 all-alert-rule mb-1"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 sql-section mb-1">
+                            <h4>SQL Query</h4>
+                            <pre class="sql-statement mt-2" id="alert-sql-statement"></pre>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 sql-section mb-1">
+                            <h4>SQL Result</h4>
+                            <pre class="sql-statement mt-2" id="alert-sql-result-statement"></pre>
+                        </div>
+                    </div>
+                    <div class="row" id="webhook-detail-container" style="display:none;"></div>
+                    <div class="row" id="email-detail-container" style="display:none;"></div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Ends alert history model -->

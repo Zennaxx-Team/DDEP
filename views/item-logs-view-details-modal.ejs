@@ -1,0 +1,28 @@
+<!-- Starts View Item Logs Details -->
+<div class="modal fade modal-slide-in-form modal-slide-in thired-step view-item-logs-details-modal"
+	id="view-item-logs-details-modal-slide-in" style="z-index:1090">
+	<div class="modal-dialog">
+		<div class="modal-content overflow-hidden">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+			<div class="modal-header mb-1">
+				<h5 class="modal-title" id="item-logs-modal-label">View Item Logs Details</h5>
+			</div>
+			<div class="modal-body flex-grow-1 p-0">
+				<section class="item-logs">
+					<div class="position-relative">
+						<button type="button" class="btn btn-sm btn-primary position-absolute"
+							style="top: 8px; right: 8px; z-index: 1;" id="copy-content-btn">
+							Copy
+						</button>
+						<button type="button" class="btn btn-link p-0 m-0 mx-1" id="log-req-res-request"
+							data-uniqueid-curl-request="" style="display: none;">Curl Bash</button>
+
+						<pre id="details-modal-body" class="p-1"></pre>
+						<div id="table-content" class="p-1"></div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Ends View Item Logs Details -->

@@ -1,0 +1,44 @@
+			<!-- Starts alert policy model -->
+			<div class="modal fade modal-slide-in-form modal-slide-in second-step alert-policy-model" id="alert-policy-modal-slide-in" >
+				<div class="modal-dialog">
+					<div class="modal-content overflow-hidden">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+						<div class="modal-header mb-1">
+							<h5 class="modal-title" id="alert-modal-label"></h5>
+						</div>
+						<div class="modal-body flex-grow-1">
+							<section class="alert-policy-create">
+								<form id="form-policy-create" action="javascript:void(0);" autocomplete="off">
+									<div class="row">
+										<div class="form-group col-12 m-0">
+											<input type="hidden" name="policy-id" id="policy-id" class="form-control" placeholder="Id">
+										</div>
+										<div class="form-group col-12">
+											<label class="form-label required" for="policy-name">Policy Name</label>
+											<input type="text" name="policy-name" id="policy-name" class="form-control" placeholder="Enter Alert Policy Name" required />
+										</div>
+										<div class="form-group col-12">
+											<label class="form-label" for="policy-description">Policy Description</label>
+											<textarea name="policy-description" id="policy-description" class="form-control" placeholder="Enter Alert Policy Description" rows="4"></textarea>
+										</div>
+										<div class="form-group col-12">
+											<div class="demo-inline-spacing">
+												<div class="custom-control custom-control-primary custom-switch mt-0">
+													<p class="mb-50 form-label" for="is-active">Active</p>
+													<input type="checkbox" name="is-active" class="custom-control-input" id="is-active" value="1" checked /><label class="custom-control-label" for="is-active"></label>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row mt-2">
+										<div class="form-group col-12">
+											<button class="btn btn-primary" id="create-alert-policy" type="submit"></button>
+										</div>
+									</div>
+								</form>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Ends lert policy model -->

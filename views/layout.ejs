@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="author" content="DDEP - a4appz">
+		<meta name="version" content="DDEP - <%= ddepVersion %>">
+		<title><%= title %> - a4appz</title>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/vendors.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/extensions/sweetalert2.min.css">
+		<%- style %>
+		<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/forms/select/select2.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/css/bootstrap-extended.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/css/colors.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/css/components.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/css/core/menu/menu-types/vertical-menu.min.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/extensions/ext-component-sweet-alerts.css">
+		<link rel="stylesheet" type="text/css" href="/assets/css/styles.css">
+		<link rel="stylesheet" type="text/css" href="/app-assets/fonts/font-awesome/css/font-awesome.css">
+		<script type="text/javascript">
+		<% if (typeof(companyCode) != "undefined") { %>
+			const dataCompanyCode = "<%= companyCode %>";
+		<% } else { %>
+			const noDataCompanyCode = "companyCode not found!";
+		<% } %>
+		<% if (typeof(isProject) != "undefined") { %>
+			const isProject = "<%= isProject %>";
+		<% } %>
+			const EnableGimaEnv = <%= process.env.EnableGima %>;
+		<% if (typeof(alldata) != "undefined" && alldata != null && alldata.ddepApiPrefix) { %>
+			let ddepApiPrefix = "<%= alldata.ddepApiPrefix %>";
+		<% } %>
+		</script>
+	</head>
+	<body class="vertical-layout vertical-menu-modern navbar-floating footer-fixed" data-open="click" data-menu="vertical-menu-modern">
+		<div class="overlay">
+			<div class="overlayDoor"></div>
+			<div class="overlayContent">
+				<div class="loader">
+					<div class="inner"></div>
+				</div>
+			</div>
+		</div>
+		<div class="header-navbar floating-nav">
+			<nav class="navbar navbar-expand-lg align-items-center navbar-light navbar-shadow">
+				<div class="navbar-container d-flex content">
+					<div class="bookmark-wrapper d-flex align-items-center">
+						<ul class="nav navbar-nav d-xl-none">
+							<li class="nav-item">
+								<a class="nav-link menu-toggle" href="javascript:void(0);">
+									<i class="ficon" data-feather="menu"></i>
+								</a>
+							</li>
+						</ul>
+						<ul class="nav navbar-nav bookmark-icons mb-pos-wrapper">
+							<li class="nav-item d-none d-lg-block"><a class="nav-link addIcon"><i class="ficon" data-feather="plus-circle"></i></a></li>
+							<li class="nav-item d-none d-lg-block"><a class="nav-link printerIcon"><i class="ficon" data-feather="printer"></i></a></li>
+							<li class="nav-item d-none d-lg-block"><a class="nav-link refreshIcon"><i class="ficon" data-feather="refresh-ccw"></i></a></li>
+							<li class="nav-item d-none d-lg-block"><a class="nav-link trashIcon"><i class="ficon" data-feather="trash-2"></i></a></li>
+							<li class="nav-item d-none d-lg-block"><a class="nav-link menuIcon"><i class="ficon" data-feather="menu"></i></a></li>
+							<li class="nav-item d-none d-lg-block"><a class="nav-link cornerdownIcon" ><i class="ficon" data-feather="corner-down-left"></i></a></li>
+							<li class="nav-item d-none d-lg-block"><a class="nav-link saveIcon" ><i class="ficon" data-feather="save"></i></a></li>
+							<li class="nav-item d-none d-lg-block"><a class="nav-link dollarIcon"><i class="ficon" data-feather="dollar-sign"></i></a></li>
+							<li class="nav-item d-none d-lg-block"><a class="nav-link downloadIcon" ><i class="ficon" data-feather="download-cloud"></i></a></li>
+							<li class="nav-item d-none d-lg-block"><a class="nav-link columnIcon" ><i class="ficon" data-feather="columns"></i></a></li>
+						</ul>
+						<div class="d-inline-flex d-mbile-box">
+							<a class="pr-1 dropdown-toggle hide-arrow text-primary" data-toggle="dropdown" aria-expanded="true">
+								<svg t="1710208216723" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1479" xmlns:xlink="http://www.w3.org/1999/xlink" width="30" height="30"><path d="M206.116734 596.023523c46.398166-0.727906 83.429277-38.940285 82.701371-85.336645-0.717069-46.40539-38.927642-83.438308-85.325808-82.710401-46.407197 0.7261-83.438308 38.927642-82.710402 85.334838 0.727906 46.409003 38.927642 83.429277 85.334839 82.712208zM820.51854 596.023523c46.396359-0.727906 83.427471-38.940285 82.699565-85.336645-0.717069-46.40539-38.927642-83.438308-85.325808-82.710401-46.407197 0.7261-83.438308 38.927642-82.710402 85.334838 0.729713 46.409003 38.927642 83.429277 85.336645 82.712208zM513.313122 596.023523c46.407197-0.727906 83.438308-38.940285 82.710401-85.336645-0.729713-46.40539-38.927642-83.438308-85.336645-82.710401-46.396359 0.7261-83.427471 38.927642-82.710401 85.334838 0.729713 46.409003 38.929448 83.429277 85.336645 82.712208z" fill="#fff" p-id="1480"></path></svg>
+							</a>						
+							<div class="dropdown-menu dropdown-menu-right dropdown-mobile-box" x-placement="top-end" style="position: absolute; transform: translate3d(1328px, -266px, 0px); top: 0px; left: 0px; will-change: transform;">
+								<a href="javascript:;" class="dropdown-item addIcon">
+									<i class="ficon" data-feather="plus-circle"></i>
+								</a>
+								<a href="javascript:;" class="dropdown-item printerIcon">
+									<i class="ficon" data-feather="printer"></i>
+								</a>
+								<a href="javascript:;" class="dropdown-item refreshIcon">
+									<i class="ficon" data-feather="refresh-ccw"></i>
+								</a>
+								<a href="javascript:;" class="dropdown-item trashIcon">
+									<i class="ficon" data-feather="trash-2"></i>
+								</a>
+								<a href="javascript:;" class="dropdown-item menuIcon">
+									<i class="ficon" data-feather="menu"></i>
+								</a>
+								<a href="javascript:;" class="dropdown-item cornerdownIcon">
+									<i class="ficon" data-feather="corner-down-left"></i>
+								</a>
+								<a href="javascript:;" class="dropdown-item saveIcon" >
+									<i class="ficon" data-feather="save"></i>
+								</a>
+								<a href="javascript:;" class="dropdown-item dollarIcon">
+									<i class="ficon" data-feather="dollar-sign"></i>
+								</a>
+								<a href="javascript:;" class="dropdown-item downloadIcon">
+									<i class="ficon" data-feather="download-cloud"></i>
+								</a>
+								<a href="javascript:;" class="dropdown-item columnIcon">
+									<i class="ficon" data-feather="columns"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+					<ul class="nav navbar-nav align-items-center ml-auto">
+						<li class="nav-item dropdown dropdown-brand 
+							<% if (typeof isProject !== 'undefined' && isProject === true) { %> 
+								is-project 
+							<% } %>">
+							<% if (typeof isProject === "undefined" || !isProject) { %>
+							<% } %>
+							<a class="nav-link dropdown-toggle" id="dropdown-brand" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<span class="selected-brand"></span>
+								<i class="fas fa-angle-down brand-arrow" width="18" height="12"></i>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right dropdown-menu-brand" aria-labelledby="dropdown-brand" id="scrollbar-box">
+								<div class="dropdown-wrapper-box"></div>
+								<div class="project-wrapper pc-project-wrapper"></div>
+							</div>
+							<div class="tip-text" data-toggle="tooltip" data-placement="top" title="" data-original-title="Click the drop-down menu, select the Company name on the left, then select System on the right. When the selection is complete, the drop-down menu will close.">
+								<!-- <i data-feather='help-circle' class="tip-icon"></i> -->
+							</div>
+						</li>
+						<!-- <li class="nav-item dropdown dropdown-language">
+							<a class="nav-link dropdown-toggle" id="dropdown-flag" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="flag-icon flag-icon-us"></i><span class="selected-language">English</span>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-flag">
+								<a class="dropdown-item" href="javascript:void(0);" data-language="en"><i class="flag-icon flag-icon-us"></i> English</a>
+							</div>
+						</li> -->
+						<li class="nav-item dropdown dropdown-user">
+							<a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<div class="user-nav d-sm-flex d-none"></div>
+								<span class="user-name pr-1 mb-0 Gima-Medium"></span>
+								<div class="user-logo-box bg-light-success"></div>
+								<span class="avatar-status-online"></span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
+			<div class="navbar-header">
+				<img src="/app-assets/images/a4appz-logo-slogan-usage-02.png">
+			</div>
+			<div class="navbar-header">
+				<ul class="nav navbar-nav flex-row">
+					<li class="nav-item mr-auto">
+						<a class="navbar-brand" href="javascript:void(0);">
+							<h2 class="brand-text">DDEP</h2>
+						</a>
+					</li>
+					<li class="nav-item nav-toggle">
+						<a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse">
+							<i class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i>
+							<i class="d-none d-xl-block collapse-toggle-icon font-medium-4 text-primary" data-feather="disc" data-ticon="disc"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="shadow-bottom"></div>
+			<div class="main-menu-content">
+				<ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+					<li class="nav-item">
+						<a class="d-flex align-items-center" href="/dashboard">
+							<i data-feather="home"></i>
+							<span class="menu-title text-truncate" data-i18n="Dashboards">Dashboards</span>
+						</a>
+					</li>
+					<li class="navigation-header">
+						<span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span>
+						<i data-feather="more-horizontal"></i>
+					</li>
+					<% if (userPermissions?.isAdmin || userPermissions?.canViewItems || userPermissions?.canCreateItems) { %>
+					<li class="nav-item">
+						<a class="d-flex align-items-center" href="/projects/project-list">
+							<i data-feather="box"></i>
+							<span class="menu-title text-truncate" data-i18n="Projects">Projects</span>
+						</a>
+					</li>
+					<% } %>
+					<% if (userPermissions?.isAdmin) { %>
+					<li class="nav-item">
+						<a class="d-flex align-items-center" href="/template/mapping-profiles">
+							<i data-feather="git-pull-request"></i>
+							<span class="menu-title text-truncate" data-i18n="Mapping Profiles">Mapping Profiles</span>
+						</a>
+					</li>
+					<% } %>
+					<% if (userPermissions?.isAdmin) { %>
+					<li class="nav-item">
+						<a class="d-flex align-items-center" href="/users">
+							<i data-feather="users"></i>
+							<span class="menu-title text-truncate" data-i18n="Users">Users</span>
+						</a>
+					</li>
+					<% } %>
+					<% if (userPermissions?.isAdmin) { %>
+					<li class="nav-item">
+						<a class="d-flex align-items-center" href="/exceptions">
+							<i data-feather="eye"></i>
+							<span class="menu-title text-truncate" data-i18n="Exceptions">Exceptions</span>
+						</a>
+					</li>
+					<% } %>
+					<% if (userPermissions?.isAdmin) { %>
+					<li class="nav-item">
+						<a class="d-flex align-items-center" href="/logs">
+							<i data-feather="file-text"></i>
+							<span class="menu-title text-truncate" data-i18n="Logs">Logs</span>
+						</a>
+					</li>
+					<% } %>
+					<% if (userPermissions?.isAdmin) { %>
+					<li class="nav-item">
+						<a class="d-flex align-items-center" href="/diff-history">
+							<i data-feather="check-square"></i>
+							<span class="menu-title text-truncate" data-i18n="Logs">Diff. Checker</span>
+						</a>
+					</li>
+					<% } %>
+					<% if (userPermissions?.isAdmin) { %>
+					<li class="nav-item">
+						<a class="d-flex align-items-center" href="javascript:void(0);">
+							<i data-feather="inbox"></i>
+							<span class="menu-title text-truncate" data-i18n="Requests (beta)">Requests (beta)</span>
+						</a>
+						<ul class="menu-content">
+							<% if (userPermissions?.isAdmin) { %>
+							<li>
+								<a class="d-flex align-items-center" href="/datas">
+									<i data-feather="circle"></i>
+									<span class="menu-title text-truncate" data-i18n="Datas">Datas</span>
+								</a>
+							</li>
+							<% } %>
+							<% if (userPermissions?.isAdmin) { %>
+							<li>
+								<a class="d-flex align-items-center" href="javascript:void(0);">
+									<i data-feather="circle"></i>
+									<span class="menu-title text-truncate" data-i18n="Views">Views</span>
+								</a>
+							</li>
+							<% } %>
+						</ul>
+					</li>
+					<% } %>
+					<% if (userPermissions?.isAdmin || userPermissions?.canViewProjects) { %>
+					<li class="nav-item">
+						<a class="d-flex align-items-center" href="javascript:void(0);">
+							<i data-feather="sliders"></i>
+							<span class="menu-title text-truncate" data-i18n="Configures">Configures</span>
+						</a>
+						<ul class="menu-content">
+							<% if (userPermissions?.isAdmin) { %>
+							<li>
+								<a class="d-flex align-items-center" href="/master/companies">
+									<i data-feather="circle"></i>
+									<span class="menu-title text-truncate" data-i18n="Companies Master">Companies Master</span>
+								</a>
+							</li>
+							<% } %>
+							<% if (userPermissions?.isAdmin || userPermissions?.canViewProjects) { %>
+							<li>
+								<a class="d-flex align-items-center" href="/master/projects">
+									<i data-feather="circle"></i>
+									<span class="menu-title text-truncate" data-i18n="Projects">Projects Master</span>
+								</a>
+							</li>
+							<% } %>
+							<% if (userPermissions?.isAdmin) { %>
+							<li>
+								<a class="d-flex align-items-center" href="/master/environments">
+									<i data-feather="circle"></i>
+									<span class="menu-title text-truncate" data-i18n="Environments Master">Environments Master</span>
+								</a>
+							</li>
+							<% } %>
+							<% if (userPermissions?.isAdmin) { %>
+							<li>
+								<a class="d-flex align-items-center" href="/master/parties">
+									<i data-feather="circle"></i>
+									<span class="menu-title text-truncate" data-i18n="Parties Master">Parties Master</span>
+								</a>
+							</li>
+							<% } %>
+							<% if (userPermissions?.isAdmin) { %>
+							<li>
+								<a class="d-flex align-items-center" href="/permissions">
+									<i data-feather="circle"></i>
+									<span class="menu-title text-truncate" data-i18n="Permissions">Permissions</span>
+								</a>
+							</li>
+							<% } %>
+						</ul>
+					</li>
+					<% } %>
+					<% if (userPermissions?.isAdmin) { %>
+					<li class="nav-item">
+						<a class="d-flex align-items-center" href="javascript:void(0);">
+							<i data-feather="settings"></i>
+							<span class="menu-title text-truncate" data-i18n="Settings">Settings</span>
+						</a>
+						<ul class="menu-content">
+							<li>
+								<a class="d-flex align-items-center" href="/settings">
+									<i data-feather="circle"></i>
+									<span class="menu-item text-truncate" data-i18n="General">General</span>
+								</a>
+							</li>
+							<li>
+								<a class="d-flex align-items-center" href="/email/smtp">
+									<i data-feather="circle"></i>
+									<span class="menu-item text-truncate" data-i18n="SMTP">SMTP</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<% } %>
+					<% if (userPermissions?.isAdmin) { %>
+					<li class="nav-item">
+						<a class="d-flex align-items-center" href="/notifications">
+							<i data-feather="bell"></i>
+							<span class="menu-title text-truncate" data-i18n="Notification">Notification</span>
+						</a>
+					</li>
+					<% } %>
+					<% if (userPermissions?.isAdmin) { %>
+					<li class="nav-item">
+						<a class="d-flex align-items-center" href="/email-failures">
+							<i data-feather="x-circle"></i>
+							<span class="menu-title text-truncate" data-i18n="Email Failures">Email Failures</span>
+						</a>
+					</li>
+					<% } %>
+					<% if (userPermissions?.isAdmin) { %>
+					<li class="nav-item">
+						<a class="d-flex align-items-center" href="javascript:void(0);">
+							<i data-feather="alert-triangle"></i>
+							<span class="menu-title text-truncate" data-i18n="Configures">Alerts</span>
+						</a>
+						<ul class="menu-content">
+							<li>
+								<a class="d-flex align-items-center" href="/alerts/alert-policies">
+									<i data-feather="circle"></i>
+									<span class="menu-title text-truncate" data-i18n="Alert Policies">Alert Policies</span>
+								</a>
+							</li>
+							<li>
+								<a class="d-flex align-items-center" href="/alerts/alert-conditions">
+									<i data-feather="circle"></i>
+									<span class="menu-title text-truncate" data-i18n="Alert Conditions">Alert Conditions</span>
+								</a>
+							</li>
+							<li>
+								<a class="d-flex align-items-center" href="/alerts/alert-history">
+									<i data-feather="circle"></i>
+									<span class="menu-title text-truncate" data-i18n="Alert History">Alert History</span>
+								</a>
+							</li>
+							<% if (process.env.EnableAlertDebug === 'true') { %>
+								<li>
+									<a class="d-flex align-items-center" href="/alerts/alert-history-debug">
+									<i data-feather="circle"></i>
+									<span class="menu-title text-truncate">
+										Alert History (Debug)
+									</span>
+									</a>
+								</li>
+							<% } %>
+						</ul>
+					</li>
+					<% } %>
+					<% if (userPermissions?.isAdmin) { %>
+					<li class="nav-item">
+						<a class="d-flex align-items-center" href="/tools">
+							<i data-feather="tool"></i>
+							<span class="menu-title text-truncate" data-i18n="Tools">Tools</span>
+						</a>
+					</li>
+					<% } %>
+				</ul>
+			</div>
+		</div>
+		<div class="app-content content">
+			<div class="content-overlay"></div>
+			<div class="header-navbar-shadow"></div>
+			<%- body %>
+		</div>
+		<div class="sidenav-overlay"></div>
+		<div class="drag-target"></div>
+		<footer class="footer footer-fixed footer-light">
+			<p class="clearfix mb-0">
+				<span class="float-md-left d-block d-md-inline-block mt-25">&copy; <span id="current-year"></span>
+					<span class="ml-25">a4appz Ltd. (Member of SiiA Group)</span>
+				</span>
+				<span class="float-md-right d-none d-md-block"><%= process.env.FooterEnvironment || "" %> - Version # <%= process.env.DDEP_version || "" %></span>
+			</p>
+		</footer>
+		<button class="btn btn-primary btn-icon scroll-top" type="button"><i data-feather="arrow-up"></i></button>
+		<script type="text/javascript" src="/app-assets/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/app-assets/js/popper.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/vendors.min.js"></script>
+		<script type="text/javascript" src="/app-assets/vendors/js/extensions/sweetalert2.all.min.js"></script>
+		<script type="text/javascript" src="/assets/js/common.js"></script>
+		<%- script %>
+		<script type="text/javascript" src="/app-assets/vendors/js/forms/select/select2.full.min.js"></script>
+		<script type="text/javascript" src="/app-assets/js/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="/app-assets/js/scripts/forms/form-select2.js"></script>
+		<script type="text/javascript" src="/app-assets/js/core/app-menu.min.js"></script>
+		<script type="text/javascript" src="/app-assets/js/core/app.min.js"></script>
+		<script type="text/javascript" src="/app-assets/js/scripts/extensions/ext-component-sweet-alerts.js"></script>
+	</body>
+</html>

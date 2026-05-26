@@ -1,0 +1,124 @@
+<%- include("partials/head", headerData); %>
+
+<%- include("partials/header"); %>
+
+<% if (typeof(companyCode) != "undefined") { %>
+<script type="text/javascript">
+	const dataCompanyCode = "<%= companyCode %>";
+</script>
+<% } else if (typeof(headerData.companyCode) != "undefined") { %>
+<script type="text/javascript">
+	const dataCompanyCode = "<%= headerData.companyCode %>";
+</script>
+<% } else { %>
+<script type="text/javascript">
+	const noDataCompanyCode = "companyCode not found!";
+</script>
+<% } %>
+
+<!-- BEGIN: Content -->
+<div class="app-content content">
+	<div class="content-overlay"></div>
+	<div class="header-navbar-shadow"></div>
+	<div class="content-wrapper">
+		<div class="content-header row">
+			<div class="content-header-left col-md-9 col-12 mb-2">
+				<div class="row breadcrumbs-top">
+					<div class="col-12">
+						<h2 class="content-header-title float-left mb-0">Logs</h2>
+						<div class="breadcrumb-wrapper">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="/">Home</a>
+								</li>
+								<li class="breadcrumb-item">
+									<a href="javascript:void(0);">Logs</a>
+								</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content-body">
+			<section id="basic-datatable">
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header border-bottom p-1">
+								<div class="head-label">
+									<h6 class="mb-0"></h6>
+								</div>
+								<div class="dt-action-buttons text-right">
+									<div class="dt-buttons d-inline-flex">
+										<div class="dropdown">
+											<button class="dt-button btn btn-outline-secondary waves-effect mr-2" id="import_log_histories" data-toggle="modal" data-target="#import_logs_history" type="button" tabindex="0">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-upload font-small-4 mr-50">
+													<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+													<polyline points="17 8 12 3 7 8"></polyline>
+													<line x1="12" y1="3" x2="12" y2="15"></line>
+												</svg>
+												<span>Import</span>
+											</button>
+										</div>
+										<div class="dropdown">
+											<a href="/logs/export" class="dt-button btn btn-outline-secondary mr-2" id="export_log_histories" type="button" tabindex="0">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download font-small-4 mr-50">
+													<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+												</svg>
+												<span>Export</span>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<table class="datatables-basic table" id="logs_data_table">
+								<thead>
+									<tr>
+										<th class="header-number">No</th>
+										<th class="header-item-id">Item Name</th>
+										<th class="header-unique-id">Unique ID</th>
+										<th class="header-type">Type</th>
+										<th class="header-path">Path</th>
+										<th class="header-result">Result</th>
+										<th class="header-http-status">HTTP Status</th>
+										<th class="header-start-time">Start Time</th>
+										<th class="header-end-time">End Time</th>
+										<th class="header-time-consumed">Time Consumed(ms)</th>
+										<th class="header-details">Details</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+<!-- END: Content -->
+
+<!-- BEGIN: Import logs history -->
+<div class="modal fade text-left" id="import_logs_history" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="myModalLabel4">Import logs</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form id="logs_import" enctype="multipart/form-data" method="POST" autocomplete="off">
+					<label class="form-label" for="log_file">Upload log JSON file:</label>
+					<input type="file" name="file" id="log_file" accept=".json" required />
+					<input type="submit" value="submit" class="btn btn-primary mt-1 waves-effect waves-float waves-light"> 
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END: Import logs history -->
+
+<%- include("partials/footer", footerData); %>

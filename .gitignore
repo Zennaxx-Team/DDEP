@@ -1,0 +1,6 @@
+_gsdata_
+.vscode
+output/
+.env/
+Jenkinsfile/
+node_modules/
