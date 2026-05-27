@@ -564,4 +564,8 @@ if (cluster.isMaster) {
 	});
 }
 
+function sum(...args) {
+	return args.reduce((total, value) => total + value, 0);
+}
+
 module.exports = app;
