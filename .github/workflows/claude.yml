@@ -25,23 +25,9 @@ permissions:
   actions: read
   id-token: write
 
-permissions:
-  contents: write
-  pull-requests: write
-  issues: write
-  actions: read
-  id-token: write
-
-permissions:
-  contents: write
-  pull-requests: write
-  issues: write
-  actions: read
-  id-token: write
-
 jobs:
   create-branch:
-    if: |
+    if: >
       github.event_name == 'issues' &&
       (
         contains(github.event.issue.title, '@claude') ||
@@ -60,7 +46,6 @@ jobs:
           ref: dev
           fetch-depth: 0
           persist-credentials: true
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create feature branch
         id: branch
@@ -83,18 +68,15 @@ jobs:
 
           git checkout -b "$BRANCH_NAME"
 
-          git remote set-url origin \
-            https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git
-
-          git push origin "$BRANCH_NAME"
+          git push --set-upstream origin "$BRANCH_NAME"
 
           gh issue comment "$ISSUE_NUMBER" \
             --body "🌿 Branch created: \`${BRANCH_NAME}\`"
 
   claude:
-    needs: [create-branch]
+    needs: create-branch
 
-    if: |
+    if: >
       always() && (
         (
           github.event_name == 'issue_comment' &&
@@ -123,13 +105,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout branch
+      - name: Checkout feature branch
         uses: actions/checkout@v4
         with:
-          ref: ${{ needs.create-branch.outputs.branch_name || github.head_ref || 'dev' }}
+          ref: ${{ needs.create-branch.outputs.branch_name }}
           fetch-depth: 0
           persist-credentials: true
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run Claude Code
         uses: anthropics/claude-code-action@v1
@@ -139,23 +120,27 @@ jobs:
           additional_permissions: |
             actions: read
 
-      - name: Commit Claude changes
+      - name: Re-authenticate Git
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-
-          git add .
-
-          git diff --cached --quiet || git commit -m "🤖 Claude automated changes"
-
-      - name: Push changes
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          BRANCH_NAME="${{ needs.create-branch.outputs.branch_name || github.head_ref }}"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git remote set-url origin \
-            https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git
+          "https://github-actions:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+
+      - name: Commit Claude changes
+        run: |
+          git add .
+
+          if ! git diff --cached --quiet; then
+            git commit -m "🤖 Claude automated changes"
+          else
+            echo "No changes to commit"
+          fi
+
+      - name: Push changes
+        run: |
+          BRANCH_NAME="${{ needs.create-branch.outputs.branch_name }}"
 
           git push origin "$BRANCH_NAME"
 
@@ -163,7 +148,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          BRANCH_NAME="${{ needs.create-branch.outputs.branch_name || github.head_ref }}"
+          BRANCH_NAME="${{ needs.create-branch.outputs.branch_name }}"
 
           PR_EXISTS=$(gh pr list \
             --head "$BRANCH_NAME" \
@@ -171,7 +156,7 @@ jobs:
             --json number \
             --jq 'length')
 
-          if [ "$PR_EXISTS" -eq "0" ]; then
+          if [ "$PR_EXISTS" -eq 0 ]; then
             gh pr create \
               --base dev \
               --head "$BRANCH_NAME" \
@@ -183,7 +168,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          BRANCH_NAME="${{ needs.create-branch.outputs.branch_name || github.head_ref }}"
+          BRANCH_NAME="${{ needs.create-branch.outputs.branch_name }}"
 
           PR_NUMBER=$(gh pr list \
             --head "$BRANCH_NAME" \
@@ -191,8 +176,6 @@ jobs:
             --json number \
             --jq '.[0].number')
 
-          if [ "$PR_NUMBER" != "null" ]; then
-            gh pr merge "$PR_NUMBER" \
-              --squash \
-              --auto
+          if [ -n "$PR_NUMBER" ] && [ "$PR_NUMBER" != "null" ]; then
+            gh pr merge "$PR_NUMBER" --squash --auto
           fi
