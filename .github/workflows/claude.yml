@@ -1,68 +1,42 @@
-name: Claude Code Automation
+name: Claude Code
 
 on:
-  issues:
-    types:
-      - opened
-      - assigned
-
   issue_comment:
-    types:
-      - created
-
+    types: [created]
   pull_request_review_comment:
-    types:
-      - created
-
+    types: [created]
+  issues:
+    types: [opened, assigned]
   pull_request_review:
-    types:
-      - submitted
-
-permissions:
-  contents: write
-  pull-requests: write
-  issues: write
-  actions: read
-  id-token: write
-
-permissions:
-  contents: write
-  pull-requests: write
-  issues: write
-  actions: read
-  id-token: write
+    types: [submitted]
 
 jobs:
   create-branch:
     if: |
       github.event_name == 'issues' &&
-      (
-        contains(github.event.issue.title, '@claude') ||
-        contains(github.event.issue.body, '@claude')
-      )
-
+      (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude'))
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write
+      issues: write
     outputs:
-      branch_name: ${{ steps.branch.outputs.branch_name }}
-
+      branch_name: ${{ steps.create-branch.outputs.branch_name }}
     steps:
-      - name: Checkout dev branch
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           ref: dev
-          fetch-depth: 0
-          persist-credentials: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 1
 
-      - name: Create feature branch
-        id: branch
+      - name: Create branch from dev
+        id: create-branch
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ISSUE_NUMBER="${{ github.event.issue.number }}"
           ISSUE_TITLE="${{ github.event.issue.title }}"
 
+          # Sanitize issue title for branch name
           SANITIZED_TITLE=$(echo "$ISSUE_TITLE" \
             | tr '[:upper:]' '[:lower:]' \
             | sed 's/[^a-z0-9]/-/g' \
@@ -71,121 +45,54 @@ jobs:
             | cut -c1-50)
 
           BRANCH_NAME="issue-${ISSUE_NUMBER}-${SANITIZED_TITLE}"
-
           echo "branch_name=${BRANCH_NAME}" >> $GITHUB_OUTPUT
 
+          # Create and push branch from dev
           git checkout -b "$BRANCH_NAME"
-
-          git remote set-url origin \
-            https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git
-
           git push origin "$BRANCH_NAME"
 
+          # Comment on the issue with the branch name
           gh issue comment "$ISSUE_NUMBER" \
-            --body "🌿 Branch created: \`${BRANCH_NAME}\`"
+            --body "🌿 Branch created from \`dev\`: [\`${BRANCH_NAME}\`](../../tree/${BRANCH_NAME})"
 
   claude:
     needs: [create-branch]
-
     if: |
       always() && (
-        (
-          github.event_name == 'issue_comment' &&
-          contains(github.event.comment.body, '@claude')
-        ) ||
-
-        (
-          github.event_name == 'pull_request_review_comment' &&
-          contains(github.event.comment.body, '@claude')
-        ) ||
-
-        (
-          github.event_name == 'pull_request_review' &&
-          contains(github.event.review.body, '@claude')
-        ) ||
-
-        (
-          github.event_name == 'issues' &&
-          (
-            contains(github.event.issue.title, '@claude') ||
-            contains(github.event.issue.body, '@claude')
-          )
-        )
+        (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+        (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
+        (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
+        (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
       )
-
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+      actions: read # Required for Claude to read CI results on PRs
     steps:
-      - name: Checkout branch
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          # Use the new branch if it was just created, otherwise default
           ref: ${{ needs.create-branch.outputs.branch_name || github.head_ref || 'dev' }}
-          fetch-depth: 0
-          persist-credentials: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 1
 
       - name: Run Claude Code
+        id: claude
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
 
+          # This is an optional setting that allows Claude to read CI results on PRs
           additional_permissions: |
             actions: read
 
-      - name: Commit Claude changes
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          # Optional: Give a custom prompt to Claude. If this is not specified, Claude will perform the instructions specified in the comment that tagged it.
+          # prompt: 'Update the pull request description to include a summary of changes.'
 
-          git add .
-
-          git diff --cached --quiet || git commit -m "🤖 Claude automated changes"
-
-      - name: Push changes
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          BRANCH_NAME="${{ needs.create-branch.outputs.branch_name || github.head_ref }}"
-
-          git remote set-url origin \
-            https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git
-
-          git push origin "$BRANCH_NAME"
-
-      - name: Create Pull Request
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          BRANCH_NAME="${{ needs.create-branch.outputs.branch_name || github.head_ref }}"
-
-          PR_EXISTS=$(gh pr list \
-            --head "$BRANCH_NAME" \
-            --base dev \
-            --json number \
-            --jq 'length')
-
-          if [ "$PR_EXISTS" -eq "0" ]; then
-            gh pr create \
-              --base dev \
-              --head "$BRANCH_NAME" \
-              --title "🤖 Claude PR: ${BRANCH_NAME}" \
-              --body "Automated PR generated by Claude Code"
-          fi
-
-      - name: Enable Auto Merge
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          BRANCH_NAME="${{ needs.create-branch.outputs.branch_name || github.head_ref }}"
-
-          PR_NUMBER=$(gh pr list \
-            --head "$BRANCH_NAME" \
-            --base dev \
-            --json number \
-            --jq '.[0].number')
-
-          if [ "$PR_NUMBER" != "null" ]; then
-            gh pr merge "$PR_NUMBER" \
-              --squash \
-              --auto
-          fi
+          # Optional: Add claude_args to customize behavior and configuration
+          # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
+          # or https://code.claude.com/docs/en/cli-reference for available options
+          # claude_args: '--allowed-tools Bash(gh pr *)'
