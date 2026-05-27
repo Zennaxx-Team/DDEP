@@ -63,7 +63,7 @@ const list = async (req, res, next) => {
 		const { companyCode } = extractUserInfoFromToken(req.cookies);
 		const query = process.env.EnableGima === "true" ? { CompanyCode: companyCode } : {};
 		const limitRecord = Math.max(parseInt(req.body.limit) || 10, 0);
-		const skipRecord = Math.max((parseInt(req.body.page) - 1) * limitRecord, 0);
+		const skipRecord = Math.max(((parseInt(req.body.page) || 1) - 1) * limitRecord, 0);
 
 		if (req.cookies && req.cookies.selectedProject) {
 			query["ProjectId"] = mongoose.Types.ObjectId(req.cookies.selectedProject);
