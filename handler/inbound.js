@@ -51,6 +51,11 @@ async function inboundrun(req, res) {
     schedulerUniqueId = uuidv4();
     const Aes = new ase();
     let item_id = req.body.item_id;
+
+    if (!item_id) {
+        return res.status(400).json({ status: 0, message: "item_id is required" });
+    }
+
     const todaydate = new Date();
     const inboundprelog = "[" + todaydate + "] - [/routers/inbound.js] > [/inboundrun] > [keywords] > [Project Id] > " + item_id + " > ";
     const logdatefilename = "log_" + todaydate.getDate() + "_" + parseInt(todaydate.getMonth() + 1) + "_" + todaydate.getFullYear() + ".txt";

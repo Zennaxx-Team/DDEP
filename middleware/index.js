@@ -48,6 +48,11 @@ const removeDynamicSegment = (url) => {
 
 const checkAuthorization = async (req, res, next) => {
 	try {
+		if (EnableGimaEnv !== "true") {
+			res.locals.companyCode = config.companyCode;
+			return next();
+		}
+
 		const Token = req.cookies?.Token || "";
 		const permissions = req.cookies?.permissions || "{}";
 		let originalUrl = req.originalUrl;
@@ -56,7 +61,7 @@ const checkAuthorization = async (req, res, next) => {
 
 		originalUrl = removeDynamicSegment(originalUrl);
 
-		if (!Token && EnableGimaEnv === "true") {
+		if (!Token) {
 			return res.redirect("/not-authorized");
 		}
 
