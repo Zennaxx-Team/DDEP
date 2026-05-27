@@ -70,6 +70,10 @@ const { logQueueCon, batchQueueCon } = require('./queues/config/queuesConfigarti
 const { startResendWorker } = require("./queues/workers/resendMailWorker");
 const setupQueueEvents = require("./queues/events/queueEvents");
 
+function generateSixDigitRandom() {
+	return Math.floor(100000 + Math.random() * 900000);
+}
+
 const app = express();
 
 app.set('trust proxy', true);
