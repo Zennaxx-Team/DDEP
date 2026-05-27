@@ -2,16 +2,28 @@ name: Claude Code Automation
 
 on:
   issues:
-    types: [opened, assigned]
+    types:
+      - opened
+      - assigned
 
   issue_comment:
-    types: [created]
+    types:
+      - created
 
   pull_request_review_comment:
-    types: [created]
+    types:
+      - created
 
   pull_request_review:
-    types: [submitted]
+    types:
+      - submitted
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  actions: read
+  id-token: write
 
 permissions:
   contents: write
@@ -39,7 +51,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: dev
-          fetch-depth: 1
+          fetch-depth: 0
+          persist-credentials: true
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create feature branch
         id: branch
@@ -61,6 +75,9 @@ jobs:
           echo "branch_name=${BRANCH_NAME}" >> $GITHUB_OUTPUT
 
           git checkout -b "$BRANCH_NAME"
+
+          git remote set-url origin \
+            https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git
 
           git push origin "$BRANCH_NAME"
 
@@ -104,6 +121,8 @@ jobs:
         with:
           ref: ${{ needs.create-branch.outputs.branch_name || github.head_ref || 'dev' }}
           fetch-depth: 0
+          persist-credentials: true
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run Claude Code
         uses: anthropics/claude-code-action@v1
@@ -123,8 +142,13 @@ jobs:
           git diff --cached --quiet || git commit -m "🤖 Claude automated changes"
 
       - name: Push changes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           BRANCH_NAME="${{ needs.create-branch.outputs.branch_name || github.head_ref }}"
+
+          git remote set-url origin \
+            https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git
 
           git push origin "$BRANCH_NAME"
 
@@ -160,6 +184,8 @@ jobs:
             --json number \
             --jq '.[0].number')
 
-          gh pr merge "$PR_NUMBER" \
-            --squash \
-            --auto
+          if [ "$PR_NUMBER" != "null" ]; then
+            gh pr merge "$PR_NUMBER" \
+              --squash \
+              --auto
+          fi
