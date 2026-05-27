@@ -25,6 +25,13 @@ permissions:
   actions: read
   id-token: write
 
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  actions: read
+  id-token: write
+
 jobs:
   create-branch:
     if: |
